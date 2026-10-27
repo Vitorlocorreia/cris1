@@ -2693,40 +2693,102 @@
   }
 
   // ==========================================
-  // TUTORIAL GUIADO INTERATIVO (6 PASSOS)
+  // TUTORIAL GUIADO POR TELA COM SPOTLIGHT, SETAS E MINI-CARDS
   // ==========================================
   const tourSteps = [
     {
-      badge: 'PASSO 1 DE 6 · ECOSSISTEMA CRIS',
-      icon: '💚',
-      title: 'Compra com Propósito & Impacto Social',
-      hint: '📍 Aba Início · Carteira de Impacto Social',
-      desc: 'Na CRIS, parte de toda compra ou serviço contratado em empresas parceiras vira doação auditada para projetos sociais, sem custar nada a mais para você!',
-      action: () => {
+      screenGroup: 0,
+      badge: 'ITEM 1 DE 10 · TELA INÍCIO',
+      icon: '👤',
+      title: 'Seu Perfil & Troca para Modo PJ',
+      hint: '👆 Seta apontando para sua Foto e Nome',
+      desc: 'Clicando aqui na sua foto você abre seu Perfil Pessoal, troca sua imagem e alterna em 1 toque para a Área do Empresário / Prestador (PJ).',
+      target: '#btn-open-member-profile',
+      prepare: () => {
         document.querySelectorAll('.sheet-backdrop.is-open').forEach(s => s.classList.remove('is-open'));
         if (state.appMode !== 'member') setAppMode('member');
         switchMainTab('home');
       }
     },
     {
-      badge: 'PASSO 2 DE 6 · SCANNER FISCAL',
+      screenGroup: 0,
+      badge: 'ITEM 2 DE 10 · TELA INÍCIO',
+      icon: '💚',
+      title: 'Saldo de Impacto Social Gerado',
+      hint: '👆 Seta apontando para o Saldo da Carteira',
+      desc: 'Mostra o valor que suas compras já geraram de doação para o projeto social escolhido (sem custar nada a mais!). Você também pode trocar o projeto apoiado aqui.',
+      target: '#view-home .hero-balance-block',
+      prepare: () => {
+        document.querySelectorAll('.sheet-backdrop.is-open').forEach(s => s.classList.remove('is-open'));
+        if (state.appMode !== 'member') setAppMode('member');
+        switchMainTab('home');
+      }
+    },
+    {
+      screenGroup: 0,
+      badge: 'ITEM 3 DE 10 · TELA INÍCIO',
+      icon: '⚡',
+      title: 'Atalhos Rápidos do Super App',
+      hint: '👆 Seta apontando para os 5 Botões Circulares',
+      desc: 'Acesso direto às 5 ações mais usadas: Enviar Nota Fiscal, publicar no Mural “Preciso/Ofereço”, ver Conexões, ler a Palavra do Dia ou abrir os Cursos.',
+      target: '#view-home .quick-circle-dock',
+      prepare: () => {
+        document.querySelectorAll('.sheet-backdrop.is-open').forEach(s => s.classList.remove('is-open'));
+        if (state.appMode !== 'member') setAppMode('member');
+        switchMainTab('home');
+      }
+    },
+    {
+      screenGroup: 0,
+      badge: 'ITEM 4 DE 10 · TELA INÍCIO',
+      icon: '🧩',
+      title: 'Bento Grid: Palavra Prática & Mural',
+      hint: '👆 Seta apontando para os Cards em Destaque',
+      desc: 'À esquerda você acessa o Devocional Prático para os negócios; à direita, acompanha quantas demandas e ofertas estão ativas agora no Mural.',
+      target: '#view-home .bento-grid',
+      prepare: () => {
+        document.querySelectorAll('.sheet-backdrop.is-open').forEach(s => s.classList.remove('is-open'));
+        if (state.appMode !== 'member') setAppMode('member');
+        switchMainTab('home');
+      }
+    },
+    {
+      screenGroup: 4,
+      badge: 'ITEM 5 DE 10 · MENU PRINCIPAL',
       icon: '📷',
-      title: 'Scanner de Nota Fiscal (NFC-e / QR)',
-      hint: '📍 Botão Central · Leitor de Cupom Fiscal',
-      desc: 'Comprou em uma empresa parceira? Aponte a câmera para o QR Code da Nota Fiscal (DANFE NFC-e) e veja o impacto social ser creditado na hora.',
-      action: () => {
+      title: 'Botão Escanear Nota Fiscal',
+      hint: '👇 Seta apontando para o Botão Verde Central',
+      desc: 'Este botão abre o leitor de Notas Fiscais (NFC-e / QR Code SEFAZ) para validar compras em empresas parceiras da CRIS.',
+      target: '#fab-open-scanner',
+      prepare: () => {
+        document.querySelectorAll('.sheet-backdrop.is-open').forEach(s => s.classList.remove('is-open'));
+        if (state.appMode !== 'member') setAppMode('member');
+        switchMainTab('home');
+      }
+    },
+    {
+      screenGroup: 4,
+      badge: 'ITEM 6 DE 10 · TELA DO SCANNER',
+      icon: '🧾',
+      title: 'Mira da Câmera & Leitura Automática',
+      hint: '👆 Seta apontando para o Cupom Fiscal na Mira',
+      desc: 'Ao apontar para o QR Code da nota, o app identifica o CNPJ da empresa parceira e mostra na hora quanto daquela compra vira doação social!',
+      target: '#scanner-viewfinder',
+      prepare: () => {
         document.querySelectorAll('.sheet-backdrop.is-open').forEach(s => s.classList.remove('is-open'));
         if (state.appMode !== 'member') setAppMode('member');
         openSheet('sheet-scanner');
       }
     },
     {
-      badge: 'PASSO 3 DE 6 · ROSTO CRISTÃO & WHATSAPP',
+      screenGroup: 6,
+      badge: 'ITEM 7 DE 10 · PERFIL DA EMPRESA',
       icon: '✝️',
-      title: 'Bio do Fundador Cristão & WhatsApp Direto',
-      hint: '📍 Aba Mercado · Perfil da Empresa',
-      desc: 'Em cada empresa você conhece a história de fé do fundador cristão por trás da marca e tem um botão para chamar direto no WhatsApp ou canal de atendimento!',
-      action: () => {
+      title: 'Bio do Fundador Cristão',
+      hint: '👆 Seta apontando para o Rosto por Trás da Marca',
+      desc: 'Dentro do perfil de cada empresa você conhece o fundador cristão, a igreja local onde ele congrega e o propósito de fé por trás do negócio!',
+      target: '#sheet-business-profile .founder-bio-card',
+      prepare: () => {
         document.querySelectorAll('.sheet-backdrop.is-open').forEach(s => s.classList.remove('is-open'));
         if (state.appMode !== 'member') setAppMode('member');
         switchMainTab('marketplace', 'companies');
@@ -2734,50 +2796,110 @@
       }
     },
     {
-      badge: 'PASSO 4 DE 6 · MURAL & CONEXÕES B2B',
+      screenGroup: 6,
+      badge: 'ITEM 8 DE 10 · CANAL DE ATENDIMENTO',
+      icon: '💬',
+      title: 'Botão WhatsApp / Canal Direto',
+      hint: '👆 Seta apontando para o Botão Verde de WhatsApp',
+      desc: 'Quer contratar ou tirar dúvida? Este botão leva você direto para o WhatsApp ou canal escolhido pela empresa, já com mensagem identificada pela CRIS.',
+      target: '#modal-biz-wa-btn',
+      prepare: () => {
+        if (!document.getElementById('sheet-business-profile')?.classList.contains('is-open')) {
+          document.querySelectorAll('.sheet-backdrop.is-open').forEach(s => s.classList.remove('is-open'));
+          if (state.appMode !== 'member') setAppMode('member');
+          switchMainTab('marketplace', 'companies');
+          openBusinessProfile('b2');
+        }
+      }
+    },
+    {
+      screenGroup: 8,
+      badge: 'ITEM 9 DE 10 · MURAL & CONEXÕES',
       icon: '🤝',
-      title: 'Mural “Preciso / Ofereço” & Medidor CRM',
-      hint: '📍 Aba Mural & Conexões',
-      desc: 'Publique o que você precisa ou oferece, gere indicações para irmãos da comunidade e acompanhe cada negócio fechado no Medidor de Conexões.',
-      action: () => {
+      title: 'Mural “Preciso / Ofereço” & CRM',
+      hint: '👆 Seta apontando para as Abas do Mural',
+      desc: 'Aqui os membros publicam necessidades ou ofertas e acompanham cada indicação até o fechamento do negócio no Medidor de Conexões.',
+      target: '#view-mural .segmented-control',
+      prepare: () => {
         document.querySelectorAll('.sheet-backdrop.is-open').forEach(s => s.classList.remove('is-open'));
         if (state.appMode !== 'member') setAppMode('member');
         switchMainTab('mural', 'board');
       }
     },
     {
-      badge: 'PASSO 5 DE 6 · FÉ PRÁTICA & CAPACITAÇÃO',
-      icon: '📖',
-      title: 'Palavra do Dia, Bíblia & Academia CRIS',
-      hint: '📍 Abas Palavra & Cursos',
-      desc: 'Receba reflexões diárias aplicadas ao trabalho, à liderança e à família, leia a Bíblia no app e faça cursos práticos ministrados por empresários da rede.',
-      action: () => {
-        document.querySelectorAll('.sheet-backdrop.is-open').forEach(s => s.classList.remove('is-open'));
-        if (state.appMode !== 'member') setAppMode('member');
-        switchMainTab('bible', 'devotional');
-      }
-    },
-    {
-      badge: 'PASSO 6 DE 6 · CONTA PF ⇄ EMPRESÁRIO PJ',
+      screenGroup: 9,
+      badge: 'ITEM 10 DE 10 · ÁREA DO EMPRESÁRIO (PJ)',
       icon: '💼',
-      title: 'Seu Perfil & Área do Empresário / Prestador',
-      hint: '📍 Clique na sua foto no topo do App',
-      desc: 'Ao clicar na sua foto no topo, você edita seu perfil pessoal ou troca em 1 toque para a Área do Empresário (PJ) para gerir vendas, orçamentos e sua vitrine!',
-      action: () => {
+      title: 'Painel do Empresário & Prestador (PJ)',
+      hint: '👆 Seta apontando para o Faturamento & Repasse PJ',
+      desc: 'Na visão PJ, o empresário ou prestador acompanha vendas, responde orçamentos, cadastra serviços na vitrine, vê o Radar B2B e edita a bio da empresa!',
+      target: '#view-biz-home .biz-balance-block',
+      prepare: () => {
         document.querySelectorAll('.sheet-backdrop.is-open').forEach(s => s.classList.remove('is-open'));
-        openProfileHub('company');
+        if (state.appMode !== 'business') setAppMode('business');
+        switchBizTab('biz-home');
       }
     }
   ];
 
   let currentTourIdx = 0;
   const tourBackdrop = document.getElementById('guided-tour-backdrop');
+  const spotlightRing = document.getElementById('tour-spotlight-ring');
+  const tourMiniCard = document.getElementById('tour-mini-card');
+  const tourArrow = document.getElementById('tour-pointer-arrow');
+  const appShellEl = document.getElementById('app-shell');
+
+  function positionSpotlightAndMiniCard(selector) {
+    if (!tourBackdrop || tourBackdrop.style.display === 'none') return;
+    const targetEl = document.querySelector(selector);
+    if (!targetEl || !appShellEl) return;
+
+    // Garante que o elemento esteja visível na rolagem
+    targetEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    setTimeout(() => {
+      const shellRect = appShellEl.getBoundingClientRect();
+      const rect = targetEl.getBoundingClientRect();
+
+      const pad = 6;
+      const top = Math.max(8, rect.top - shellRect.top - pad);
+      const left = Math.max(8, rect.left - shellRect.left - pad);
+      const width = Math.min(shellRect.width - 16, rect.width + pad * 2);
+      const height = Math.min(260, rect.height + pad * 2);
+
+      spotlightRing.style.top = `${top}px`;
+      spotlightRing.style.left = `${left}px`;
+      spotlightRing.style.width = `${width}px`;
+      spotlightRing.style.height = `${height}px`;
+
+      // Decide se o mini-card fica abaixo do elemento (com seta apontando para cima) ou acima (com seta apontando para baixo)
+      const targetCenterY = top + height / 2;
+      const placeBelow = targetCenterY < shellRect.height * 0.54;
+
+      if (placeBelow) {
+        tourMiniCard.style.top = `${Math.min(shellRect.height - 235, top + height + 14)}px`;
+        tourMiniCard.style.bottom = 'auto';
+        tourArrow.className = 'tour-pointer-arrow is-pointing-up';
+      } else {
+        const bottomOffset = Math.max(90, shellRect.height - top + 14);
+        tourMiniCard.style.top = 'auto';
+        tourMiniCard.style.bottom = `${bottomOffset}px`;
+        tourArrow.className = 'tour-pointer-arrow is-pointing-down';
+      }
+
+      // Posiciona a seta horizontalmente apontando para o centro do botão/seção
+      const cardRect = tourMiniCard.getBoundingClientRect();
+      const targetCenterX = rect.left + rect.width / 2;
+      const arrowLeft = Math.max(22, Math.min(cardRect.width - 34, targetCenterX - cardRect.left - 8));
+      tourArrow.style.left = `${arrowLeft}px`;
+    }, 80);
+  }
 
   function renderTourStep() {
     const step = tourSteps[currentTourIdx];
     if (!step || !tourBackdrop) return;
 
-    step.action();
+    step.prepare();
 
     document.getElementById('tour-step-badge').textContent = step.badge;
     document.getElementById('tour-step-icon').textContent = step.icon;
@@ -2785,19 +2907,25 @@
     document.getElementById('tour-step-hint').textContent = step.hint;
     document.getElementById('tour-step-desc').textContent = step.desc;
 
+    document.querySelectorAll('#tour-screen-pills .tour-screen-pill').forEach(pill => {
+      pill.classList.toggle('is-active', Number(pill.dataset.tourJump) === step.screenGroup);
+    });
+
     const dotsEl = document.getElementById('tour-dots-container');
     dotsEl.innerHTML = tourSteps.map((_, idx) => `<span class="tour-dot ${idx === currentTourIdx ? 'is-active' : ''}"></span>`).join('');
 
     const prevBtn = document.getElementById('btn-tour-prev');
     const nextBtn = document.getElementById('btn-tour-next');
-    prevBtn.style.display = currentTourIdx === 0 ? 'none' : 'inline-flex';
-    nextBtn.textContent = currentTourIdx === tourSteps.length - 1 ? 'Concluir Tour e Explorar 🎉' : 'Próximo passo →';
+    prevBtn.style.visibility = currentTourIdx === 0 ? 'hidden' : 'visible';
+    nextBtn.textContent = currentTourIdx === tourSteps.length - 1 ? 'Concluir 🎉' : 'Próximo →';
+
+    positionSpotlightAndMiniCard(step.target);
   }
 
   function startGuidedTour() {
     currentTourIdx = 0;
     if (tourBackdrop) {
-      tourBackdrop.style.display = 'flex';
+      tourBackdrop.style.display = 'block';
       renderTourStep();
     }
   }
@@ -2806,6 +2934,19 @@
     if (tourBackdrop) tourBackdrop.style.display = 'none';
     sessionStorage.setItem('cris_tour_seen', '1');
   }
+
+  document.querySelectorAll('#tour-screen-pills .tour-screen-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      currentTourIdx = Number(pill.dataset.tourJump);
+      renderTourStep();
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    if (tourBackdrop && tourBackdrop.style.display !== 'none') {
+      positionSpotlightAndMiniCard(tourSteps[currentTourIdx]?.target);
+    }
+  });
 
   document.getElementById('btn-start-tour-desktop')?.addEventListener('click', startGuidedTour);
   document.getElementById('btn-start-tour-mobile')?.addEventListener('click', startGuidedTour);

@@ -1502,27 +1502,47 @@
         </div>
       </div>
 
-      <!-- 13. Tutorial Guiado Interativo (Onboarding / Tour Guiado CRIS) -->
-      <div class="tour-backdrop" id="guided-tour-backdrop" role="dialog" aria-modal="true" aria-labelledby="tour-step-title" style="display:none;">
-        <div class="tour-card">
-          <div class="tour-top-row">
-            <span class="tour-step-badge" id="tour-step-badge">PASSO 1 DE 6 · TOUR GUIADO</span>
-            <button type="button" class="tour-skip-btn" id="btn-tour-close">Pular tutorial ✕</button>
+      <!-- 13. Tutorial Guiado por Tela com Spotlight, Setas e Mini-Cards -->
+      <div class="tour-overlay-layer" id="guided-tour-backdrop" role="dialog" aria-modal="true" aria-labelledby="tour-step-title" style="display:none;">
+        <!-- Recorte Iluminado (Spotlight) sobre o botão/seção atual -->
+        <div class="tour-spotlight-ring" id="tour-spotlight-ring">
+          <span class="tour-spotlight-pulse"></span>
+        </div>
+
+        <!-- Mini-Card Explicativo Flutuante com Seta Indicadora -->
+        <div class="tour-mini-card" id="tour-mini-card">
+          <div class="tour-pointer-arrow" id="tour-pointer-arrow" aria-hidden="true"></div>
+
+          <!-- Pílulas de telas para pular direto se quiser -->
+          <div class="tour-screen-pills" id="tour-screen-pills">
+            <button type="button" class="tour-screen-pill is-active" data-tour-jump="0">Início</button>
+            <button type="button" class="tour-screen-pill" data-tour-jump="4">Scanner</button>
+            <button type="button" class="tour-screen-pill" data-tour-jump="6">Empresa & Bio</button>
+            <button type="button" class="tour-screen-pill" data-tour-jump="8">Mural</button>
+            <button type="button" class="tour-screen-pill" data-tour-jump="9">Modo PJ</button>
           </div>
+
+          <div class="tour-top-row">
+            <span class="tour-step-badge" id="tour-step-badge">ITEM 1 DE 10 · TELA INÍCIO</span>
+            <button type="button" class="tour-skip-btn" id="btn-tour-close">Fechar ✕</button>
+          </div>
+
           <div class="tour-icon-title-row">
-            <div class="tour-icon-bubble" id="tour-step-icon">💚</div>
+            <div class="tour-icon-bubble" id="tour-step-icon">👤</div>
             <div>
-              <h3 id="tour-step-title">Bem-vindo ao Super App CRIS</h3>
-              <span class="tour-location-hint" id="tour-step-hint">📍 Aba Início · Saldo de Impacto Social</span>
+              <h3 id="tour-step-title">Foto de Perfil & Troca PJ</h3>
+              <span class="tour-location-hint" id="tour-step-hint">👆 Botão destacado na tela</span>
             </div>
           </div>
+
           <p class="tour-step-desc" id="tour-step-desc">
-            A CRIS conecta consumidores, empreendedores cristãos e projetos sociais. Toda compra ou serviço contratado gera doação transparente, sem custar nada a mais!
+            Toque na sua foto para abrir seu perfil completo, trocar sua imagem ou alternar em 1 clique para a Área do Empresário / Prestador (PJ).
           </p>
-          <div class="tour-dots-row" id="tour-dots-container"></div>
+
           <div class="tour-actions-row">
-            <button type="button" class="btn-secondary" id="btn-tour-prev" style="padding:10px 14px;">← Anterior</button>
-            <button type="button" class="btn-primary" id="btn-tour-next" style="flex:1;padding:10px 16px;">Próximo passo →</button>
+            <button type="button" class="btn-secondary" id="btn-tour-prev" style="padding:8px 12px;font-size:11.5px;">← Anterior</button>
+            <div class="tour-dots-row" id="tour-dots-container" style="margin:0;flex:1;"></div>
+            <button type="button" class="btn-primary" id="btn-tour-next" style="padding:8px 14px;font-size:11.5px;">Próximo →</button>
           </div>
         </div>
       </div>
