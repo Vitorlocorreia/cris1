@@ -170,17 +170,14 @@
               <span style="font-size:10px;letter-spacing:0.12em;color:#a8c7b8;font-weight:600;">COMPRA COM PROPÓSITO</span>
             </div>
             <div class="hero-top-bar">
-              <div class="user-profile-pill">
-                <img class="user-avatar-photo" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Mateus">
+              <div class="user-profile-pill is-clickable-profile" id="btn-open-member-profile" role="button" tabindex="0" title="Abrir Meu Perfil e Alternar Conta (Membro / PJ)">
+                <div class="avatar-ring-wrap">
+                  <img class="user-avatar-photo" id="hero-member-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Mateus">
+                  <span class="avatar-badge-dot" aria-hidden="true">⚙</span>
+                </div>
                 <div class="user-greeting">
-                  <small>📍 Boa Viagem, Recife ▾</small>
-                  <div style="display:flex;align-items:center;gap:6px;">
-                    <strong>Olá, Mateus</strong>
-                    <button type="button" class="subtle-mode-pill" data-set-mode="business" title="Ir para Área do Empresário / Prestador">
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 10l5-5 5 5M17 14l-5 5-5-5"/></svg>
-                      <span>Modo PJ</span>
-                    </button>
-                  </div>
+                  <small id="hero-member-location">📍 Boa Viagem, Recife ▾</small>
+                  <strong id="hero-member-greeting">Olá, Mateus <span class="profile-chevron">›</span></strong>
                 </div>
               </div>
               <div class="hero-top-actions">
@@ -604,26 +601,22 @@
         <section class="app-view" id="view-biz-home" aria-label="Painel do Empresário e Prestador">
           <div class="emerald-hero biz-hero">
             <div class="biz-header-top">
-              <div class="biz-profile-selector">
-                <div class="biz-avatar-badge" id="biz-active-avatar">ER</div>
+              <div class="biz-profile-selector is-clickable-profile" id="btn-open-biz-profile" role="button" tabindex="0" title="Abrir Perfil da Empresa / Prestador e Trocar Conta">
+                <div class="avatar-ring-wrap">
+                  <img class="user-avatar-photo biz-avatar-photo" id="biz-active-avatar" src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=200&q=80" alt="Empresa">
+                  <span class="avatar-badge-dot is-gold" aria-hidden="true">✎</span>
+                </div>
                 <div>
                   <div style="display:flex;align-items:center;gap:6px;">
-                    <select id="biz-account-select" class="biz-select-inline" aria-label="Selecionar perfil empresarial ou prestador">
-                      <option value="provider">Estúdio Raízes · Serviços & Consultoria</option>
-                      <option value="merchant">Padaria Grão & Graça · Comércio & Produtos</option>
-                    </select>
+                    <strong id="biz-header-company-name" style="font-size:14.5px;color:#fff;">Estúdio Raízes · Design <span class="profile-chevron">›</span></strong>
                   </div>
                   <div class="biz-seal-row">
-                    <span class="biz-gold-seal">✓ Empresa Verificada CRIS · Nível Ouro</span>
+                    <span class="biz-gold-seal">✓ Empresa Verificada CRIS · Ouro</span>
                     <span class="biz-impact-rate-pill" id="biz-hero-rate-pill">♥ 8% Repasse Social</span>
                   </div>
                 </div>
               </div>
               <div style="display:flex;align-items:center;gap:6px;">
-                <button type="button" class="subtle-mode-pill is-pj-active" data-set-mode="member" title="Voltar para visão de Membro">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 10l5-5 5 5M17 14l-5 5-5-5"/></svg>
-                  <span>Membro</span>
-                </button>
                 <button type="button" class="glass-icon-btn" id="btn-biz-open-pos-top" title="Cobrar / Emitir QR Fiscal">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
                 </button>
@@ -1307,6 +1300,176 @@
             </div>
             <button type="submit" class="btn-primary btn-full">Publicar na Academia CRIS</button>
           </form>
+        </div>
+      </div>
+
+      <!-- 12. Central de Perfil & Troca de Conta (Membro PF ⇄ Empresa / Prestador PJ) -->
+      <div class="sheet-backdrop" id="sheet-profile-hub" role="dialog" aria-modal="true" aria-labelledby="sheet-profile-hub-title">
+        <div class="bottom-sheet profile-hub-sheet">
+          <div class="sheet-handle"></div>
+          <div class="sheet-header">
+            <h3 id="sheet-profile-hub-title">Meu Perfil & Contas CRIS</h3>
+            <button type="button" class="sheet-close" data-close-sheet="sheet-profile-hub">✕</button>
+          </div>
+
+          <!-- Bloco de Troca de Conta (Estilo Nubank Conta Pessoal ⇄ Conta PJ) -->
+          <div class="account-switcher-section">
+            <span class="account-section-label">ALTERNAR VISÃO DO APLICATIVO</span>
+            <div class="account-cards-grid">
+              <!-- Conta Pessoal (Membro) -->
+              <button type="button" class="account-switch-card is-active" id="acc-card-member" data-switch-account="member">
+                <img class="acc-card-avatar" id="hub-switch-member-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Mateus">
+                <div class="acc-card-info">
+                  <div style="display:flex;align-items:center;gap:6px;">
+                    <strong id="hub-switch-member-name">Mateus Andrade</strong>
+                    <span class="acc-type-pill">Membro PF</span>
+                  </div>
+                  <small>Consumidor · Membro Ouro CRIS</small>
+                </div>
+                <span class="acc-active-check" id="acc-check-member">✓ Em uso</span>
+              </button>
+
+              <!-- Conta Empresa / Prestador (PJ) -->
+              <button type="button" class="account-switch-card" id="acc-card-business" data-switch-account="business">
+                <img class="acc-card-avatar is-biz" id="hub-switch-biz-img" src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=200&q=80" alt="Empresa">
+                <div class="acc-card-info">
+                  <div style="display:flex;align-items:center;gap:6px;">
+                    <strong id="hub-switch-biz-name">Estúdio Raízes · Design</strong>
+                    <span class="acc-type-pill is-gold">Empresa / PJ</span>
+                  </div>
+                  <small id="hub-switch-biz-sub">Prestador de Serviços & Vitrine Ativa</small>
+                </div>
+                <span class="acc-active-check" id="acc-check-business">Trocar →</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Abas para Visualizar e Editar Perfil Pessoal ou Perfil Empresarial -->
+          <div class="segmented-control" role="tablist" style="margin-bottom:14px;">
+            <button type="button" class="segment-btn is-active" data-profile-tab="personal">👤 Editar Perfil Pessoal</button>
+            <button type="button" class="segment-btn" data-profile-tab="company">💼 Editar Perfil Empresa / PJ</button>
+          </div>
+
+          <!-- ABA 1: PERFIL PESSOAL (PESSOA FÍSICA / MEMBRO) -->
+          <div id="profile-tab-personal">
+            <div class="profile-photo-Showcase">
+              <div class="profile-avatar-large-wrap">
+                <img id="personal-profile-preview-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Foto do Perfil">
+                <button type="button" class="avatar-camera-fab" id="btn-upload-member-photo" title="Enviar foto do aparelho">📷</button>
+              </div>
+              <div class="profile-showcase-meta">
+                <span class="verified-badge">★ Membro Ouro · ID #CRIS-8842</span>
+                <h4 id="personal-showcase-name" style="margin:4px 0 2px;font-size:16px;">Mateus Andrade</h4>
+                <p id="personal-showcase-bio" style="margin:0;font-size:12px;color:var(--text-muted);">Arquiteto & Empreendedor Cristão · Recife/PE</p>
+                <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;">
+                  <button type="button" class="btn-secondary" style="padding:5px 10px;font-size:11px;" id="btn-trigger-member-file">🖼 Enviar Foto</button>
+                  <button type="button" class="btn-secondary" style="padding:5px 10px;font-size:11px;" id="btn-cycle-member-avatar">✨ Trocar Avatar Rápido</button>
+                </div>
+                <input type="file" id="input-member-photo-file" accept="image/*" style="display:none;">
+              </div>
+            </div>
+
+            <form id="form-personal-profile">
+              <div class="field-group">
+                <label for="prof-member-name">Seu Nome Completo</label>
+                <input type="text" id="prof-member-name" value="Mateus Andrade" required>
+              </div>
+              <div class="field-group">
+                <label for="prof-member-bio">Profissão / Bio na Comunidade</label>
+                <input type="text" id="prof-member-bio" value="Arquiteto & Empreendedor Cristão · Recife/PE" required>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <div class="field-group">
+                  <label for="prof-member-location">Bairro & Cidade</label>
+                  <input type="text" id="prof-member-location" value="Boa Viagem, Recife" required>
+                </div>
+                <div class="field-group">
+                  <label for="prof-member-phone">WhatsApp</label>
+                  <input type="text" id="prof-member-phone" value="(81) 99812-4490" required>
+                </div>
+              </div>
+              <div class="field-group">
+                <label for="prof-member-church">Comunidade / Igreja Local</label>
+                <input type="text" id="prof-member-church" value="Igreja Batista Esperança · Recife/PE" required>
+              </div>
+              <button type="submit" class="btn-primary btn-full">Salvar Alterações do Perfil Pessoal</button>
+            </form>
+          </div>
+
+          <!-- ABA 2: PERFIL DA EMPRESA / PRESTADOR DE SERVIÇO (PJ) -->
+          <div id="profile-tab-company" style="display:none;">
+            <!-- Seletor de qual negócio editar + Botão Ver Vitrine -->
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+              <select id="hub-biz-account-select" class="biz-hub-select" aria-label="Escolher empresa ou prestador cadastrado">
+                <option value="provider">Estúdio Raízes · Prestador de Serviços</option>
+                <option value="merchant">Padaria Grão & Graça · Comércio & Produtos</option>
+              </select>
+              <button type="button" class="btn-secondary" style="padding:7px 11px;font-size:11.5px;" id="btn-preview-public-storefront">
+                👁 Ver Como Cliente
+              </button>
+            </div>
+
+            <!-- Capa da Vitrine + Logo/Foto da Empresa Editáveis -->
+            <div class="biz-profile-cover-editor">
+              <img id="biz-profile-cover-img" src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=900&q=80" alt="Capa da Empresa">
+              <div class="biz-cover-overlay">
+                <div class="biz-logo-editor-wrap">
+                  <img id="biz-profile-logo-img" src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=200&q=80" alt="Logo da Empresa">
+                </div>
+                <div class="biz-cover-actions">
+                  <button type="button" class="hud-pill-btn" id="btn-upload-biz-logo">📷 Trocar Logo/Foto</button>
+                  <button type="button" class="hud-pill-btn" id="btn-upload-biz-cover">🖼 Trocar Capa</button>
+                  <button type="button" class="hud-pill-btn" id="btn-cycle-biz-photos">✨ Fotos Exemplo</button>
+                </div>
+              </div>
+              <input type="file" id="input-biz-logo-file" accept="image/*" style="display:none;">
+              <input type="file" id="input-biz-cover-file" accept="image/*" style="display:none;">
+            </div>
+
+            <form id="form-company-profile">
+              <div class="field-group">
+                <label for="prof-biz-name">Nome da Empresa ou Prestador de Serviço</label>
+                <input type="text" id="prof-biz-name" value="Estúdio Raízes · Design & Consultoria" required>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <div class="field-group">
+                  <label for="prof-biz-modality">Modalidade de Atuação</label>
+                  <select id="prof-biz-modality">
+                    <option value="Prestação de Serviços & B2B">Prestador de Serviços & B2B</option>
+                    <option value="Comércio, Produtos & Eventos">Comércio & Produtos</option>
+                    <option value="Saúde & Profissional Liberal">Saúde & Profissional Liberal</option>
+                  </select>
+                </div>
+                <div class="field-group">
+                  <label for="prof-biz-cnpj">CNPJ / Registro Verificado</label>
+                  <input type="text" id="prof-biz-cnpj" value="34.891.220/0001-19" required>
+                </div>
+              </div>
+              <div class="field-group">
+                <label for="prof-biz-bio">Bio & Apresentação na Vitrine (Como o cliente vê)</label>
+                <textarea id="prof-biz-bio" rows="2" required>Branding, design de embalagens, arquitetura comercial e posicionamento digital para empresas com propósito.</textarea>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+                <div class="field-group">
+                  <label for="prof-biz-address">Endereço / Região de Atendimento</label>
+                  <input type="text" id="prof-biz-address" value="Boa Viagem, Recife (Atende Online)" required>
+                </div>
+                <div class="field-group">
+                  <label for="prof-biz-contact">WhatsApp & Instagram</label>
+                  <input type="text" id="prof-biz-contact" value="(81) 99640-1120 · @estudioraizes" required>
+                </div>
+              </div>
+              <div class="field-group">
+                <label for="prof-biz-perk">Benefício Exclusivo para Membros CRIS</label>
+                <input type="text" id="prof-biz-perk" value="Diagnóstico de marca gratuito + 10% OFF no primeiro projeto B2B" required>
+              </div>
+              <div style="display:flex;gap:8px;">
+                <button type="submit" class="btn-primary btn-full">Salvar & Atualizar Vitrine PJ</button>
+                <button type="button" class="btn-secondary" id="btn-save-and-enter-pj" style="white-space:nowrap;">Ir ao Painel PJ →</button>
+              </div>
+            </form>
+          </div>
+
         </div>
       </div>
 

@@ -1519,17 +1519,33 @@
   }
 
   // ==========================================
-  // MODO EMPRESÁRIO & PRESTADOR DE SERVIÇOS (CRIS BUSINESS PJ)
+  // MODO EMPRESÁRIO & PRESTADOR DE SERVIÇOS (CRIS BUSINESS PJ) + CENTRAL DE PERFIL
   // ==========================================
   state.appMode = 'member'; // 'member' | 'business'
   state.activeBizAccount = 'provider'; // 'provider' (Estúdio Raízes) | 'merchant' (Padaria Grão & Graça)
   state.bizHiddenRevenue = false;
 
+  state.memberProfile = {
+    name: 'Mateus Andrade',
+    bio: 'Arquiteto & Empreendedor Cristão · Recife/PE',
+    location: 'Boa Viagem, Recife',
+    phone: '(81) 99812-4490',
+    church: 'Igreja Batista Esperança · Recife/PE',
+    photo: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80'
+  };
+
   state.bizAccounts = {
     provider: {
+      marketplaceId: 'b2',
       name: 'Estúdio Raízes · Design & Consultoria',
       avatar: 'ER',
+      logoPhoto: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=300&q=80',
+      coverPhoto: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=900&q=80',
       typeTag: 'Prestação de Serviços & B2B',
+      cnpj: '34.891.220/0001-19',
+      bio: 'Branding, design de embalagens, arquitetura comercial e posicionamento digital para empresas com propósito.',
+      address: 'Boa Viagem, Recife (Atende Online)',
+      contact: '(81) 99640-1120 · @estudioraizes',
       revenue: 18420.00,
       impactRate: 8,
       views: 418,
@@ -1537,9 +1553,16 @@
       perk: 'Diagnóstico de marca gratuito + 10% OFF no primeiro projeto B2B'
     },
     merchant: {
+      marketplaceId: 'b1',
       name: 'Padaria Grão & Graça · Gastronomia',
       avatar: 'GG',
+      logoPhoto: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=300&q=80',
+      coverPhoto: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80',
       typeTag: 'Comércio, Produtos & Eventos',
+      cnpj: '28.419.502/0001-84',
+      bio: 'Padaria artesanal de fermentação natural, cafés especiais e cestas corporativas que abençoam famílias.',
+      address: 'Rua dos Navegantes, 1420 · Boa Viagem, Recife',
+      contact: '(81) 99210-3380 · @graoegraca.recife',
       revenue: 34890.00,
       impactRate: 6,
       views: 890,
@@ -1733,10 +1756,292 @@
       switchMainTab('home');
       showToast('👤 Modo Membro (Consumidor) ativado!');
     }
+    syncProfileHubUI();
   }
 
+  // ==========================================
+  // CENTRAL DE PERFIL & CONTAS (#sheet-profile-hub)
+  // ==========================================
+  function switchProfileHubTab(tabName) {
+    document.querySelectorAll('[data-profile-tab]').forEach(btn => {
+      btn.classList.toggle('is-active', btn.dataset.profileTab === tabName);
+    });
+    document.getElementById('profile-tab-personal').style.display = tabName === 'personal' ? 'block' : 'none';
+    document.getElementById('profile-tab-company').style.display = tabName === 'company' ? 'block' : 'none';
+  }
+
+  document.querySelectorAll('[data-profile-tab]').forEach(btn => {
+    btn.addEventListener('click', () => switchProfileHubTab(btn.dataset.profileTab));
+  });
+
+  function syncProfileHubUI() {
+    const mp = state.memberProfile;
+    const biz = getActiveBiz();
+    const firstName = mp.name.split(' ')[0] || 'Mateus';
+
+    // Topo Home Membro
+    const heroAvatar = document.getElementById('hero-member-avatar');
+    if (heroAvatar) heroAvatar.src = mp.photo;
+    const heroLoc = document.getElementById('hero-member-location');
+    if (heroLoc) heroLoc.textContent = `📍 ${mp.location} ▾`;
+    const heroGreet = document.getElementById('hero-member-greeting');
+    if (heroGreet) heroGreet.innerHTML = `Olá, ${firstName} <span class="profile-chevron">›</span>`;
+
+    // Topo Home Empresa PJ
+    const bizAvatarImg = document.getElementById('biz-active-avatar');
+    if (bizAvatarImg && bizAvatarImg.tagName === 'IMG') {
+      bizAvatarImg.src = biz.logoPhoto;
+    }
+    const bizHeaderName = document.getElementById('biz-header-company-name');
+    if (bizHeaderName) {
+      bizHeaderName.innerHTML = `${biz.name.split('·')[0].trim()} <span class="profile-chevron">›</span>`;
+    }
+
+    // Cards de Troca de Conta no Hub
+    const cardMember = document.getElementById('acc-card-member');
+    const cardBiz = document.getElementById('acc-card-business');
+    const checkMember = document.getElementById('acc-check-member');
+    const checkBiz = document.getElementById('acc-check-business');
+
+    if (cardMember && cardBiz) {
+      const isBiz = state.appMode === 'business';
+      cardMember.classList.toggle('is-active', !isBiz);
+      cardBiz.classList.toggle('is-active', isBiz);
+      checkMember.textContent = !isBiz ? '✓ Em uso' : 'Usar conta →';
+      checkBiz.textContent = isBiz ? '✓ Em uso' : 'Acessar PJ →';
+    }
+
+    const hubMemberImg = document.getElementById('hub-switch-member-img');
+    if (hubMemberImg) hubMemberImg.src = mp.photo;
+    const hubMemberName = document.getElementById('hub-switch-member-name');
+    if (hubMemberName) hubMemberName.textContent = mp.name;
+
+    const hubBizImg = document.getElementById('hub-switch-biz-img');
+    if (hubBizImg) hubBizImg.src = biz.logoPhoto;
+    const hubBizName = document.getElementById('hub-switch-biz-name');
+    if (hubBizName) hubBizName.textContent = biz.name;
+    const hubBizSub = document.getElementById('hub-switch-biz-sub');
+    if (hubBizSub) hubBizSub.textContent = `${biz.typeTag} · ♥ ${biz.impactRate}% Repasse`;
+
+    // Aba Perfil Pessoal
+    const pImg = document.getElementById('personal-profile-preview-img');
+    if (pImg) pImg.src = mp.photo;
+    const pName = document.getElementById('personal-showcase-name');
+    if (pName) pName.textContent = mp.name;
+    const pBio = document.getElementById('personal-showcase-bio');
+    if (pBio) pBio.textContent = mp.bio;
+
+    const fName = document.getElementById('prof-member-name');
+    if (fName) fName.value = mp.name;
+    const fBio = document.getElementById('prof-member-bio');
+    if (fBio) fBio.value = mp.bio;
+    const fLoc = document.getElementById('prof-member-location');
+    if (fLoc) fLoc.value = mp.location;
+    const fPhone = document.getElementById('prof-member-phone');
+    if (fPhone) fPhone.value = mp.phone;
+    const fChurch = document.getElementById('prof-member-church');
+    if (fChurch) fChurch.value = mp.church;
+
+    // Aba Perfil Empresa / PJ
+    const hubSelect = document.getElementById('hub-biz-account-select');
+    if (hubSelect) hubSelect.value = state.activeBizAccount;
+    const bCover = document.getElementById('biz-profile-cover-img');
+    if (bCover) bCover.src = biz.coverPhoto;
+    const bLogo = document.getElementById('biz-profile-logo-img');
+    if (bLogo) bLogo.src = biz.logoPhoto;
+
+    const bfName = document.getElementById('prof-biz-name');
+    if (bfName) bfName.value = biz.name;
+    const bfMod = document.getElementById('prof-biz-modality');
+    if (bfMod) bfMod.value = biz.typeTag;
+    const bfCnpj = document.getElementById('prof-biz-cnpj');
+    if (bfCnpj) bfCnpj.value = biz.cnpj;
+    const bfBio = document.getElementById('prof-biz-bio');
+    if (bfBio) bfBio.value = biz.bio;
+    const bfAddr = document.getElementById('prof-biz-address');
+    if (bfAddr) bfAddr.value = biz.address;
+    const bfCont = document.getElementById('prof-biz-contact');
+    if (bfCont) bfCont.value = biz.contact;
+    const bfPerk = document.getElementById('prof-biz-perk');
+    if (bfPerk) bfPerk.value = biz.perk;
+  }
+
+  function openProfileHub(initialTab) {
+    syncProfileHubUI();
+    switchProfileHubTab(initialTab || (state.appMode === 'business' ? 'company' : 'personal'));
+    openSheet('sheet-profile-hub');
+  }
+
+  // Clicar na foto do Membro abre o Hub na aba Pessoal; clicar na foto da Empresa abre na aba Empresa/PJ
+  document.getElementById('btn-open-member-profile')?.addEventListener('click', () => openProfileHub('personal'));
+  document.getElementById('btn-open-biz-profile')?.addEventListener('click', () => openProfileHub('company'));
   document.getElementById('sidebar-mode-toggle-btn')?.addEventListener('click', () => {
-    setAppMode(state.appMode === 'business' ? 'member' : 'business');
+    openProfileHub(state.appMode === 'business' ? 'company' : 'personal');
+  });
+
+  // Trocar Conta nos Cards do Topo do Hub
+  document.querySelectorAll('[data-switch-account]').forEach(card => {
+    card.addEventListener('click', () => {
+      const targetMode = card.dataset.switchAccount;
+      setAppMode(targetMode);
+      switchProfileHubTab(targetMode === 'business' ? 'company' : 'personal');
+    });
+  });
+
+  // Upload e troca de Foto Pessoal
+  const memberAvatars = [
+    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80',
+    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80',
+    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80',
+    'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80'
+  ];
+
+  ['btn-upload-member-photo', 'btn-trigger-member-file'].forEach(id => {
+    document.getElementById(id)?.addEventListener('click', () => {
+      document.getElementById('input-member-photo-file')?.click();
+    });
+  });
+
+  document.getElementById('input-member-photo-file')?.addEventListener('change', e => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      state.memberProfile.photo = ev.target.result;
+      syncProfileHubUI();
+      showToast('Foto do seu perfil pessoal atualizada!');
+    };
+    reader.readAsDataURL(file);
+  });
+
+  document.getElementById('btn-cycle-member-avatar')?.addEventListener('click', () => {
+    const cur = memberAvatars.indexOf(state.memberProfile.photo);
+    state.memberProfile.photo = memberAvatars[(cur + 1) % memberAvatars.length];
+    syncProfileHubUI();
+    showToast('Avatar do perfil atualizado!');
+  });
+
+  document.getElementById('form-personal-profile')?.addEventListener('submit', e => {
+    e.preventDefault();
+    state.memberProfile.name = document.getElementById('prof-member-name').value.trim();
+    state.memberProfile.bio = document.getElementById('prof-member-bio').value.trim();
+    state.memberProfile.location = document.getElementById('prof-member-location').value.trim();
+    state.memberProfile.phone = document.getElementById('prof-member-phone').value.trim();
+    state.memberProfile.church = document.getElementById('prof-member-church').value.trim();
+    syncProfileHubUI();
+    closeSheet('sheet-profile-hub');
+    showToast('Dados do seu Perfil Pessoal salvos com sucesso!');
+  });
+
+  // Edição e Troca de Imagens do Perfil Empresa / Prestador (PJ)
+  document.getElementById('hub-biz-account-select')?.addEventListener('change', e => {
+    state.activeBizAccount = e.target.value;
+    syncProfileHubUI();
+    renderAllBizViews();
+    showToast(`Editando perfil de: ${getActiveBiz().name}`);
+  });
+
+  document.getElementById('btn-upload-biz-logo')?.addEventListener('click', () => {
+    document.getElementById('input-biz-logo-file')?.click();
+  });
+
+  document.getElementById('btn-upload-biz-cover')?.addEventListener('click', () => {
+    document.getElementById('input-biz-cover-file')?.click();
+  });
+
+  function syncBizWithPublicMarketplace(biz) {
+    const mktComp = state.companies.find(c => c.id === biz.marketplaceId);
+    if (mktComp) {
+      mktComp.name = biz.name.split('·')[0].trim();
+      mktComp.bio = biz.bio;
+      mktComp.address = biz.address;
+      mktComp.contact = biz.contact;
+      mktComp.photo = biz.coverPhoto;
+      mktComp.impactPct = biz.impactRate;
+      renderHomeFeaturedBusinesses();
+      renderCompanies();
+    }
+  }
+
+  document.getElementById('input-biz-logo-file')?.addEventListener('change', e => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const biz = getActiveBiz();
+      biz.logoPhoto = ev.target.result;
+      syncProfileHubUI();
+      renderAllBizViews();
+      showToast('Logo / Foto da empresa atualizada!');
+    };
+    reader.readAsDataURL(file);
+  });
+
+  document.getElementById('input-biz-cover-file')?.addEventListener('change', e => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const biz = getActiveBiz();
+      biz.coverPhoto = ev.target.result;
+      syncBizWithPublicMarketplace(biz);
+      syncProfileHubUI();
+      renderAllBizViews();
+      showToast('Imagem de capa da vitrine atualizada!');
+    };
+    reader.readAsDataURL(file);
+  });
+
+  const bizPhotoPresets = [
+    'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=900&q=80',
+    'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80',
+    'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80',
+    'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=900&q=80'
+  ];
+
+  document.getElementById('btn-cycle-biz-photos')?.addEventListener('click', () => {
+    const biz = getActiveBiz();
+    const cur = bizPhotoPresets.indexOf(biz.coverPhoto);
+    const nextPhoto = bizPhotoPresets[(cur + 1) % bizPhotoPresets.length];
+    biz.coverPhoto = nextPhoto;
+    biz.logoPhoto = nextPhoto;
+    syncBizWithPublicMarketplace(biz);
+    syncProfileHubUI();
+    renderAllBizViews();
+    showToast('Foto e capa da empresa atualizadas!');
+  });
+
+  function saveCompanyProfileFromForm() {
+    const biz = getActiveBiz();
+    biz.name = document.getElementById('prof-biz-name').value.trim();
+    biz.typeTag = document.getElementById('prof-biz-modality').value;
+    biz.cnpj = document.getElementById('prof-biz-cnpj').value.trim();
+    biz.bio = document.getElementById('prof-biz-bio').value.trim();
+    biz.address = document.getElementById('prof-biz-address').value.trim();
+    biz.contact = document.getElementById('prof-biz-contact').value.trim();
+    biz.perk = document.getElementById('prof-biz-perk').value.trim();
+    syncBizWithPublicMarketplace(biz);
+    syncProfileHubUI();
+    renderAllBizViews();
+  }
+
+  document.getElementById('form-company-profile')?.addEventListener('submit', e => {
+    e.preventDefault();
+    saveCompanyProfileFromForm();
+    closeSheet('sheet-profile-hub');
+    showToast('Perfil da Empresa / Prestador atualizado na Vitrine CRIS!');
+  });
+
+  document.getElementById('btn-save-and-enter-pj')?.addEventListener('click', () => {
+    saveCompanyProfileFromForm();
+    closeSheet('sheet-profile-hub');
+    setAppMode('business');
+  });
+
+  document.getElementById('btn-preview-public-storefront')?.addEventListener('click', () => {
+    saveCompanyProfileFromForm();
+    closeSheet('sheet-profile-hub');
+    openBusinessProfile(getActiveBiz().marketplaceId);
   });
 
   document.querySelectorAll('[data-set-mode]').forEach(btn => {
@@ -1754,9 +2059,9 @@
     btn.addEventListener('click', () => {
       if (state.appMode !== 'member') {
         state.appMode = 'member';
-        document.querySelectorAll('[data-set-mode]').forEach(b => b.classList.toggle('is-active', b.dataset.setMode === 'member'));
         document.getElementById('nav-biz-dock').style.display = 'none';
         document.getElementById('nav-member-dock').style.display = '';
+        syncProfileHubUI();
       }
       switchMainTab(btn.dataset.jumpTab, btn.dataset.jumpSub);
     });
@@ -1770,13 +2075,6 @@
     el.addEventListener('click', () => switchBizTab(el.dataset.bizNav));
   });
 
-  // Alternar entre Prestador de Serviço e Comércio dentro do Modo PJ
-  document.getElementById('biz-account-select')?.addEventListener('change', e => {
-    state.activeBizAccount = e.target.value;
-    renderAllBizViews();
-    showToast(`Visualizando como: ${getActiveBiz().name}`);
-  });
-
   document.getElementById('btn-toggle-biz-revenue')?.addEventListener('click', () => {
     state.bizHiddenRevenue = !state.bizHiddenRevenue;
     renderBizDashboard();
@@ -1787,7 +2085,15 @@
     const impactTotal = (biz.revenue * biz.impactRate) / 100;
     const projName = state.projects[state.activeProjectIndex];
 
-    document.getElementById('biz-active-avatar').textContent = biz.avatar;
+    const avatarEl = document.getElementById('biz-active-avatar');
+    if (avatarEl) {
+      if (avatarEl.tagName === 'IMG') avatarEl.src = biz.logoPhoto;
+      else avatarEl.textContent = biz.avatar;
+    }
+    const headerName = document.getElementById('biz-header-company-name');
+    if (headerName) {
+      headerName.innerHTML = `${biz.name.split('·')[0].trim()} <span class="profile-chevron">›</span>`;
+    }
     document.getElementById('biz-type-tag').textContent = biz.typeTag;
     document.getElementById('biz-hero-rate-pill').textContent = `♥ ${biz.impactRate}% Repasse Social`;
     document.getElementById('biz-revenue-display').textContent = state.bizHiddenRevenue ? 'R$ ••••••' : formatBRL(biz.revenue);
@@ -2291,6 +2597,7 @@
     renderBizCatalog();
     renderBizB2B();
     renderBizAcademy();
+    syncProfileHubUI();
   }
 
   // Inicialização
