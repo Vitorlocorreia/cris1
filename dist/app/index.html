@@ -1,0 +1,850 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b241b">
+  <title>CRIS Super App — Protótipo UI/UX Mobile</title>
+  <link rel="icon" href="../assets/cris-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="prototype.css">
+</head>
+<body>
+  <div class="proto-workspace">
+    <!-- Painel Guia no Desktop (Oculto automaticamente no celular) -->
+    <aside class="proto-desktop-panel" aria-label="Controles do Protótipo">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+        <img src="../assets/cris-logo-light.png" alt="CRIS" style="height:36px;width:auto;display:block;">
+        <a class="proto-back-lp" href="../index.html">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Voltar à LP
+        </a>
+      </div>
+      <div>
+        <div class="eyebrow">UI/UX SUPER APP · CRIS</div>
+        <h1>Acolhedor, fluido e <em>com cara de app real.</em></h1>
+      </div>
+      <p>Inspirado nas referências enviadas + experiência Nubank, iFood e Uber.</p>
+      <div class="proto-quick-jumps">
+        <span class="jump-label">NAVEGUE PELAS FRENTES</span>
+
+        <button type="button" class="jump-btn is-active" data-jump-tab="home">
+          <span class="jump-btn-left">
+            <svg class="jump-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>Início do Super App</span>
+          </span>
+          <small>Visão geral</small>
+        </button>
+
+        <button type="button" class="jump-btn" data-jump-tab="mural" data-jump-sub="board">
+          <span class="jump-btn-left">
+            <svg class="jump-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M7 8h10M7 12h6M8 18v3M16 18v3"/></svg>
+            <span>Mural “Preciso / Posso oferecer”</span>
+          </span>
+          <small>Oportunidades</small>
+        </button>
+
+        <button type="button" class="jump-btn" data-jump-tab="mural" data-jump-sub="connections">
+          <span class="jump-btn-left">
+            <svg class="jump-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            <span>Acompanhamento das conexões</span>
+          </span>
+          <small>Parcerias</small>
+        </button>
+
+        <button type="button" class="jump-btn" data-jump-tab="marketplace" data-jump-sub="companies">
+          <span class="jump-btn-left">
+            <svg class="jump-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 12v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-8"/></svg>
+            <span>Marketplace e perfil empresarial</span>
+          </span>
+          <small>Descoberta</small>
+        </button>
+
+        <button type="button" class="jump-btn" data-jump-tab="bible" data-jump-sub="devotional">
+          <span class="jump-btn-left">
+            <svg class="jump-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            <span>Bíblia e reflexão prática</span>
+          </span>
+          <small>Fé no dia a dia</small>
+        </button>
+
+        <button type="button" class="jump-btn" data-jump-tab="academy" data-jump-sub="courses">
+          <span class="jump-btn-left">
+            <svg class="jump-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <span>Cursos e capacitação</span>
+          </span>
+          <small>Crescimento</small>
+        </button>
+
+        <button type="button" class="jump-btn" id="desktop-open-impact">
+          <span class="jump-btn-left">
+            <svg class="jump-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <span>Impacto e projetos sociais</span>
+          </span>
+          <small>Transparência</small>
+        </button>
+
+        <button type="button" class="jump-btn" id="desktop-trigger-push">
+          <span class="jump-btn-left">
+            <svg class="jump-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span>Palavra do dia e lembretes</span>
+          </span>
+          <small>Prévia</small>
+        </button>
+      </div>
+
+      <div class="proto-bottom-links">
+        <a href="?frameless=1" class="proto-util-link" id="btn-open-frameless">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <span>Abrir app sem moldura</span>
+        </a>
+        <button type="button" class="proto-util-link" id="btn-focus-phone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+          <span>Focar no celular</span>
+        </button>
+        <button type="button" class="proto-util-link" id="btn-reset-home">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+          <span>Voltar ao início</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Barra Flutuante para Restaurar Guia / Moldura quando ocultos -->
+    <div class="proto-restore-bar" id="proto-restore-bar" style="display:none;">
+      <button type="button" class="restore-pill-btn" id="btn-restore-guide">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></svg>
+        <span>Mostrar menu lateral</span>
+      </button>
+      <button type="button" class="restore-pill-btn" id="btn-restore-home">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+        <span>Voltar ao início</span>
+      </button>
+    </div>
+
+    <!-- Simulador Mobile iPhone Pro / Fullscreen no Celular -->
+    <div class="mobile-shell" id="app-shell">
+      <!-- Status Bar iOS -->
+      <div class="ios-status-bar" aria-hidden="true">
+        <span>9:41</span>
+        <div class="dynamic-island"></div>
+        <div class="status-icons">
+          <svg width="15" height="11" viewBox="0 0 15 11" fill="currentColor"><path d="M1 7h2v4H1zM4.5 5h2v6h-2zM8 2.5h2v8.5H8zM11.5 0h2v11h-2z"/></svg>
+          <svg width="22" height="11" viewBox="0 0 22 11" fill="none"><rect x="0.5" y="0.5" width="18" height="10" rx="2.5" stroke="currentColor"/><rect x="2" y="2" width="14" height="7" rx="1" fill="currentColor"/><path d="M20 3.5v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+
+      <!-- Notificação Push Simulada (Palavra do Dia) -->
+      <div class="push-notification" id="push-banner" role="alert" aria-live="polite">
+        <img class="push-icon" src="../assets/cris-icon.png" alt="CRIS" style="object-fit:cover;background:#fcfbf7;padding:2px;">
+        <div class="push-content" id="push-banner-body">
+          <div class="push-meta">
+            <span>PALAVRA DO DIA · CRIS</span>
+            <span>AGORA</span>
+          </div>
+          <strong>Colossenses 3:23 — Excelência que serve</strong>
+          <p>“Tudo o que fizerem, façam de todo o coração, como para o Senhor...” Toque para aplicar hoje no trabalho.</p>
+        </div>
+        <button type="button" class="push-close" id="push-close-btn" aria-label="Fechar">✕</button>
+      </div>
+
+      <!-- Área Principal Rolável -->
+      <main class="app-main" id="app-main">
+
+        <!-- =====================================================
+             ABA 1: INÍCIO (SUPER APP HOME - REF 1 + NUBANK + IFOOD)
+             ===================================================== -->
+        <section class="app-view is-active" id="view-home" aria-label="Início">
+          <!-- Topo Esmeralda Profundo (Igual Referência 1) -->
+          <div class="emerald-hero">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;position:relative;z-index:2;">
+              <img src="../assets/cris-logo-light.png" alt="CRIS" style="height:26px;width:auto;display:block;">
+              <span style="font-size:10px;letter-spacing:0.12em;color:#a8c7b8;font-weight:600;">COMPRA COM PROPÓSITO</span>
+            </div>
+            <div class="hero-top-bar">
+              <div class="user-profile-pill">
+                <img class="user-avatar-photo" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Mateus">
+                <div class="user-greeting">
+                  <small>📍 Boa Viagem, Recife ▾</small>
+                  <strong>Olá, Mateus</strong>
+                </div>
+              </div>
+              <div class="hero-top-actions">
+                <button type="button" class="theme-switch-pill" id="btn-theme-toggle" title="Alternar Tema Light / Dark" aria-label="Alternar tema">
+                  <span id="theme-icon-dark">🌙</span>
+                  <span id="theme-icon-light" class="is-active">☀️</span>
+                </button>
+                <button type="button" class="glass-icon-btn" id="btn-trigger-push" aria-label="Notificação Palavra do Dia">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                  <span class="notif-dot" id="notif-badge">1</span>
+                </button>
+                <button type="button" class="glass-icon-btn" id="btn-open-cart" aria-label="Sacola do Marketplace">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                  <span class="notif-dot" id="cart-badge">2</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Saldo de Impacto Social (Estilo Nubank + Referência 1) -->
+            <div class="hero-balance-block">
+              <div class="balance-label-row">
+                <span>Impacto Social Gerado · <strong id="active-project-short" style="color:#5fe3a8;">Instituto Pão da Vida</strong></span>
+                <button type="button" id="btn-change-project" style="background:none;border:0;color:#5fe3a8;font-size:11px;font-weight:600;padding:0;">Trocar projeto →</button>
+              </div>
+              <div class="balance-main-row">
+                <div class="balance-value" id="wallet-total-display">R$ 2.489,90</div>
+                <span class="balance-growth-pill" id="wallet-week-display">+18,4% este mês</span>
+                <button type="button" class="eye-toggle-btn" id="btn-toggle-balance" aria-label="Ocultar ou mostrar saldo">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Dock de Atalhos Circulares (Igual Referência 1 + Nubank) -->
+            <div class="quick-circle-dock">
+              <button type="button" class="circle-action-btn" id="home-scan-receipt-btn">
+                <div class="circle-icon-ring">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 7V4h3M20 7V4h-3M4 17v3h3M20 17v3h-3M7 12h10"/></svg>
+                </div>
+                <span>Enviar Nota</span>
+              </button>
+              <button type="button" class="circle-action-btn" data-nav-target="mural" data-sub-target="board">
+                <div class="circle-icon-ring">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+                </div>
+                <span>Preciso/Ofereço</span>
+              </button>
+              <button type="button" class="circle-action-btn" data-nav-target="mural" data-sub-target="connections">
+                <div class="circle-icon-ring">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                </div>
+                <span>Conexões</span>
+              </button>
+              <button type="button" class="circle-action-btn" data-nav-target="bible" data-sub-target="devotional">
+                <div class="circle-icon-ring">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3v18M8 7h8"/><circle cx="12" cy="12" r="9"/></svg>
+                </div>
+                <span>Palavra</span>
+              </button>
+              <button type="button" class="circle-action-btn" data-nav-target="academy" data-sub-target="courses">
+                <div class="circle-icon-ring">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                </div>
+                <span>Cursos</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Folha Curva Principal (Overlapping Sheet igual Ref 1 & 2) -->
+          <div class="sheet-body">
+            <!-- Busca Rápida iFood / Uber -->
+            <div class="uber-search-bar" id="home-search-trigger">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <input type="text" placeholder="Buscar padarias, serviços B2B, cursos..." readonly>
+              <span class="search-filter-pill">Perto de mim</span>
+            </div>
+
+            <!-- Bento Grid Duplo (Igual Design 2 da Ref 1 + Ref 3) -->
+            <div class="bento-grid">
+              <article class="bento-card bento-word" data-nav-target="bible" data-sub-target="devotional">
+                <div class="bento-top-row">
+                  <span class="bento-badge">✦ PALAVRA & AÇÃO</span>
+                  <span class="bento-arrow-circle">↗</span>
+                </div>
+                <div>
+                  <h4>Colossenses 3:23 no Trabalho</h4>
+                  <p>Toque para responder à pergunta prática de hoje.</p>
+                  <div class="avatar-stack">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=100&q=80" alt="">
+                    <span>+142 praticando</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="bento-card bento-mural" data-nav-target="mural" data-sub-target="board">
+                <div class="bento-top-row">
+                  <span class="bento-badge">MURAL ATIVO</span>
+                  <span class="bento-arrow-circle">↗</span>
+                </div>
+                <div>
+                  <h4>Preciso / Ofereço</h4>
+                  <p>14 novas oportunidades de negócio hoje.</p>
+                </div>
+              </article>
+            </div>
+
+            <!-- Banner Esmeralda 3D (Igual ao Banner "THE FUTURE..." da Ref 1) -->
+            <article class="promo-emerald-banner">
+              <div class="promo-copy">
+                <span class="promo-tag">🌱 ECONOMIA DO REINO</span>
+                <h3>Nenhuma compra é neutra. Comprar é servir.</h3>
+                <p>Envie a foto da nota fiscal de empresas parceiras e gere doação sem gastar nada a mais.</p>
+                <button type="button" class="promo-cta-btn" id="banner-scan-btn">
+                  ENVIAR NOTA AGORA →
+                </button>
+              </div>
+              <div class="promo-3d-emblem" aria-hidden="true">
+                <div class="emblem-ring"></div>
+                <div class="emblem-cube" style="background:#fcfbf7;padding:6px;">
+                  <img src="../assets/cris-logo.png" alt="CRIS" style="width:100%;height:100%;object-fit:contain;transform:rotate(-35deg);">
+                </div>
+              </div>
+            </article>
+
+            <!-- Carrossel Fotográfico iFood / Ref 1: Empresas Parceiras em Destaque -->
+            <div class="section-head-row">
+              <h3>Descubra Empresas Parceiras</h3>
+              <button type="button" data-nav-target="marketplace" data-sub-target="companies">Ver todas →</button>
+            </div>
+            <div class="horizontal-cards-scroll" id="home-featured-businesses"></div>
+
+            <!-- Cartão Físico Metálico de Impacto (Ref 2) -->
+            <div class="section-head-row">
+              <h3>Seu Passaporte de Impacto</h3>
+              <button type="button" data-nav-target="mural" data-sub-target="connections">Ver métricas →</button>
+            </div>
+            <article class="metallic-impact-card">
+              <div class="card-chip-row">
+                <div class="emv-chip"></div>
+                <img src="../assets/cris-logo-light.png" alt="CRIS" style="height:24px;width:auto;">
+              </div>
+              <div style="margin-bottom:14px;">
+                <span style="font-size:11px;color:#9fc0b0;display:block;">NEGÓCIOS & INDICAÇÕES GERADAS NA REDE</span>
+                <strong style="font-size:22px;letter-spacing:-0.02em;">R$ 6.400,00 movimentados</strong>
+              </div>
+              <div class="metallic-card-Bottom">
+                <div>
+                  <small style="font-size:9.5px;color:#8eb0a0;display:block;">MEMBRO VERIFICADO</small>
+                  <strong style="font-size:13px;letter-spacing:0.06em;">MATEUS CORREIA</strong>
+                </div>
+                <button type="button" class="promo-cta-btn" data-nav-target="mural" data-sub-target="connections">
+                  + REGISTRAR INDICAÇÃO
+                </button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- =====================================================
+             ABA 2: MARKETPLACE (ESTILO IFOOD + PERFIL COMPLETO)
+             ===================================================== -->
+        <section class="app-view" id="view-marketplace" aria-label="Marketplace">
+          <div class="internal-hero">
+            <div class="eyebrow">MARKETPLACE & CATÁLOGO</div>
+            <h2>Boas empresas merecem <em>ser descobertas.</em></h2>
+            <p>Compre pelo app, peça orçamento ou compre na loja física e envie a nota.</p>
+          </div>
+
+          <div class="sheet-body">
+            <div class="segmented-control" role="tablist">
+              <button type="button" class="segment-btn is-active" data-market-tab="companies">Empresas (6)</button>
+              <button type="button" class="segment-btn" data-market-tab="products">Loja no App</button>
+              <button type="button" class="segment-btn" data-market-tab="quotes">Orçamentos</button>
+            </div>
+
+            <!-- SUB 2.1: Empresas -->
+            <div id="market-sub-companies">
+              <div class="uber-search-bar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                <input type="search" id="biz-search-input" placeholder="Buscar por nome, produto, serviço ou bairro...">
+              </div>
+              <div class="chip-row" id="biz-category-chips">
+                <button type="button" class="chip is-active" data-biz-cat="all">Todas</button>
+                <button type="button" class="chip" data-biz-cat="Alimentação">🥐 Alimentação</button>
+                <button type="button" class="chip" data-biz-cat="Serviços B2B">💼 Serviços B2B</button>
+                <button type="button" class="chip" data-biz-cat="Saúde">🩺 Saúde</button>
+                <button type="button" class="chip" data-biz-cat="Tecnologia">🎨 Tech & Design</button>
+              </div>
+              <div id="biz-list-container"></div>
+            </div>
+
+            <!-- SUB 2.2: Loja de Produtos In-App -->
+            <div id="market-sub-products" style="display:none;">
+              <div class="cris-card" style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px 15px;">
+                <span style="font-size:12px;line-height:1.4;"><strong>Checkout Integrado:</strong> mesmo preço da loja e doação automática para seu projeto social.</span>
+                <button type="button" class="btn-primary" style="white-space:nowrap;padding:8px 12px;" id="market-open-cart-inline">Sacola</button>
+              </div>
+              <div class="product-grid" id="product-grid-container"></div>
+            </div>
+
+            <!-- SUB 2.3: Pedidos de Orçamento Rastreáveis -->
+            <div id="market-sub-quotes" style="display:none;">
+              <div class="cris-card">
+                <span class="mural-badge type-offer" style="display:inline-block;margin-bottom:8px;">ORÇAMENTO RASTREÁVEL</span>
+                <h3 style="font-size:18px;margin:0 0 6px;">Receba propostas de empresas verificadas</h3>
+                <p style="font-size:12.5px;color:var(--text-muted);margin:0 0 14px;line-height:1.5;">
+                  Seu pedido entra automaticamente no seu painel de <strong>Acompanhamento de Conexões</strong>.
+                </p>
+                <form id="quote-request-form">
+                  <div class="field-group">
+                    <label for="quote-category">Categoria</label>
+                    <select id="quote-category" required>
+                      <option value="Design, Branding & Social Media">Design, Branding & Social Media</option>
+                      <option value="Buffet, Coffee Break & Eventos">Buffet, Coffee Break & Eventos</option>
+                      <option value="Contabilidade, Jurídico & Gestão">Contabilidade, Jurídico & Gestão</option>
+                      <option value="Tecnologia, Sites & Sistemas">Tecnologia, Sites & Sistemas</option>
+                    </select>
+                  </div>
+                  <div class="field-group">
+                    <label for="quote-title">O que você precisa contratar?</label>
+                    <input type="text" id="quote-title" required placeholder="Ex: Coffee break para 35 pessoas na sexta">
+                  </div>
+                  <div class="field-group">
+                    <label for="quote-budget">Orçamento estimado (R$)</label>
+                    <input type="text" id="quote-budget" placeholder="Ex: 1200">
+                  </div>
+                  <button type="submit" class="btn-primary btn-full">Enviar Pedido & Rastrear Conexão</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =====================================================
+             ABA 3: MURAL “PRECISO / OFEREÇO” & CONEXÕES (CRM)
+             ===================================================== -->
+        <section class="app-view" id="view-mural" aria-label="Mural e Conexões">
+          <div class="internal-hero">
+            <div class="eyebrow">ECOSSISTEMA VIVO</div>
+            <h2>Mural de Oportunidades <em>& Conexões.</em></h2>
+            <p>Publique uma necessidade ou ofereça seu serviço e meça os negócios gerados na comunidade.</p>
+          </div>
+
+          <div class="sheet-body">
+            <div class="segmented-control" role="tablist">
+              <button type="button" class="segment-btn is-active" data-mural-tab="board">Mural Preciso / Ofereço</button>
+              <button type="button" class="segment-btn" data-mural-tab="connections">Medidor de Conexões</button>
+            </div>
+
+            <!-- SUB 3.1: Mural -->
+            <div id="mural-sub-board">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;">
+                <div class="chip-row" style="margin-bottom:0;padding-bottom:0;" id="mural-filter-chips">
+                  <button type="button" class="chip is-active" data-mural-filter="all">Todos</button>
+                  <button type="button" class="chip" data-mural-filter="need">Preciso de...</button>
+                  <button type="button" class="chip" data-mural-filter="offer">Posso oferecer...</button>
+                </div>
+                <button type="button" class="btn-primary" id="btn-open-new-mural" style="white-space:nowrap;padding:9px 14px;">+ Publicar</button>
+              </div>
+              <div id="mural-feed-container"></div>
+            </div>
+
+            <!-- SUB 3.2: Acompanhamento das Conexões -->
+            <div id="mural-sub-connections" style="display:none;">
+              <div class="metrics-strip">
+                <div class="metric-box">
+                  <strong id="metric-referrals-count">7</strong>
+                  <span>Indicações</span>
+                </div>
+                <div class="metric-box">
+                  <strong id="metric-meetings-count">4</strong>
+                  <span>Reuniões</span>
+                </div>
+                <div class="metric-box">
+                  <strong id="metric-business-volume">R$ 6,4k</strong>
+                  <span>Negócios Gerados</span>
+                </div>
+              </div>
+
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                <strong style="font-size:14px;">Pipeline de Indicações & Negócios</strong>
+                <button type="button" class="btn-primary" id="btn-open-new-connection" style="padding:8px 13px;font-size:11.5px;">+ Registrar</button>
+              </div>
+
+              <div id="connections-list-container"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =====================================================
+             ABA 4: BÍBLIA NO APP & PALAVRA DO DIA COM AÇÃO PRÁTICA
+             ===================================================== -->
+        <section class="app-view" id="view-bible" aria-label="Bíblia e Reflexão">
+          <div class="internal-hero">
+            <div class="eyebrow">FÉ INTEGRADA À ROTINA</div>
+            <h2>Palavra Diária <em>& Bíblia no App.</em></h2>
+            <p>Leitura bíblica acompanhada de pergunta e ação prática para o trabalho, liderança e família.</p>
+          </div>
+
+          <div class="sheet-body">
+            <div class="segmented-control" role="tablist">
+              <button type="button" class="segment-btn is-active" data-bible-tab="devotional">Reflexão & Ação Prática</button>
+              <button type="button" class="segment-btn" data-bible-tab="bible-reader">Bíblia Sagrada</button>
+            </div>
+
+            <!-- SUB 4.1: Devocional + Aplicação Prática -->
+            <div id="bible-sub-devotional">
+              <article class="cris-card" style="padding:0;overflow:hidden;">
+                <div style="height:135px;background:linear-gradient(180deg,rgba(11,36,27,0.2),rgba(11,36,27,0.92)),url('https://images.unsplash.com/photo-1507692049790-de58290a4334?auto=format&fit=crop&w=800&q=80') center/cover;padding:16px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;">
+                  <span style="font-size:10px;letter-spacing:0.14em;color:#5fe3a8;font-weight:700;">PALAVRA DO DIA · COLOSSENSES 3:23</span>
+                  <h3 style="font-family:var(--serif);font-size:21px;margin:4px 0 0;font-weight:400;">Excelência quando ninguém está olhando</h3>
+                </div>
+                <div style="padding:16px;">
+                  <blockquote style="margin:0 0 12px;padding-left:12px;border-left:3px solid var(--emerald-bright);font-family:var(--serif);font-size:15px;line-height:1.45;">
+                    “Tudo o que fizerem, façam de todo o coração, como para o Senhor, e não para os homens.”
+                  </blockquote>
+                  <p style="font-size:12.5px;color:var(--text-muted);line-height:1.55;margin:0 0 14px;">
+                    Quando entendemos que o nosso trabalho também é adoração, a honestidade no orçamento, o respeito ao prazo e o cuidado com o cliente ganham propósito eterno.
+                  </p>
+
+                  <div style="background:var(--sheet-bg);border:1px solid var(--border-color);border-radius:16px;padding:14px;">
+                    <span style="font-size:10px;font-weight:800;letter-spacing:0.1em;color:var(--emerald-bright);text-transform:uppercase;">ESCOLHA A ESFERA DE APLICAÇÃO HOJE:</span>
+                    <div class="context-pills">
+                      <button type="button" class="context-pill is-active" data-context="work">💼 Trabalho</button>
+                      <button type="button" class="context-pill" data-context="leadership">🧭 Liderança</button>
+                      <button type="button" class="context-pill" data-context="family">🏠 Família</button>
+                    </div>
+                    <p id="devotional-context-question" style="font-size:13px;font-weight:700;margin:8px 0 4px;">
+                      Pergunta: Qual entrega ou atendimento de hoje você pode fazer com um cuidado acima do esperado?
+                    </p>
+                    <p id="devotional-context-action" style="font-size:12px;color:var(--text-muted);margin:0 0 10px;line-height:1.45;">
+                      Ação prática: Escolha um cliente ou colega hoje, revise sua entrega com excelência e envie uma mensagem genuína de cuidado.
+                    </p>
+                    <textarea id="devotional-note-input" rows="2" placeholder="Escreva aqui sua decisão prática de hoje..." style="width:100%;padding:10px;border-radius:12px;border:1px solid var(--border-color);font-size:12.5px;margin-bottom:10px;background:var(--card-bg);"></textarea>
+                    <button type="button" class="btn-primary btn-full" id="btn-save-devotional-action">✓ Confirmar Aplicação Prática de Hoje</button>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Configuração do Push Diário -->
+              <article class="cris-card">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+                  <div>
+                    <strong style="font-size:14px;display:block;">🔔 Horário da Notificação Diária</strong>
+                    <span style="font-size:11.5px;color:var(--text-muted);">Receba a Palavra do Dia no celular</span>
+                  </div>
+                  <input type="time" id="notif-time-input" value="07:00" style="padding:7px 10px;border-radius:10px;border:1px solid var(--border-color);font-weight:700;background:var(--sheet-bg);">
+                </div>
+                <button type="button" class="btn-secondary btn-full" style="margin-top:12px;" id="btn-test-push-from-bible">
+                  Testar Notificação Push Agora
+                </button>
+              </article>
+            </div>
+
+            <!-- SUB 4.2: Leitor Bíblico -->
+            <div id="bible-sub-reader" style="display:none;">
+              <div class="chip-row" id="bible-theme-chips">
+                <button type="button" class="chip is-active" data-bible-book="proverbios16">Provérbios 16 · Negócios</button>
+                <button type="button" class="chip" data-bible-book="colossenses3">Colossenses 3 · Vocação</button>
+                <button type="button" class="chip" data-bible-book="mateus5">Mateus 5 · Sal e Luz</button>
+                <button type="button" class="chip" data-bible-book="salmos23">Salmos 23 · Confiança</button>
+              </div>
+              <div class="field-group">
+                <select id="bible-book-select" aria-label="Selecionar capítulo bíblico">
+                  <option value="proverbios16">Provérbios · Capítulo 16</option>
+                  <option value="colossenses3">Colossenses · Capítulo 3</option>
+                  <option value="mateus5">Mateus · Capítulo 5</option>
+                  <option value="salmos23">Salmos · Capítulo 23</option>
+                </select>
+              </div>
+              <div class="cris-card">
+                <h3 id="bible-chapter-heading" style="font-family:var(--serif);font-size:21px;margin:0 0 4px;">Provérbios 16</h3>
+                <p style="font-size:11px;color:var(--text-muted);margin:0 0 12px;">Toque em qualquer versículo para destacar.</p>
+                <div id="bible-verses-container"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =====================================================
+             ABA 5: ACADEMIA CRIS (CURSOS) & COMUNIDADE / EVENTOS
+             ===================================================== -->
+        <section class="app-view" id="view-academy" aria-label="Cursos e Comunidade">
+          <div class="internal-hero">
+            <div class="eyebrow">FORMAÇÃO & RELACIONAMENTO</div>
+            <h2>Cursos Empresariais <em>& Comunidade.</em></h2>
+            <p>Capacitações práticas para quem empreende e encontros presenciais que geram confiança.</p>
+          </div>
+
+          <div class="sheet-body">
+            <div class="segmented-control" role="tablist">
+              <button type="button" class="segment-btn is-active" data-academy-tab="courses">Cursos & Capacitações</button>
+              <button type="button" class="segment-btn" data-academy-tab="community">Eventos & Grupos</button>
+            </div>
+
+            <div id="academy-sub-courses">
+              <div id="courses-list-container"></div>
+            </div>
+
+            <div id="academy-sub-community" style="display:none;">
+              <div class="section-head-row" style="margin-top:0;">
+                <h3>Encontros & Eventos da Rede</h3>
+              </div>
+              <div id="events-list-container" style="margin-bottom:18px;"></div>
+
+              <div class="section-head-row">
+                <h3>Grupos por Área de Atuação</h3>
+              </div>
+              <div id="groups-list-container"></div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- =====================================================
+           DOCK INFERIOR FLUTUANTE + FAB CENTRAL (REF 1 & 3)
+           ===================================================== -->
+      <div class="app-bottom-dock-wrap">
+        <nav class="app-bottom-nav" aria-label="Navegação principal do aplicativo">
+          <button type="button" class="nav-tab is-active" data-tab="home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>Início</span>
+          </button>
+          <button type="button" class="nav-tab" data-tab="marketplace">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0"/><path d="M5 12v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-8"/></svg>
+            <span>Mercado</span>
+          </button>
+          <button type="button" class="nav-center-fab" id="fab-open-scanner" title="Enviar Nota Fiscal" aria-label="Enviar Nota Fiscal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h3M20 7V4h-3M4 17v3h3M20 17v3h-3M7 12h10"/></svg>
+          </button>
+          <button type="button" class="nav-tab" data-tab="mural">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span>Mural</span>
+          </button>
+          <button type="button" class="nav-tab" data-tab="academy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <span>Rede</span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Toast de Feedback -->
+      <div class="app-toast" id="app-toast" role="status" aria-live="polite"></div>
+
+      <!-- =====================================================
+           BOTTOM SHEETS / MODAIS
+           ===================================================== -->
+
+      <!-- 1. Perfil Empresarial Completo (Estilo Tela Direita da Ref 3) -->
+      <div class="sheet-backdrop" id="sheet-business-profile" role="dialog" aria-modal="true" aria-labelledby="sheet-biz-title">
+        <div class="bottom-sheet" style="padding-top:12px;">
+          <div class="sheet-handle"></div>
+          <div class="sheet-header">
+            <h3 id="sheet-biz-title">Perfil Empresarial</h3>
+            <button type="button" class="sheet-close" data-close-sheet="sheet-business-profile">✕</button>
+          </div>
+          <div id="sheet-biz-body"></div>
+        </div>
+      </div>
+
+      <!-- 2. Publicar no Mural (Preciso / Posso Oferecer) -->
+      <div class="sheet-backdrop" id="sheet-new-mural" role="dialog" aria-modal="true" aria-labelledby="sheet-mural-title">
+        <div class="bottom-sheet">
+          <div class="sheet-handle"></div>
+          <div class="sheet-header">
+            <h3 id="sheet-mural-title">Publicar no Mural</h3>
+            <button type="button" class="sheet-close" data-close-sheet="sheet-new-mural">✕</button>
+          </div>
+          <form id="form-new-mural">
+            <div class="field-group">
+              <label for="mural-post-type">O que você deseja publicar?</label>
+              <select id="mural-post-type" required>
+                <option value="need">PRECISO DE... (Busco fornecedor ou parceiro)</option>
+                <option value="offer">POSSO OFERECER... (Ofereço serviço, produto ou mentoria)</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label for="mural-post-cat">Setor / Área</label>
+              <select id="mural-post-cat" required>
+                <option value="Serviços B2B">Serviços B2B & Consultoria</option>
+                <option value="Tecnologia & Marketing">Tecnologia & Marketing</option>
+                <option value="Alimentação & Eventos">Alimentação & Eventos</option>
+                <option value="Saúde & Bem-estar">Saúde & Bem-estar</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label for="mural-post-title">Título objetivo</label>
+              <input type="text" id="mural-post-title" required placeholder="Ex: Preciso de fornecedor de embalagens personalizadas">
+            </div>
+            <div class="field-group">
+              <label for="mural-post-desc">Descrição</label>
+              <textarea id="mural-post-desc" rows="3" required placeholder="Detalhe como os membros da CRIS podem ajudar ou se conectar..."></textarea>
+            </div>
+            <button type="submit" class="btn-primary btn-full">Publicar Agora no Mural</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- 3. Registrar Indicação / Negócio -->
+      <div class="sheet-backdrop" id="sheet-new-connection" role="dialog" aria-modal="true" aria-labelledby="sheet-conn-title">
+        <div class="bottom-sheet">
+          <div class="sheet-handle"></div>
+          <div class="sheet-header">
+            <h3 id="sheet-conn-title">Registrar Conexão / Negócio</h3>
+            <button type="button" class="sheet-close" data-close-sheet="sheet-new-connection">✕</button>
+          </div>
+          <form id="form-new-connection">
+            <div class="field-group">
+              <label for="conn-partner">Empresa ou Membro</label>
+              <input type="text" id="conn-partner" required placeholder="Ex: Estúdio Raízes Design">
+            </div>
+            <div class="field-group">
+              <label for="conn-subject">Escopo do Negócio / Indicação</label>
+              <input type="text" id="conn-subject" required placeholder="Ex: Identidade visual + embalagens">
+            </div>
+            <div class="field-group">
+              <label for="conn-stage">Status da Conexão</label>
+              <select id="conn-stage" required>
+                <option value="referred">Indicação enviada</option>
+                <option value="meeting">Reunião realizada</option>
+                <option value="closed">Negócio fechado 🎉</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label for="conn-value">Valor do negócio (R$)</label>
+              <input type="number" id="conn-value" min="0" step="10" value="950" required>
+            </div>
+            <button type="submit" class="btn-primary btn-full">Salvar no Medidor de Conexões</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- 4. Scanner de Nota Fiscal (Câmera + Leitor QR Code / NFC-e) -->
+      <div class="sheet-backdrop" id="sheet-scanner" role="dialog" aria-modal="true" aria-labelledby="sheet-scanner-title">
+        <div class="bottom-sheet scanner-sheet">
+          <div class="sheet-handle" style="background:rgba(255,255,255,0.2);"></div>
+          <div class="scanner-top-hud">
+            <div class="scanner-hud-title" id="sheet-scanner-title">
+              <span class="scanner-live-dot"></span>
+              <span>Scanner de Nota Fiscal</span>
+            </div>
+            <div class="scanner-hud-actions">
+              <button type="button" class="hud-pill-btn" id="btn-scanner-flash" title="Lanterna / Flash">🔦 Flash</button>
+              <button type="button" class="hud-pill-btn" id="btn-scanner-camera" title="Usar câmera do aparelho">📷 Câmera</button>
+              <button type="button" class="sheet-close" style="background:rgba(255,255,255,0.12);color:#fff;border:0;" data-close-sheet="sheet-scanner">✕</button>
+            </div>
+          </div>
+
+          <!-- Viewfinder com Laser + Cupom Fiscal DANFE NFC-e -->
+          <div class="scanner-viewfinder" id="scanner-viewfinder">
+            <video class="scanner-video" id="scanner-video" playsinline muted></video>
+            <div class="scan-frame-box" aria-hidden="true">
+              <span class="scan-corner-bracket tl"></span>
+              <span class="scan-corner-bracket tr"></span>
+              <span class="scan-corner-bracket bl"></span>
+              <span class="scan-corner-bracket br"></span>
+            </div>
+            <div class="scanner-laser-line" aria-hidden="true"></div>
+
+            <!-- Cupom Fiscal Realista dentro da Mira -->
+            <div class="nfce-paper" id="nfce-paper-preview">
+              <div class="nfce-head">
+                <strong id="nfce-company-name">PADARIA GRÃO & GRAÇA LTDA</strong>
+                <small id="nfce-cnpj">CNPJ: 28.419.502/0001-84 · RECIFE/PE</small>
+                <small>DANFE NFC-e · DOCUMENTO AUXILIAR</small>
+              </div>
+              <div class="nfce-items" id="nfce-items-list">
+                <div class="nfce-item-row"><span>001 CESTA CAFE REINO</span><span>89,00</span></div>
+                <div class="nfce-item-row"><span>002 PAO FERM NATURAL</span><span>32,00</span></div>
+                <div class="nfce-item-row"><span>003 CAFE EXPRESSO DUPLO</span><span>29,00</span></div>
+              </div>
+              <div class="nfce-total-row">
+                <span>VALOR TOTAL R$</span>
+                <span id="nfce-total-val">150,00</span>
+              </div>
+              <div class="nfce-qr-row">
+                <svg class="nfce-qr-box" viewBox="0 0 36 36" fill="#0d261d" aria-hidden="true">
+                  <path d="M2 2h10v10H2V2zm2 2v6h6V4H4zm2 2h2v2H6V6zm18-4h10v10H24V2zm2 2v6h6V4h-6zm2 2h2v2h-2V6zM2 24h10v10H2V24zm2 2v6h6v-6H4zm2 2h2v2H6v-2zm10-24h4v4h-4V4zm4 4h4v4h-4V8zm-4 4h4v4h-4v-4zm8 4h4v4h-4v-4zm-12 4h8v4h-8v-4zm12 4h6v6h-6v-6zm-8 4h4v4h-4v-4zm10 2h4v4h-4v-4z"/>
+                </svg>
+                <div class="nfce-qr-meta">
+                  <strong>QR CODE SEFAZ · NFC-e</strong>
+                  <span id="nfce-impact-tag">PARCEIRO CRIS: 5% VIRA DOAÇÃO</span>
+                  <span>CHAVE: 2626 1028 4195 0200</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="scanner-status-pill" id="scanner-status-pill">
+              🎯 QR Code e CNPJ detectados na mira
+            </div>
+          </div>
+
+          <!-- Alternar Notas Fiscais de Exemplo para Testar o Scanner -->
+          <div style="font-size:10.5px;color:#95b8a7;margin-bottom:5px;display:flex;justify-content:space-between;">
+            <span>TESTAR COM OUTRA NOTA NA MIRA:</span>
+            <span style="color:#5fe3a8;">Leitura automática OCR + QR</span>
+          </div>
+          <div class="scanner-sample-bar" id="scanner-sample-chips">
+            <button type="button" class="sample-receipt-chip is-active" data-sample-idx="0">🥐 Padaria (R$ 150)</button>
+            <button type="button" class="sample-receipt-chip" data-sample-idx="1">🎨 Estúdio Raízes (R$ 450)</button>
+            <button type="button" class="sample-receipt-chip" data-sample-idx="2">🩺 Clínica Esperança (R$ 220)</button>
+            <button type="button" class="sample-receipt-chip" data-sample-idx="3">☕ Café Aliança (R$ 85)</button>
+          </div>
+
+          <!-- Resumo Extraído pelo Scanner -->
+          <div class="scanner-ocr-card">
+            <div>
+              <span style="font-size:10px;color:#97b8a8;display:block;text-transform:uppercase;letter-spacing:0.08em;">DOAÇÃO IDENTIFICADA NA NOTA</span>
+              <strong id="scan-preview-donation" style="font-size:18px;color:#5fe3a8;">+ R$ 7,50 (5%)</strong>
+              <small id="scan-preview-company" style="display:block;font-size:11px;color:#c9dfd4;">Padaria Grão & Graça · Nota de R$ 150,00</small>
+            </div>
+            <div style="text-align:right;">
+              <span style="font-size:10px;background:rgba(95,227,168,0.16);color:#5fe3a8;padding:4px 8px;border-radius:8px;font-weight:700;">Sem custo extra</span>
+            </div>
+          </div>
+
+          <!-- Botão de Captura (Shutter) + Galeria + Digitar -->
+          <input type="file" id="scanner-file-input" accept="image/*" capture="environment" style="display:none;">
+          <div class="scanner-controls-bar">
+            <button type="button" class="scanner-side-btn" id="btn-scanner-gallery">
+              🖼 Enviar Foto
+            </button>
+            <button type="button" class="scanner-shutter-btn" id="btn-shutter-scan" title="Escanear Nota Fiscal Agora" aria-label="Escanear Nota Fiscal Agora">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M4 7V4h3M20 7V4h-3M4 17v3h3M20 17v3h-3M7 12h10"/></svg>
+            </button>
+            <button type="button" class="scanner-side-btn" id="btn-scanner-custom">
+              ⌨️ Outro Valor
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Sacola / Checkout In-App -->
+      <div class="sheet-backdrop" id="sheet-cart" role="dialog" aria-modal="true" aria-labelledby="sheet-cart-title">
+        <div class="bottom-sheet">
+          <div class="sheet-handle"></div>
+          <div class="sheet-header">
+            <h3 id="sheet-cart-title">Sua Sacola CRIS</h3>
+            <button type="button" class="sheet-close" data-close-sheet="sheet-cart">✕</button>
+          </div>
+          <div id="cart-items-container"></div>
+        </div>
+      </div>
+
+      <!-- 6. Player de Curso Empresarial -->
+      <div class="sheet-backdrop" id="sheet-course" role="dialog" aria-modal="true" aria-labelledby="sheet-course-title">
+        <div class="bottom-sheet">
+          <div class="sheet-handle"></div>
+          <div class="sheet-header">
+            <h3 id="sheet-course-title">Aula de Capacitação</h3>
+            <button type="button" class="sheet-close" data-close-sheet="sheet-course">✕</button>
+          </div>
+          <div id="sheet-course-body"></div>
+        </div>
+      </div>
+
+      <!-- 7. Impacto e Projetos Sociais (Transparência) -->
+      <div class="sheet-backdrop" id="sheet-impact-projects" role="dialog" aria-modal="true" aria-labelledby="sheet-impact-title">
+        <div class="bottom-sheet">
+          <div class="sheet-handle"></div>
+          <div class="sheet-header">
+            <h3 id="sheet-impact-title">Impacto & Projetos Sociais</h3>
+            <button type="button" class="sheet-close" data-close-sheet="sheet-impact-projects">✕</button>
+          </div>
+          <p style="font-size:12.5px;color:var(--text-muted);margin:0 0 12px;line-height:1.45;">
+            Cada doação na CRIS tem <strong>origem, valor e destino à vista</strong>. Escolha abaixo o projeto que recebe o impacto das suas compras:
+          </p>
+          <div id="impact-projects-list"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="prototype.js"></script>
+</body>
+</html>
