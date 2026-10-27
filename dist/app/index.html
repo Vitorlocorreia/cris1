@@ -32,9 +32,17 @@
         <button type="button" class="jump-btn is-active" data-jump-tab="home">
           <span class="jump-btn-left">
             <svg class="jump-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            <span>Início do Super App</span>
+            <span>Início do Super App (Membro)</span>
           </span>
-          <small>Visão geral</small>
+          <small>Consumidor</small>
+        </button>
+
+        <button type="button" class="jump-btn jump-btn-pj" id="desktop-jump-business">
+          <span class="jump-btn-left">
+            <svg class="jump-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <span>Área do Empresário & Prestador</span>
+          </span>
+          <small style="color:#f5c878;font-weight:700;">Modo PJ</small>
         </button>
 
         <button type="button" class="jump-btn" data-jump-tab="mural" data-jump-sub="board">
@@ -150,6 +158,19 @@
 
       <!-- Área Principal Rolável -->
       <main class="app-main" id="app-main">
+
+        <!-- Alternador Nubank PF ⇄ PJ (Modo Membro vs Modo Empresário / Prestador) -->
+        <div class="profile-mode-bar" role="tablist" aria-label="Alternar modo de uso">
+          <button type="button" class="mode-switch-btn is-active" data-set-mode="member">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>Modo Membro</span>
+          </button>
+          <button type="button" class="mode-switch-btn" data-set-mode="business">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <span>Empresário & Prestador</span>
+            <em class="mode-pj-tag">PJ</em>
+          </button>
+        </div>
 
         <!-- =====================================================
              ABA 1: INÍCIO (SUPER APP HOME - REF 1 + NUBANK + IFOOD)
@@ -582,6 +603,269 @@
           </div>
         </section>
 
+        <!-- =====================================================
+             MODO EMPRESÁRIO & PRESTADOR DE SERVIÇOS (CRIS BUSINESS PJ)
+             ===================================================== -->
+
+        <!-- ABA PJ 1: DASHBOARD DE VENDAS, NOTAS & IMPACTO DA EMPRESA -->
+        <section class="app-view" id="view-biz-home" aria-label="Painel do Empresário e Prestador">
+          <div class="emerald-hero biz-hero">
+            <div class="biz-header-top">
+              <div class="biz-profile-selector">
+                <div class="biz-avatar-badge" id="biz-active-avatar">ER</div>
+                <div>
+                  <div style="display:flex;align-items:center;gap:6px;">
+                    <select id="biz-account-select" class="biz-select-inline" aria-label="Selecionar perfil empresarial ou prestador">
+                      <option value="provider">Estúdio Raízes · Serviços & Consultoria</option>
+                      <option value="merchant">Padaria Grão & Graça · Comércio & Produtos</option>
+                    </select>
+                  </div>
+                  <div class="biz-seal-row">
+                    <span class="biz-gold-seal">✓ Empresa Verificada CRIS · Nível Ouro</span>
+                    <span class="biz-impact-rate-pill" id="biz-hero-rate-pill">♥ 8% Repasse Social</span>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="glass-icon-btn" id="btn-biz-open-pos-top" title="Cobrar / Emitir QR Fiscal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              </button>
+            </div>
+
+            <!-- Faturamento Gerado na Rede CRIS + Repasse Social Auditado -->
+            <div class="hero-balance-block biz-balance-block">
+              <div>
+                <div class="balance-label-row">
+                  <span>Faturamento via Rede CRIS (Mês) · <strong id="biz-type-tag" style="color:#f5c878;">Prestação de Serviços & B2B</strong></span>
+                </div>
+                <div class="balance-main-row">
+                  <div class="balance-value" id="biz-revenue-display">R$ 18.420,00</div>
+                  <span class="balance-growth-pill" style="background:rgba(245,200,120,0.22);color:#f5c878;">+32,4% no mês</span>
+                  <button type="button" class="eye-toggle-btn" id="btn-toggle-biz-revenue" aria-label="Mostrar ou ocultar faturamento">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </button>
+                </div>
+              </div>
+              <div class="biz-impact-mini-box">
+                <small>Impacto Social Repassado pela sua Empresa</small>
+                <strong id="biz-impact-generated-display">R$ 1.473,60 → Instituto Pão da Vida</strong>
+                <span class="biz-audit-status">✓ 100% Auditado · Selo Ativo na Vitrine</span>
+              </div>
+            </div>
+
+            <!-- 5 Atalhos Rápidos do Empresário / Prestador -->
+            <div class="quick-circle-dock">
+              <button type="button" class="circle-action-btn" id="biz-quick-pos">
+                <div class="circle-icon-ring biz-ring-gold">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><path d="M3 14h7v7H3z"/></svg>
+                </div>
+                <span>Cobrar / QR</span>
+              </button>
+              <button type="button" class="circle-action-btn" data-biz-nav="biz-orders">
+                <div class="circle-icon-ring">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                </div>
+                <span>Orçamentos</span>
+              </button>
+              <button type="button" class="circle-action-btn" id="biz-quick-new-item">
+                <div class="circle-icon-ring">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </div>
+                <span>+ Serviço/Item</span>
+              </button>
+              <button type="button" class="circle-action-btn" data-biz-nav="biz-b2b">
+                <div class="circle-icon-ring">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                </div>
+                <span>Radar B2B</span>
+              </button>
+              <button type="button" class="circle-action-btn" id="biz-quick-new-course">
+                <div class="circle-icon-ring">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                </div>
+                <span>+ Curso/Mentoria</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Corpo do Dashboard PJ -->
+          <div class="sheet-body">
+            <!-- Bento Grid PJ -->
+            <div class="bento-grid">
+              <article class="bento-card is-dark-emerald" data-biz-nav="biz-orders">
+                <div>
+                  <span class="bento-tag" style="color:#f5c878;">CENTRAL DE DEMANDA</span>
+                  <h4 id="biz-bento-orders-count">4 Solicitações</h4>
+                  <p>Orçamentos e pedidos aguardando sua resposta hoje.</p>
+                </div>
+                <div class="bento-footer">
+                  <span>Responder clientes</span>
+                  <span class="bento-arrow">↗</span>
+                </div>
+              </article>
+
+              <article class="bento-card is-warm-gold" data-biz-nav="biz-b2b">
+                <div>
+                  <span class="bento-tag">RADAR B2B & MURAL</span>
+                  <h4 id="biz-bento-leads-count">3 Oportunidades</h4>
+                  <p>Membros buscando exatamente o serviço que você presta.</p>
+                </div>
+                <div class="bento-footer">
+                  <span>Enviar proposta</span>
+                  <span class="bento-arrow">↗</span>
+                </div>
+              </article>
+            </div>
+
+            <!-- Funil de Performance da Vitrine CRIS -->
+            <div class="cris-card" style="margin-bottom:16px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                <div>
+                  <span style="font-size:10px;font-weight:800;letter-spacing:0.1em;color:var(--emerald-bright);text-transform:uppercase;">DESEMPENHO DA SUA VITRINE</span>
+                  <h3 style="margin:2px 0 0;font-size:15.5px;">Funil de Clientes & Reputação CRIS</h3>
+                </div>
+                <span class="verified-badge">★ 4.9 (128 avaliações)</span>
+              </div>
+              <div class="biz-kpi-grid">
+                <div class="biz-kpi-box">
+                  <strong id="kpi-views">418</strong>
+                  <span>Visitas no Perfil</span>
+                </div>
+                <div class="biz-kpi-box">
+                  <strong id="kpi-quotes">29</strong>
+                  <span>Orçamentos / Pedidos</span>
+                </div>
+                <div class="biz-kpi-box">
+                  <strong id="kpi-sales">47</strong>
+                  <span>Notas & Vendas</span>
+                </div>
+                <div class="biz-kpi-box">
+                  <strong style="color:var(--emerald-bright);">68%</strong>
+                  <span>Taxa de Fechamento</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Últimas Vendas, Serviços & Notas Validadas -->
+            <div class="section-head-row">
+              <h3>Últimas Vendas & Notas Validadas</h3>
+              <button type="button" id="btn-biz-add-sale-inline">+ Registrar venda</button>
+            </div>
+            <div id="biz-sales-history-container"></div>
+          </div>
+        </section>
+
+        <!-- ABA PJ 2: CENTRAL DE ORÇAMENTOS, PEDIDOS E AGENDAMENTOS -->
+        <section class="app-view" id="view-biz-orders" aria-label="Central de Orçamentos e Pedidos">
+          <div class="internal-hero">
+            <div class="eyebrow">ATENDIMENTO & FECHAMENTO</div>
+            <h2>Orçamentos, Pedidos <em>& Agenda.</em></h2>
+            <p>Receba demandas de membros da CRIS, envie propostas comerciais e conclua serviços com repasse social automático.</p>
+          </div>
+
+          <div class="sheet-body">
+            <div class="segmented-control" role="tablist">
+              <button type="button" class="segment-btn is-active" data-biz-orders-tab="quotes">Orçamentos de Serviço (<span id="badge-quotes-count">4</span>)</button>
+              <button type="button" class="segment-btn" data-biz-orders-tab="store">Pedidos da Loja & Agenda (<span id="badge-orders-count">3</span>)</button>
+            </div>
+
+            <div id="biz-sub-quotes">
+              <div id="biz-quotes-list-container"></div>
+            </div>
+
+            <div id="biz-sub-store" style="display:none;">
+              <div id="biz-store-orders-container"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ABA PJ 3: GESTÃO DE VITRINE, SERVIÇOS, PRODUTOS & REPASSE -->
+        <section class="app-view" id="view-biz-catalog" aria-label="Gestão de Vitrine e Catálogo">
+          <div class="internal-hero">
+            <div class="eyebrow">SUA VITRINE NO MARKETPLACE</div>
+            <h2>Catálogo de Serviços, <em>Produtos & Impacto.</em></h2>
+            <p>Tudo o que você cadastra ou atualiza aqui aparece instantaneamente para os membros no Marketplace CRIS.</p>
+          </div>
+
+          <div class="sheet-body">
+            <!-- Configuração de Repasse Social e Benefício Membro CRIS -->
+            <div class="cris-card" style="margin-bottom:16px;border-left:4px solid var(--gold-warm);">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:10px;">
+                <div>
+                  <span style="font-size:10px;font-weight:800;letter-spacing:0.08em;color:var(--gold-warm);text-transform:uppercase;">COMPROMISSO SOCIAL DA EMPRESA</span>
+                  <h4 style="margin:2px 0 4px;font-size:15px;">Percentual de Repasse Social por Venda/Serviço</h4>
+                  <p style="margin:0;font-size:12px;color:var(--text-muted);">Empresas com repasse ativo ganham destaque orgânico na Home do Super App.</p>
+                </div>
+                <span class="verified-badge" id="catalog-rate-preview">♥ 8% ativo</span>
+              </div>
+              <div class="chip-scroll" id="biz-impact-pct-chips" style="padding-bottom:4px;">
+                <button type="button" class="chip" data-set-pct="5">5% (Selo Bronze)</button>
+                <button type="button" class="chip is-active" data-set-pct="8">8% (Selo Ouro · Recomendado)</button>
+                <button type="button" class="chip" data-set-pct="10">10% (Selo Diamante)</button>
+                <button type="button" class="chip" data-set-pct="12">12% (Embaixador do Reino)</button>
+              </div>
+              <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border-color);display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+                <div style="font-size:12px;">
+                  <strong>Benefício Exclusivo Membro CRIS:</strong>
+                  <span id="biz-perk-text" style="color:var(--text-muted);display:block;">Diagnóstico gratuito + 10% OFF no primeiro contrato ou pedido</span>
+                </div>
+                <button type="button" class="btn-secondary" style="padding:7px 12px;font-size:11.5px;" id="btn-edit-perk">Editar Benefício</button>
+              </div>
+            </div>
+
+            <div class="section-head-row" style="margin-top:0;">
+              <h3>Serviços & Produtos Publicados</h3>
+              <button type="button" id="btn-open-new-catalog-item">+ Cadastrar Novo</button>
+            </div>
+
+            <div id="biz-catalog-items-container"></div>
+          </div>
+        </section>
+
+        <!-- ABA PJ 4: RADAR B2B & INDICAÇÕES RECEBIDAS -->
+        <section class="app-view" id="view-biz-b2b" aria-label="Radar B2B e Indicações Recebidas">
+          <div class="internal-hero">
+            <div class="eyebrow">INTELIGÊNCIA COMERCIAL & REDE</div>
+            <h2>Radar B2B & <em>Indicações Recebidas.</em></h2>
+            <p>Encontre membros que precisam do seu serviço agora no Mural e acompanhe as indicações que outros empresários enviaram para você.</p>
+          </div>
+
+          <div class="sheet-body">
+            <div class="segmented-control" role="tablist">
+              <button type="button" class="segment-btn is-active" data-biz-b2b-tab="radar">Demandas do Mural (Match)</button>
+              <button type="button" class="segment-btn" data-biz-b2b-tab="referrals">Indicações Recebidas (CRM)</button>
+            </div>
+
+            <div id="biz-sub-radar">
+              <div id="biz-radar-matches-container"></div>
+            </div>
+
+            <div id="biz-sub-referrals" style="display:none;">
+              <div id="biz-referrals-received-container"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ABA PJ 5: PUBLICAÇÃO DE CURSOS, MENTORIAS & EVENTOS EMPRESARIAIS -->
+        <section class="app-view" id="view-biz-academy" aria-label="Academia e Eventos do Empresário">
+          <div class="internal-hero">
+            <div class="eyebrow">AUTORIDADE & EDUCAÇÃO</div>
+            <h2>Seus Cursos, Mentorias <em>& Eventos.</em></h2>
+            <p>Compartilhe sua experiência prática na Academia CRIS, forme outros empreendedores e fortaleça a autoridade da sua empresa.</p>
+          </div>
+
+          <div class="sheet-body">
+            <div style="display:flex;gap:8px;margin-bottom:16px;">
+              <button type="button" class="btn-primary btn-full" id="btn-biz-publish-course">+ Publicar Curso ou Mentoria</button>
+              <button type="button" class="btn-secondary btn-full" id="btn-biz-publish-event">+ Criar Workshop / Evento</button>
+            </div>
+
+            <div class="section-head-row" style="margin-top:0;">
+              <h3>Cursos & Mentorias da sua Empresa</h3>
+            </div>
+            <div id="biz-my-courses-container"></div>
+          </div>
+        </section>
+
       </main>
 
       <!-- =====================================================
@@ -590,9 +874,11 @@
       <div class="app-bottom-dock-wrap">
         <div class="desktop-sidebar-brand">
           <img src="/assets/cris-logo-light.png" alt="CRIS" style="height:38px;width:auto;max-width:112px;object-fit:contain;display:block;align-self:flex-start;">
-          <span>SUPER APP · ECONOMIA DO REINO</span>
+          <span id="sidebar-mode-subtitle">SUPER APP · ECONOMIA DO REINO</span>
         </div>
-        <nav class="app-bottom-nav" aria-label="Navegação principal do aplicativo">
+
+        <!-- Navegação Modo Membro -->
+        <nav class="app-bottom-nav" id="nav-member-dock" aria-label="Navegação principal do membro">
           <button type="button" class="nav-tab is-active" data-tab="home">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             <span>Início</span>
@@ -616,6 +902,34 @@
           <button type="button" class="nav-tab" data-tab="academy">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
             <span>Cursos & Rede</span>
+          </button>
+        </nav>
+
+        <!-- Navegação Modo Empresário & Prestador (PJ) -->
+        <nav class="app-bottom-nav nav-biz-dock" id="nav-biz-dock" aria-label="Navegação do empresário e prestador" style="display:none;">
+          <button type="button" class="nav-tab is-active" data-biz-tab="biz-home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+            <span>Painel PJ</span>
+          </button>
+          <button type="button" class="nav-tab" data-biz-tab="biz-orders">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <span>Orçamentos</span>
+          </button>
+          <button type="button" class="nav-center-fab fab-gold-pj" id="fab-open-pos" title="Cobrar / Gerar QR Fiscal" aria-label="Cobrar ou Gerar QR Fiscal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            <span class="fab-desktop-label">Cobrar / Validar Venda</span>
+          </button>
+          <button type="button" class="nav-tab" data-biz-tab="biz-catalog">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+            <span>Minha Vitrine</span>
+          </button>
+          <button type="button" class="nav-tab" data-biz-tab="biz-b2b">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            <span>Radar B2B</span>
+          </button>
+          <button type="button" class="nav-tab nav-tab-bible-desktop" data-biz-tab="biz-academy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <span>Academia PJ</span>
           </button>
         </nav>
         <div class="desktop-sidebar-footer">
@@ -853,6 +1167,141 @@
             Cada doação na CRIS tem <strong>origem, valor e destino à vista</strong>. Escolha abaixo o projeto que recebe o impacto das suas compras:
           </p>
           <div id="impact-projects-list"></div>
+        </div>
+      </div>
+
+      <!-- 8. Terminal CRIS Pay & Emissor de QR Code / Validador de Venda (Modo Empresário) -->
+      <div class="sheet-backdrop" id="sheet-biz-pos" role="dialog" aria-modal="true" aria-labelledby="sheet-pos-title">
+        <div class="bottom-sheet">
+          <div class="sheet-handle"></div>
+          <div class="sheet-header">
+            <h3 id="sheet-pos-title">Cobrar Cliente / Validar Venda CRIS</h3>
+            <button type="button" class="sheet-close" data-close-sheet="sheet-biz-pos">✕</button>
+          </div>
+          <p style="font-size:12.5px;color:var(--text-muted);margin:0 0 12px;">
+            Gere o QR Code de pagamento/nota para seu cliente ou registre um serviço/venda concluído com repasse social automático.
+          </p>
+          <form id="form-biz-pos">
+            <div class="field-group">
+              <label for="pos-client-name">Cliente ou Membro CRIS</label>
+              <input type="text" id="pos-client-name" required value="Mateus Andrade (Membro Ouro)" placeholder="Ex: Mateus Andrade">
+            </div>
+            <div class="field-group">
+              <label for="pos-service-desc">Serviço Prestado ou Produto Vendido</label>
+              <input type="text" id="pos-service-desc" required value="Identidade Visual & Embalagens" placeholder="Ex: Consultoria / Produto">
+            </div>
+            <div class="field-group">
+              <label for="pos-amount">Valor da Venda / Serviço (R$)</label>
+              <input type="number" id="pos-amount" min="10" step="10" value="450" required>
+            </div>
+            <div class="cris-card" style="background:var(--emerald-soft);border-color:transparent;padding:12px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <span style="font-size:10px;font-weight:800;text-transform:uppercase;color:#14523a;display:block;">REPASSE SOCIAL AUTOMÁTICO (<span id="pos-rate-label">8%</span>)</span>
+                <strong id="pos-donation-preview" style="font-size:16px;color:#0b241b;">R$ 36,00 para Instituto Pão da Vida</strong>
+              </div>
+              <span class="verified-badge">Selo Ativo</span>
+            </div>
+            <button type="submit" class="btn-primary btn-full">Confirmar Venda & Emitir Nota CRIS</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- 9. Cadastrar Novo Serviço ou Produto na Vitrine (Modo Empresário) -->
+      <div class="sheet-backdrop" id="sheet-biz-new-item" role="dialog" aria-modal="true" aria-labelledby="sheet-new-item-title">
+        <div class="bottom-sheet">
+          <div class="sheet-handle"></div>
+          <div class="sheet-header">
+            <h3 id="sheet-new-item-title">Cadastrar Serviço ou Produto</h3>
+            <button type="button" class="sheet-close" data-close-sheet="sheet-biz-new-item">✕</button>
+          </div>
+          <form id="form-biz-new-item">
+            <div class="field-group">
+              <label for="new-item-kind">Tipo de Oferta</label>
+              <select id="new-item-kind" required>
+                <option value="service">Prestação de Serviço / Consultoria / Atendimento</option>
+                <option value="product">Produto Físico / Kit na Loja In-App</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label for="new-item-title">Nome do Serviço ou Produto</label>
+              <input type="text" id="new-item-title" required placeholder="Ex: Consultoria de Posicionamento Digital (4 encontros)">
+            </div>
+            <div class="field-group">
+              <label for="new-item-price">Valor ou Faixa de Preço (R$)</label>
+              <input type="number" id="new-item-price" min="15" step="5" value="280" required>
+            </div>
+            <div class="field-group">
+              <label for="new-item-benefit">Diferencial para Membros CRIS</label>
+              <input type="text" id="new-item-benefit" value="Diagnóstico inicial gratuito + 8% revertido em doação" required>
+            </div>
+            <button type="submit" class="btn-primary btn-full">Publicar na Minha Vitrine & Marketplace</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- 10. Enviar Proposta de Orçamento ao Cliente (Modo Empresário) -->
+      <div class="sheet-backdrop" id="sheet-biz-proposal" role="dialog" aria-modal="true" aria-labelledby="sheet-proposal-title">
+        <div class="bottom-sheet">
+          <div class="sheet-handle"></div>
+          <div class="sheet-header">
+            <h3 id="sheet-proposal-title">Responder Orçamento com Proposta</h3>
+            <button type="button" class="sheet-close" data-close-sheet="sheet-biz-proposal">✕</button>
+          </div>
+          <form id="form-biz-proposal">
+            <input type="hidden" id="proposal-quote-id">
+            <div class="field-group">
+              <label for="proposal-client">Cliente / Empresa Solicitante</label>
+              <input type="text" id="proposal-client" readonly style="opacity:0.8;">
+            </div>
+            <div class="field-group">
+              <label for="proposal-value">Valor Proposto pelo Serviço (R$)</label>
+              <input type="number" id="proposal-value" min="50" step="10" value="1200" required>
+            </div>
+            <div class="field-group">
+              <label for="proposal-deadline">Prazo de Entrega / Atendimento</label>
+              <input type="text" id="proposal-deadline" value="Entrega em 7 dias úteis · Início imediato" required>
+            </div>
+            <div class="field-group">
+              <label for="proposal-notes">Mensagem e Condições para o Membro CRIS</label>
+              <textarea id="proposal-notes" rows="3" required>Olá! Preparei uma proposta especial pelo ecossistema CRIS com 10% de desconto e 8% revertido automaticamente para o projeto social.</textarea>
+            </div>
+            <button type="submit" class="btn-primary btn-full">Enviar Proposta Oficial ao Cliente</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- 11. Publicar Curso, Mentoria ou Evento na Academia CRIS (Modo Empresário) -->
+      <div class="sheet-backdrop" id="sheet-biz-new-course" role="dialog" aria-modal="true" aria-labelledby="sheet-new-course-title">
+        <div class="bottom-sheet">
+          <div class="sheet-handle"></div>
+          <div class="sheet-header">
+            <h3 id="sheet-new-course-title">Publicar Curso ou Mentoria</h3>
+            <button type="button" class="sheet-close" data-close-sheet="sheet-biz-new-course">✕</button>
+          </div>
+          <form id="form-biz-new-course">
+            <div class="field-group">
+              <label for="new-course-title">Título do Curso ou Mentoria Prática</label>
+              <input type="text" id="new-course-title" required placeholder="Ex: Como Estruturar Vendas B2B com Propósito">
+            </div>
+            <div class="field-group">
+              <label for="new-course-tag">Área / Trilha</label>
+              <select id="new-course-tag" required>
+                <option value="GESTÃO & VENDAS">GESTÃO & VENDAS</option>
+                <option value="POSICIONAMENTO & MARCA">POSICIONAMENTO & MARCA</option>
+                <option value="LIDERANÇA CRISTÃ">LIDERANÇA CRISTÃ</option>
+                <option value="FINANÇAS & MORDOMIA">FINANÇAS & MORDOMIA</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label for="new-course-duration">Formato e Carga Horária</label>
+              <input type="text" id="new-course-duration" value="5 aulas · 1h 40m + Mentoria" required>
+            </div>
+            <div class="field-group">
+              <label for="new-course-action">Ferramenta Prática para os Alunos</label>
+              <textarea id="new-course-action" rows="2" required placeholder="Ex: Planilha de diagnóstico comercial + roteiro de atendimento para aplicar na semana."></textarea>
+            </div>
+            <button type="submit" class="btn-primary btn-full">Publicar na Academia CRIS</button>
+          </form>
         </div>
       </div>
 

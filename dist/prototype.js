@@ -509,7 +509,11 @@
     document.querySelectorAll('.sheet-backdrop.is-open').forEach(s => s.classList.remove('is-open'));
     document.querySelectorAll('.proto-quick-jumps .jump-btn').forEach(b => b.classList.remove('is-active'));
     document.querySelector('.proto-quick-jumps [data-jump-tab="home"]')?.classList.add('is-active');
-    switchMainTab('home');
+    if (typeof setAppMode === 'function') {
+      setAppMode('member');
+    } else {
+      switchMainTab('home');
+    }
     showToast('De volta ao início do Super App!');
   }
 
@@ -1028,11 +1032,24 @@
     });
 
     document.getElementById('btn-checkout-complete')?.addEventListener('click', () => {
+      const itemsText = state.cart.map(i => i.title).join(' + ');
+      if (state.bizStoreOrders) {
+        state.bizStoreOrders.unshift({
+          id: 'bo' + Date.now(),
+          client: 'Mateus Andrade (Pedido via App)',
+          items: itemsText,
+          total,
+          type: 'Pedido Loja In-App',
+          slot: 'Aguardando confirmação · Hoje',
+          status: 'pending'
+        });
+      }
       state.walletTotal += totalDonation;
       state.walletWeek += totalDonation;
       state.cart = [];
       updateCartBadge();
       updateWalletUI();
+      if (typeof renderAllBizViews === 'function') renderAllBizViews();
       closeSheet('sheet-cart');
       showToast(`Pedido confirmado! +${formatBRL(totalDonation)} gerados para o projeto social.`);
     });
@@ -1064,10 +1081,25 @@
       date: 'Agora'
     });
 
+    if (state.bizQuotes) {
+      state.bizQuotes.unshift({
+        id: 'bq' + Date.now(),
+        client: 'Mateus Andrade (Membro CRIS)',
+        category: cat,
+        title,
+        budget,
+        urgency: 'Enviado agora pelo App',
+        status: 'new',
+        proposalNote: '',
+        time: 'Agora'
+      });
+    }
+
     e.target.reset();
     renderConnections();
+    if (typeof renderAllBizViews === 'function') renderAllBizViews();
     switchMainTab('mural', 'connections');
-    showToast('Orçamento enviado e registrado no Medidor de Conexões!');
+    showToast('Orçamento enviado! (Você também pode vê-lo no Modo Empresário!)');
   });
 
   // ==========================================
@@ -1486,6 +1518,771 @@
     });
   }
 
+  // ==========================================
+  // MODO EMPRESÁRIO & PRESTADOR DE SERVIÇOS (CRIS BUSINESS PJ)
+  // ==========================================
+  state.appMode = 'member'; // 'member' | 'business'
+  state.activeBizAccount = 'provider'; // 'provider' (Estúdio Raízes) | 'merchant' (Padaria Grão & Graça)
+  state.bizHiddenRevenue = false;
+
+  state.bizAccounts = {
+    provider: {
+      name: 'Estúdio Raízes · Design & Consultoria',
+      avatar: 'ER',
+      typeTag: 'Prestação de Serviços & B2B',
+      revenue: 18420.00,
+      impactRate: 8,
+      views: 418,
+      salesCount: 47,
+      perk: 'Diagnóstico de marca gratuito + 10% OFF no primeiro projeto B2B'
+    },
+    merchant: {
+      name: 'Padaria Grão & Graça · Gastronomia',
+      avatar: 'GG',
+      typeTag: 'Comércio, Produtos & Eventos',
+      revenue: 34890.00,
+      impactRate: 6,
+      views: 890,
+      salesCount: 164,
+      perk: 'Café expresso cortesia em compras acima de R$ 60 para membros CRIS'
+    }
+  };
+
+  state.bizQuotes = [
+    {
+      id: 'bq1',
+      client: 'Clínica Vida Plena (Dr. Lucas)',
+      category: 'Design, Marca & Identidade',
+      title: 'Redesign da fachada + papelaria médica e sinalização interna',
+      budget: 2400,
+      urgency: 'Para iniciar esta semana',
+      status: 'new', // 'new' | 'proposed' | 'in_progress' | 'completed'
+      proposalNote: '',
+      time: 'Há 18 min'
+    },
+    {
+      id: 'bq2',
+      client: 'Padaria Grão & Graça (Marcos)',
+      category: 'Embalagens & Ponto de Venda',
+      title: 'Linha de embalagens presenteáveis para cestas corporativas',
+      budget: 1650,
+      urgency: 'Entrega em 15 dias',
+      status: 'proposed',
+      proposalNote: 'Proposta enviada com 3 opções de faca gráfica + acompanhamento em gráfica.',
+      time: 'Há 2 horas'
+    },
+    {
+      id: 'bq3',
+      client: 'Livraria Sêmen & Palavra',
+      category: 'Consultoria Digital & Tráfego',
+      title: 'Landing page para lançamento de clube de leitura cristão',
+      budget: 1900,
+      urgency: 'Mês atual',
+      status: 'in_progress',
+      proposalNote: 'Aprovado! Cronograma em execução (Etapa 2/3).',
+      time: 'Ontem'
+    },
+    {
+      id: 'bq4',
+      client: 'Construtora Rocha Firme',
+      category: 'Apresentação Comercial B2B',
+      title: 'Book institucional para captação de investidores',
+      budget: 1450,
+      urgency: 'Concluído',
+      status: 'completed',
+      proposalNote: 'Entregue e nota fiscal validada com repasse social.',
+      time: '3 dias atrás'
+    }
+  ];
+
+  state.bizStoreOrders = [
+    {
+      id: 'bo1',
+      client: 'Mateus Andrade (Membro Ouro)',
+      items: 'Mentoria Diagnóstico de Posicionamento (2h Online)',
+      total: 380.00,
+      type: 'Agendamento de Serviço',
+      slot: 'Quinta, 15h00 · Google Meet',
+      status: 'pending' // 'pending' | 'preparing' | 'done'
+    },
+    {
+      id: 'bo2',
+      client: 'Ana Clara Ribeiro',
+      items: 'Cesta Café da Manhã Reino + Pão Levain',
+      total: 121.00,
+      type: 'Pedido Loja In-App',
+      slot: 'Entrega Boa Viagem · Hoje até 17h',
+      status: 'preparing'
+    },
+    {
+      id: 'bo3',
+      client: 'Pr. Eduardo & Igreja Esperança',
+      items: 'Coffee Break Executivo para 30 Lideranças',
+      total: 890.00,
+      type: 'Encomenda Corporativa',
+      slot: 'Sábado, 08h30',
+      status: 'done'
+    }
+  ];
+
+  state.bizCatalogItems = [
+    {
+      id: 'cat1',
+      kind: 'service',
+      title: 'Identidade Visual Completa & Manual de Marca',
+      price: 2200,
+      benefit: 'Diagnóstico gratuito + parcelamento em 4x sem juros para membros',
+      active: true,
+      featured: true
+    },
+    {
+      id: 'cat2',
+      kind: 'service',
+      title: 'Consultoria Express de Posicionamento Digital (Sessão 2h)',
+      price: 380,
+      benefit: 'Inclui plano prático de 30 dias + análise de perfil',
+      active: true,
+      featured: true
+    },
+    {
+      id: 'cat3',
+      kind: 'service',
+      title: 'Design de Embalagens & Rótulos para Produtos Locais',
+      price: 1150,
+      benefit: 'Indicação direta de gráficas parceiras da rede CRIS',
+      active: true,
+      featured: false
+    },
+    {
+      id: 'cat4',
+      kind: 'product',
+      title: 'Cesta Café da Manhã Reino (Artesanal)',
+      price: 89,
+      benefit: 'Frete grátis em Boa Viagem para membros CRIS',
+      active: true,
+      featured: true
+    }
+  ];
+
+  state.bizSalesHistory = [
+    {
+      id: 'sh1',
+      client: 'Construtora Rocha Firme',
+      desc: 'Book Institucional B2B (Nota NFC-e / NFS-e)',
+      amount: 1450.00,
+      donation: 116.00,
+      date: 'Hoje, 10:15'
+    },
+    {
+      id: 'sh2',
+      client: 'Mateus Andrade',
+      desc: 'Identidade Visual Embalagens (Sinal 50%)',
+      amount: 950.00,
+      donation: 76.00,
+      date: 'Ontem, 16:40'
+    },
+    {
+      id: 'sh3',
+      client: 'Café Aliança Torrefação',
+      desc: 'Consultoria de Rótulos & Ponto de Venda',
+      amount: 680.00,
+      donation: 54.40,
+      date: '24 Out'
+    }
+  ];
+
+  function getActiveBiz() {
+    return state.bizAccounts[state.activeBizAccount];
+  }
+
+  function switchBizTab(bizTabName) {
+    document.querySelectorAll('#nav-biz-dock .nav-tab').forEach(t => {
+      t.classList.toggle('is-active', t.dataset.bizTab === bizTabName);
+    });
+    views.forEach(v => v.classList.toggle('is-active', v.id === `view-${bizTabName}`));
+    appMain.scrollTop = 0;
+  }
+
+  function setAppMode(mode) {
+    state.appMode = mode;
+    document.querySelectorAll('[data-set-mode]').forEach(btn => {
+      btn.classList.toggle('is-active', btn.dataset.setMode === mode);
+    });
+
+    const memberDock = document.getElementById('nav-member-dock');
+    const bizDock = document.getElementById('nav-biz-dock');
+    const sidebarSubtitle = document.getElementById('sidebar-mode-subtitle');
+
+    if (mode === 'business') {
+      memberDock.style.display = 'none';
+      bizDock.style.display = '';
+      if (sidebarSubtitle) sidebarSubtitle.textContent = 'MODO EMPRESÁRIO & PRESTADOR (PJ)';
+      renderAllBizViews();
+      switchBizTab('biz-home');
+      showToast('💼 Área do Empresário & Prestador ativada!');
+    } else {
+      bizDock.style.display = 'none';
+      memberDock.style.display = '';
+      if (sidebarSubtitle) sidebarSubtitle.textContent = 'SUPER APP · ECONOMIA DO REINO';
+      switchMainTab('home');
+      showToast('👤 Modo Membro (Consumidor) ativado!');
+    }
+  }
+
+  document.querySelectorAll('[data-set-mode]').forEach(btn => {
+    btn.addEventListener('click', () => setAppMode(btn.dataset.setMode));
+  });
+
+  document.getElementById('desktop-jump-business')?.addEventListener('click', function () {
+    document.querySelectorAll('.proto-quick-jumps .jump-btn').forEach(b => b.classList.remove('is-active'));
+    this.classList.add('is-active');
+    setAppMode('business');
+  });
+
+  // Quando clicar em qualquer atalho do painel guia desktop que seja do membro, garante que volte ao modo membro
+  document.querySelectorAll('[data-jump-tab]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (state.appMode !== 'member') {
+        state.appMode = 'member';
+        document.querySelectorAll('[data-set-mode]').forEach(b => b.classList.toggle('is-active', b.dataset.setMode === 'member'));
+        document.getElementById('nav-biz-dock').style.display = 'none';
+        document.getElementById('nav-member-dock').style.display = '';
+      }
+      switchMainTab(btn.dataset.jumpTab, btn.dataset.jumpSub);
+    });
+  });
+
+  document.querySelectorAll('#nav-biz-dock [data-biz-tab]').forEach(tab => {
+    tab.addEventListener('click', () => switchBizTab(tab.dataset.bizTab));
+  });
+
+  document.querySelectorAll('[data-biz-nav]').forEach(el => {
+    el.addEventListener('click', () => switchBizTab(el.dataset.bizNav));
+  });
+
+  // Alternar entre Prestador de Serviço e Comércio dentro do Modo PJ
+  document.getElementById('biz-account-select')?.addEventListener('change', e => {
+    state.activeBizAccount = e.target.value;
+    renderAllBizViews();
+    showToast(`Visualizando como: ${getActiveBiz().name}`);
+  });
+
+  document.getElementById('btn-toggle-biz-revenue')?.addEventListener('click', () => {
+    state.bizHiddenRevenue = !state.bizHiddenRevenue;
+    renderBizDashboard();
+  });
+
+  function renderBizDashboard() {
+    const biz = getActiveBiz();
+    const impactTotal = (biz.revenue * biz.impactRate) / 100;
+    const projName = state.projects[state.activeProjectIndex];
+
+    document.getElementById('biz-active-avatar').textContent = biz.avatar;
+    document.getElementById('biz-type-tag').textContent = biz.typeTag;
+    document.getElementById('biz-hero-rate-pill').textContent = `♥ ${biz.impactRate}% Repasse Social`;
+    document.getElementById('biz-revenue-display').textContent = state.bizHiddenRevenue ? 'R$ ••••••' : formatBRL(biz.revenue);
+    document.getElementById('biz-impact-generated-display').textContent = state.bizHiddenRevenue
+      ? `R$ •••• → ${projName}`
+      : `${formatBRL(impactTotal)} → ${projName}`;
+
+    const pendingQuotes = state.bizQuotes.filter(q => q.status !== 'completed').length;
+    const pendingOrders = state.bizStoreOrders.filter(o => o.status !== 'done').length;
+    document.getElementById('biz-bento-orders-count').textContent = `${pendingQuotes + pendingOrders} Solicitações`;
+
+    const needPosts = state.muralPosts.filter(p => p.type === 'need').length;
+    document.getElementById('biz-bento-leads-count').textContent = `${needPosts} Oportunidades`;
+
+    document.getElementById('kpi-views').textContent = biz.views;
+    document.getElementById('kpi-quotes').textContent = state.bizQuotes.length + state.bizStoreOrders.length;
+    document.getElementById('kpi-sales').textContent = biz.salesCount;
+
+    const historyEl = document.getElementById('biz-sales-history-container');
+    historyEl.innerHTML = state.bizSalesHistory.map(s => `
+      <article class="cris-card" style="padding:13px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+          <div>
+            <strong style="font-size:13.5px;display:block;">${s.client}</strong>
+            <span style="font-size:12px;color:var(--text-muted);display:block;margin:2px 0 6px;">${s.desc}</span>
+            <span style="font-size:11px;color:var(--emerald-bright);font-weight:700;">♥ +${formatBRL(s.donation)} repassados ao projeto social</span>
+          </div>
+          <div style="text-align:right;">
+            <strong style="font-size:14.5px;display:block;">${formatBRL(s.amount)}</strong>
+            <small style="font-size:10.5px;color:var(--text-muted);">${s.date}</small>
+          </div>
+        </div>
+      </article>
+    `).join('');
+  }
+
+  // Sub-abas de Orçamentos e Pedidos PJ
+  const bizOrdersSubBtns = document.querySelectorAll('[data-biz-orders-tab]');
+  bizOrdersSubBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sub = btn.dataset.bizOrdersTab;
+      bizOrdersSubBtns.forEach(b => b.classList.toggle('is-active', b.dataset.bizOrdersTab === sub));
+      document.getElementById('biz-sub-quotes').style.display = sub === 'quotes' ? 'block' : 'none';
+      document.getElementById('biz-sub-store').style.display = sub === 'store' ? 'block' : 'none';
+    });
+  });
+
+  function renderBizOrdersAndQuotes() {
+    document.getElementById('badge-quotes-count').textContent = state.bizQuotes.length;
+    document.getElementById('badge-orders-count').textContent = state.bizStoreOrders.length;
+
+    const quotesEl = document.getElementById('biz-quotes-list-container');
+    const statusMap = {
+      new: { label: 'Nova Solicitação', color: '#c8965b', bg: 'var(--gold-soft)' },
+      proposed: { label: 'Proposta Enviada', color: '#2ca374', bg: 'var(--emerald-soft)' },
+      in_progress: { label: 'Em Execução', color: '#2ca374', bg: 'var(--emerald-soft)' },
+      completed: { label: '✓ Serviço Concluído & Faturado', color: '#14523a', bg: 'var(--emerald-soft)' }
+    };
+
+    quotesEl.innerHTML = state.bizQuotes.map(q => {
+      const st = statusMap[q.status] || statusMap.new;
+      return `
+        <article class="cris-card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+            <span style="font-size:10px;font-weight:800;padding:3px 9px;border-radius:99px;background:${st.bg};color:${st.color};text-transform:uppercase;">${st.label}</span>
+            <small style="font-size:11px;color:var(--text-muted);">${q.time} · ${q.urgency}</small>
+          </div>
+          <h4 style="margin:4px 0;font-size:14.5px;">${q.title}</h4>
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">
+            👤 <strong>${q.client}</strong> · Setor: ${q.category}
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;background:var(--sheet-bg);padding:9px 12px;border-radius:12px;margin-bottom:10px;font-size:12.5px;">
+            <span>Orçamento estimado: <strong>${formatBRL(q.budget)}</strong></span>
+            <span style="color:var(--emerald-bright);font-weight:700;">♥ ${getActiveBiz().impactRate}% repasse</span>
+          </div>
+          ${q.proposalNote ? `<p style="font-size:12px;color:var(--text-muted);margin:0 0 10px;padding-left:8px;border-left:2px solid var(--emerald-bright);">${q.proposalNote}</p>` : ''}
+          <div style="display:flex;gap:8px;">
+            ${q.status === 'new' ? `<button type="button" class="btn-primary" style="flex:1;" data-open-proposal="${q.id}">Enviar Proposta Comercial</button>` : ''}
+            ${q.status !== 'completed' ? `<button type="button" class="btn-secondary" style="flex:1;" data-advance-quote="${q.id}">Avançar Etapa →</button>` : `<span style="font-size:12px;font-weight:700;color:var(--emerald-bright);">🎉 Valor creditado no Faturamento PJ</span>`}
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    quotesEl.querySelectorAll('[data-open-proposal]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const q = state.bizQuotes.find(item => item.id === btn.dataset.openProposal);
+        if (!q) return;
+        document.getElementById('proposal-quote-id').value = q.id;
+        document.getElementById('proposal-client').value = `${q.client} — ${q.title}`;
+        document.getElementById('proposal-value').value = q.budget;
+        openSheet('sheet-biz-proposal');
+      });
+    });
+
+    quotesEl.querySelectorAll('[data-advance-quote]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const q = state.bizQuotes.find(item => item.id === btn.dataset.advanceQuote);
+        if (!q) return;
+        const order = ['new', 'proposed', 'in_progress', 'completed'];
+        const nextIdx = Math.min(order.length - 1, order.indexOf(q.status) + 1);
+        q.status = order[nextIdx];
+        if (q.status === 'completed') {
+          const biz = getActiveBiz();
+          const donation = +(q.budget * (biz.impactRate / 100)).toFixed(2);
+          biz.revenue += q.budget;
+          biz.salesCount += 1;
+          state.walletTotal += donation;
+          state.bizSalesHistory.unshift({
+            id: 'sh' + Date.now(),
+            client: q.client,
+            desc: q.title,
+            amount: q.budget,
+            donation,
+            date: 'Agora'
+          });
+          updateWalletUI();
+          showToast(`🎉 Serviço concluído! +${formatBRL(q.budget)} no faturamento e +${formatBRL(donation)} de impacto social!`);
+        } else {
+          showToast('Status do orçamento atualizado!');
+        }
+        renderAllBizViews();
+      });
+    });
+
+    // Pedidos da Loja & Agendamentos
+    const storeEl = document.getElementById('biz-store-orders-container');
+    storeEl.innerHTML = state.bizStoreOrders.map(o => `
+      <article class="cris-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <span class="verified-badge">${o.type}</span>
+          <strong style="font-size:14px;">${formatBRL(o.total)}</strong>
+        </div>
+        <h4 style="margin:4px 0;font-size:14.5px;">${o.items}</h4>
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">
+          👤 ${o.client} · 🗓 ${o.slot}
+        </div>
+        <button type="button" class="${o.status === 'done' ? 'btn-secondary' : 'btn-primary'} btn-full" data-advance-order="${o.id}">
+          ${o.status === 'pending' ? 'Aceitar & Confirmar Atendimento →' : o.status === 'preparing' ? 'Marcar como Entregue / Concluído 🎉' : '✓ Atendimento / Pedido Concluído'}
+        </button>
+      </article>
+    `).join('');
+
+    storeEl.querySelectorAll('[data-advance-order]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const ord = state.bizStoreOrders.find(item => item.id === btn.dataset.advanceOrder);
+        if (!ord || ord.status === 'done') return;
+        if (ord.status === 'pending') {
+          ord.status = 'preparing';
+          showToast('Pedido / agendamento confirmado com o cliente!');
+        } else {
+          ord.status = 'done';
+          const biz = getActiveBiz();
+          const donation = +(ord.total * (biz.impactRate / 100)).toFixed(2);
+          biz.revenue += ord.total;
+          biz.salesCount += 1;
+          state.bizSalesHistory.unshift({
+            id: 'sh' + Date.now(),
+            client: ord.client,
+            desc: ord.items,
+            amount: ord.total,
+            donation,
+            date: 'Agora'
+          });
+          showToast(`Concluído! +${formatBRL(ord.total)} faturados.`);
+        }
+        renderAllBizViews();
+      });
+    });
+  }
+
+  // Formulário de Envio de Proposta Comercial
+  document.getElementById('form-biz-proposal')?.addEventListener('submit', e => {
+    e.preventDefault();
+    const qId = document.getElementById('proposal-quote-id').value;
+    const val = parseFloat(document.getElementById('proposal-value').value) || 1200;
+    const deadline = document.getElementById('proposal-deadline').value.trim();
+    const notes = document.getElementById('proposal-notes').value.trim();
+
+    const q = state.bizQuotes.find(item => item.id === qId);
+    if (q) {
+      q.budget = val;
+      q.status = 'proposed';
+      q.proposalNote = `Proposta de ${formatBRL(val)} (${deadline}): "${notes}"`;
+    }
+    closeSheet('sheet-biz-proposal');
+    renderAllBizViews();
+    showToast('Proposta comercial enviada para o cliente no Super App!');
+  });
+
+  // Vitrine & Catálogo PJ
+  function renderBizCatalog() {
+    const biz = getActiveBiz();
+    document.getElementById('catalog-rate-preview').textContent = `♥ ${biz.impactRate}% ativo`;
+    document.getElementById('biz-perk-text').textContent = biz.perk;
+
+    document.querySelectorAll('#biz-impact-pct-chips .chip').forEach(chip => {
+      chip.classList.toggle('is-active', Number(chip.dataset.setPct) === biz.impactRate);
+    });
+
+    const container = document.getElementById('biz-catalog-items-container');
+    container.innerHTML = state.bizCatalogItems.map(item => `
+      <article class="cris-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <span class="mural-badge ${item.kind === 'service' ? 'type-offer' : 'type-need'}">
+            ${item.kind === 'service' ? '🛠 PRESTAÇÃO DE SERVIÇO' : '🛍 PRODUTO NA LOJA'}
+          </span>
+          <strong style="font-size:15px;">${formatBRL(item.price)}</strong>
+        </div>
+        <h4 style="margin:4px 0;font-size:15px;">${item.title}</h4>
+        <p style="font-size:12px;color:var(--text-muted);margin:4px 0 12px;">🎁 ${item.benefit}</p>
+        <div style="display:flex;gap:8px;">
+          <button type="button" class="${item.active ? 'btn-secondary' : 'btn-primary'}" style="flex:1;padding:8px;" data-toggle-cat-item="${item.id}">
+            ${item.active ? '✓ Visível no Marketplace' : 'Ativar na Vitrine'}
+          </button>
+        </div>
+      </article>
+    `).join('');
+
+    container.querySelectorAll('[data-toggle-cat-item]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = state.bizCatalogItems.find(i => i.id === btn.dataset.toggleCatItem);
+        if (!item) return;
+        item.active = !item.active;
+        renderBizCatalog();
+        showToast(item.active ? 'Item ativado no Marketplace!' : 'Item pausado temporariamente.');
+      });
+    });
+  }
+
+  document.querySelectorAll('#biz-impact-pct-chips .chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const pct = Number(chip.dataset.setPct);
+      getActiveBiz().impactRate = pct;
+      renderAllBizViews();
+      showToast(`Repasse social da sua empresa atualizado para ${pct}%!`);
+    });
+  });
+
+  document.getElementById('btn-edit-perk')?.addEventListener('click', () => {
+    const biz = getActiveBiz();
+    const presets = [
+      'Diagnóstico gratuito + 15% OFF no primeiro contrato para membros CRIS',
+      'Atendimento prioritário VIP + 10% de bônus em serviços recorrentes',
+      'Frete grátis + brinde artesanal em pedidos pelo Super App CRIS'
+    ];
+    const next = presets[(presets.indexOf(biz.perk) + 1) % presets.length];
+    biz.perk = next;
+    renderBizCatalog();
+    showToast('Benefício exclusivo para membros CRIS atualizado!');
+  });
+
+  // Abrir modal de Novo Serviço / Produto
+  ['biz-quick-new-item', 'btn-open-new-catalog-item'].forEach(id => {
+    document.getElementById(id)?.addEventListener('click', () => openSheet('sheet-biz-new-item'));
+  });
+
+  document.getElementById('form-biz-new-item')?.addEventListener('submit', e => {
+    e.preventDefault();
+    const kind = document.getElementById('new-item-kind').value;
+    const title = document.getElementById('new-item-title').value.trim();
+    const price = parseFloat(document.getElementById('new-item-price').value) || 250;
+    const benefit = document.getElementById('new-item-benefit').value.trim();
+    const biz = getActiveBiz();
+
+    state.bizCatalogItems.unshift({
+      id: 'cat' + Date.now(),
+      kind,
+      title,
+      price,
+      benefit,
+      active: true,
+      featured: true
+    });
+
+    // Também adiciona na Loja e Perfil do Modo Membro em tempo real!
+    state.products.unshift({
+      id: 'p' + Date.now(),
+      title,
+      seller: biz.name.split('·')[0].trim(),
+      price,
+      impactPct: biz.impactRate,
+      photo: kind === 'service'
+        ? 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=600&q=80'
+        : 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80'
+    });
+
+    e.target.reset();
+    closeSheet('sheet-biz-new-item');
+    renderProducts();
+    renderAllBizViews();
+    switchBizTab('biz-catalog');
+    showToast(`"${title}" publicado na sua Vitrine e no Marketplace!`);
+  });
+
+  // Radar B2B & Indicações Recebidas
+  const bizB2bSubBtns = document.querySelectorAll('[data-biz-b2b-tab]');
+  bizB2bSubBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sub = btn.dataset.bizB2bTab;
+      bizB2bSubBtns.forEach(b => b.classList.toggle('is-active', b.dataset.bizB2bTab === sub));
+      document.getElementById('biz-sub-radar').style.display = sub === 'radar' ? 'block' : 'none';
+      document.getElementById('biz-sub-referrals').style.display = sub === 'referrals' ? 'block' : 'none';
+    });
+  });
+
+  function renderBizB2B() {
+    const radarEl = document.getElementById('biz-radar-matches-container');
+    const needPosts = state.muralPosts.filter(p => p.type === 'need');
+
+    radarEl.innerHTML = needPosts.map(post => `
+      <article class="cris-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <span class="verified-badge">🎯 96% Match com seu Serviço</span>
+          <small style="font-size:11px;color:var(--text-muted);">${post.time}</small>
+        </div>
+        <h4 style="margin:4px 0;font-size:15px;">${post.title}</h4>
+        <p style="font-size:12.5px;color:var(--text-muted);margin:4px 0 10px;">${post.desc}</p>
+        <div style="font-size:11.5px;color:var(--text-muted);margin-bottom:10px;">
+          Publicado por: <strong>${post.author}</strong> (${post.role})
+        </div>
+        <button type="button" class="btn-primary btn-full" data-pitch-mural="${post.id}">
+          Enviar Proposta Direta para ${post.author.split(' ')[0]}
+        </button>
+      </article>
+    `).join('');
+
+    radarEl.querySelectorAll('[data-pitch-mural]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const post = state.muralPosts.find(p => p.id === btn.dataset.pitchMural);
+        if (!post) return;
+        const newQId = 'bq' + Date.now();
+        state.bizQuotes.unshift({
+          id: newQId,
+          client: `${post.author} (${post.role})`,
+          category: post.category,
+          title: post.title,
+          budget: 1500,
+          urgency: 'Lead captado via Radar B2B',
+          status: 'new',
+          proposalNote: '',
+          time: 'Agora'
+        });
+        document.getElementById('proposal-quote-id').value = newQId;
+        document.getElementById('proposal-client').value = `${post.author} — ${post.title}`;
+        document.getElementById('proposal-value').value = 1500;
+        openSheet('sheet-biz-proposal');
+      });
+    });
+
+    const refEl = document.getElementById('biz-referrals-received-container');
+    refEl.innerHTML = state.connections.map(c => `
+      <article class="cris-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <span class="mural-badge type-offer">${c.stage === 'closed' ? '✓ NEGÓCIO FECHADO' : c.stage === 'meeting' ? 'REUNIÃO REALIZADA' : 'INDICAÇÃO RECEBIDA'}</span>
+          <strong style="font-size:14px;">${formatBRL(c.value)}</strong>
+        </div>
+        <h4 style="margin:4px 0;font-size:14.5px;">${c.subject}</h4>
+        <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">
+          Cliente / Parceiro: <strong>${c.partner}</strong> · Impacto previsto: <strong style="color:var(--emerald-bright);">+${formatBRL(c.impact)}</strong>
+        </div>
+        <button type="button" class="${c.stage === 'closed' ? 'btn-secondary' : 'btn-primary'} btn-full" data-biz-adv-conn="${c.id}">
+          ${c.stage === 'referred' ? 'Marcar Reunião Realizada →' : c.stage === 'meeting' ? 'Confirmar Fechamento de Negócio 🎉' : '✓ Negócio Fechado & Indicador Notificado'}
+        </button>
+      </article>
+    `).join('');
+
+    refEl.querySelectorAll('[data-biz-adv-conn]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const conn = state.connections.find(item => item.id === btn.dataset.bizAdvConn);
+        if (!conn || conn.stage === 'closed') return;
+        conn.stage = conn.stage === 'referred' ? 'meeting' : 'closed';
+        if (conn.stage === 'closed') {
+          getActiveBiz().revenue += conn.value;
+          showToast(`🎉 Negócio fechado! +${formatBRL(conn.value)} somados ao faturamento PJ.`);
+        } else {
+          showToast('Reunião registrada no CRM!');
+        }
+        renderConnections();
+        renderAllBizViews();
+      });
+    });
+  }
+
+  // Academia & Cursos Publicados pelo Empresário
+  function renderBizAcademy() {
+    const container = document.getElementById('biz-my-courses-container');
+    container.innerHTML = state.courses.map(course => `
+      <article class="biz-card">
+        <div class="biz-card-banner" style="height:125px;">
+          <img src="${course.photo}" alt="${course.title}" loading="lazy">
+          <span class="spot-overlay-pill">${course.tag}</span>
+          <span class="spot-rating-pill">★ 4.9 · 112 alunos</span>
+        </div>
+        <div class="biz-card-content">
+          <h4 style="font-size:15px;margin:0 0 4px;">${course.title}</h4>
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">${course.instructor} · ${course.duration}</div>
+          <p style="font-size:12px;color:var(--text-muted);margin:0;">🛠 <strong>Ferramenta:</strong> ${course.keyAction}</p>
+        </div>
+      </article>
+    `).join('');
+  }
+
+  ['biz-quick-new-course', 'btn-biz-publish-course'].forEach(id => {
+    document.getElementById(id)?.addEventListener('click', () => openSheet('sheet-biz-new-course'));
+  });
+
+  document.getElementById('btn-biz-publish-event')?.addEventListener('click', () => {
+    const biz = getActiveBiz();
+    state.events.unshift({
+      id: 'ev' + Date.now(),
+      title: `Workshop Prático: ${biz.name.split('·')[0].trim()}`,
+      date: 'Quinta-feira · 19h00 (Presencial & Rede)',
+      place: 'Hub Executivo CRIS · Boa Viagem, Recife',
+      spots: '20 vagas abertas para membros',
+      confirmed: true
+    });
+    renderCommunity();
+    showToast('Workshop empresarial publicado na agenda da Comunidade CRIS!');
+  });
+
+  document.getElementById('form-biz-new-course')?.addEventListener('submit', e => {
+    e.preventDefault();
+    const title = document.getElementById('new-course-title').value.trim();
+    const tag = document.getElementById('new-course-tag').value;
+    const duration = document.getElementById('new-course-duration').value.trim();
+    const keyAction = document.getElementById('new-course-action').value.trim();
+    const biz = getActiveBiz();
+
+    state.courses.unshift({
+      id: 'cr' + Date.now(),
+      title,
+      instructor: biz.name,
+      duration,
+      progress: 0,
+      tag,
+      photo: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=700&q=80',
+      summary: 'Mentoria prática publicada diretamente pelo Painel do Empresário CRIS.',
+      keyAction
+    });
+
+    e.target.reset();
+    closeSheet('sheet-biz-new-course');
+    renderCourses();
+    renderBizAcademy();
+    switchBizTab('biz-academy');
+    showToast(`Curso "${title}" publicado na Academia CRIS!`);
+  });
+
+  // Terminal CRIS Pay / Emitir QR / Validar Venda
+  function updatePosPreview() {
+    const val = parseFloat(document.getElementById('pos-amount')?.value) || 0;
+    const biz = getActiveBiz();
+    const don = (val * biz.impactRate) / 100;
+    const rateLabel = document.getElementById('pos-rate-label');
+    const previewEl = document.getElementById('pos-donation-preview');
+    if (rateLabel) rateLabel.textContent = `${biz.impactRate}%`;
+    if (previewEl) previewEl.textContent = `${formatBRL(don)} para ${state.projects[state.activeProjectIndex]}`;
+  }
+
+  document.getElementById('pos-amount')?.addEventListener('input', updatePosPreview);
+
+  ['fab-open-pos', 'btn-biz-open-pos-top', 'biz-quick-pos', 'btn-biz-add-sale-inline'].forEach(id => {
+    document.getElementById(id)?.addEventListener('click', () => {
+      updatePosPreview();
+      openSheet('sheet-biz-pos');
+    });
+  });
+
+  document.getElementById('form-biz-pos')?.addEventListener('submit', e => {
+    e.preventDefault();
+    const client = document.getElementById('pos-client-name').value.trim();
+    const desc = document.getElementById('pos-service-desc').value.trim();
+    const amount = parseFloat(document.getElementById('pos-amount').value) || 150;
+    const biz = getActiveBiz();
+    const donation = +(amount * (biz.impactRate / 100)).toFixed(2);
+
+    biz.revenue += amount;
+    biz.salesCount += 1;
+    state.walletTotal += donation;
+    state.walletWeek += donation;
+
+    state.bizSalesHistory.unshift({
+      id: 'sh' + Date.now(),
+      client,
+      desc: `${desc} (QR Fiscal CRIS)`,
+      amount,
+      donation,
+      date: 'Agora'
+    });
+
+    updateWalletUI();
+    renderAllBizViews();
+    closeSheet('sheet-biz-pos');
+    showToast(`Venda de ${formatBRL(amount)} validada! +${formatBRL(donation)} destinados ao projeto social.`);
+  });
+
+  function renderAllBizViews() {
+    renderBizDashboard();
+    renderBizOrdersAndQuotes();
+    renderBizCatalog();
+    renderBizB2B();
+    renderBizAcademy();
+  }
+
   // Inicialização
   updateWalletUI();
   updateScanPreview();
@@ -1498,4 +2295,5 @@
   renderBibleChapter('proverbios16');
   renderCourses();
   renderCommunity();
+  renderAllBizViews();
 })();
