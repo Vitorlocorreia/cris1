@@ -45,7 +45,13 @@
         services: ['Buffet corporativo sob encomenda', 'Assinatura semanal de pães'],
         courses: ['Oficina de Panificação Artesanal & Gestão'],
         contact: '(81) 99123-4501 · @graoegraca.pe',
-        address: 'Rua dos Navegantes, 410 — Boa Viagem, Recife'
+        whatsapp: '5581991234501',
+        address: 'Rua dos Navegantes, 410 — Boa Viagem, Recife',
+        founderName: 'Marcos & Débora Silveira · Fundadores',
+        founderPhoto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80',
+        founderChurch: 'Igreja Batista Esperança · Recife/PE',
+        founderBio: 'Cristãos há 18 anos e apaixonados por comunhão à mesa. Abrimos a Grão & Graça para que cada pão sustente famílias e financie o ensino bíblico e alimentar de crianças.',
+        founderVerse: '“O pão nosso de cada dia dá-nos hoje.” (Mateus 6:11)'
       },
       {
         id: 'b2',
@@ -60,7 +66,13 @@
         services: ['Consultoria de Branding', 'Design de Embalagens'],
         courses: ['Posicionamento de Marca com Propósito (Academia CRIS)'],
         contact: '(81) 99812-3302 · @estudioraizes',
-        address: 'Av. 17 de Agosto, 1120 — Casa Forte, Recife'
+        whatsapp: '5581998123302',
+        address: 'Av. 17 de Agosto, 1120 — Casa Forte, Recife',
+        founderName: 'Rafael Vasconcelos · Diretor Criativo',
+        founderPhoto: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80',
+        founderChurch: 'Igreja Presbiteriana de Casa Forte',
+        founderBio: 'Cristão há 14 anos, casado com a Mariana e pai do Theo. Criei o Estúdio Raízes para servir negócios cristãos com excelência estética, verdade e mordomia.',
+        founderVerse: '“Tudo o que fizerem, façam de todo o coração, como para o Senhor.” (Colossenses 3:23)'
       },
       {
         id: 'b3',
@@ -75,7 +87,13 @@
         services: ['Psicoterapia Individual e Familiar', 'Saúde Ocupacional para Empresas'],
         courses: ['Saúde Emocional para Líderes e Empreendedores'],
         contact: '(81) 99440-1190 · @clinicaesperanca',
-        address: 'Rua das Creoulas, 285 — Graças, Recife'
+        whatsapp: '5581994401190',
+        address: 'Rua das Creoulas, 285 — Graças, Recife',
+        founderName: 'Dra. Helena & Dr. Lucas Moura · Médicos',
+        founderPhoto: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80',
+        founderChurch: 'Primeira Igreja Batista do Recife',
+        founderBio: 'Entendemos a medicina e a psicologia como ministério de acolhimento e cura. Cuidamos do corpo, da mente e da família à luz da graça de Cristo.',
+        founderVerse: '“Amado, desejo que te vá bem em todas as coisas e que tenhas saúde.” (3 João 1:2)'
       },
       {
         id: 'b4',
@@ -90,7 +108,13 @@
         services: ['Contabilidade Mensal Consultiva', 'BPO Financeiro Terceirizado'],
         courses: ['Gestão Financeira e Mordomia para Empresários'],
         contact: '(81) 99654-7780 · @bussolacontabil',
-        address: 'Empresarial Thomas Edison, Sala 604 — Recife'
+        whatsapp: '5581996547780',
+        address: 'Empresarial Thomas Edison, Sala 604 — Recife',
+        founderName: 'Daniela Lira · Contadora & Consultora',
+        founderPhoto: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80',
+        founderChurch: 'Igreja Verbo da Vida · Zona Sul',
+        founderBio: 'Acredito que integridade fiscal e organização financeira são testemunho cristão. Ajudamos empresários a crescerem com paz no coração e contas transparentes.',
+        founderVerse: '“Pesos e balanças honestos vêm do Senhor.” (Provérbios 16:11)'
       },
       {
         id: 'b5',
@@ -105,7 +129,13 @@
         services: ['Fornecimento de Café Corporativo', 'Salas de Reunião & Coworking'],
         courses: ['Barismo Básico & Experiência do Cliente'],
         contact: '(81) 99201-8840 · @cafealianca',
-        address: 'Rua da Hora, 520 — Espinheiro, Recife'
+        whatsapp: '5581992018840',
+        address: 'Rua da Hora, 520 — Espinheiro, Recife',
+        founderName: 'Gabriel Monteiro · Mestre de Torra',
+        founderPhoto: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80',
+        founderChurch: 'Comunidade da Graça · Espinheiro',
+        founderBio: 'Criamos o Café Aliança para valorizar pequenos produtores cristãos do agreste e oferecer um ambiente onde irmãos possam fechar parcerias edificantes.',
+        founderVerse: '“Oh! Quão bom e quão suave é que os irmãos vivam em união.” (Salmos 133:1)'
       },
       {
         id: 'b6',
@@ -120,7 +150,13 @@
         services: ['Desenvolvimento Web e Mobile', 'Consultoria de Processos'],
         courses: ['Vendas & Atendimento Digital para Negócios Locais'],
         contact: '(81) 99771-2026 · @techreino',
-        address: 'Rua do Apolo, 181 — Bairro do Recife'
+        whatsapp: '5581997712026',
+        address: 'Rua do Apolo, 181 — Bairro do Recife',
+        founderName: 'Tiago Cavalcanti · Engenheiro de Software',
+        founderPhoto: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80',
+        founderChurch: 'Igreja Batista Cidade Universitária',
+        founderBio: 'Tecnologia é ferramenta para multiplicar talentos. Desenvolvemos soluções que liberam tempo do empreendedor cristão para sua família e seu chamado.',
+        founderVerse: '“Consagre ao Senhor tudo o que você faz, e os seus planos serão bem-sucedidos.” (Pv 16:3)'
       }
     ],
     products: [
@@ -840,36 +876,49 @@
       return;
     }
 
-    container.innerHTML = filtered.map(c => `
-      <article class="biz-card">
-        <div class="biz-card-banner">
-          <img src="${c.photo}" alt="${c.name}" loading="lazy">
-          <span class="spot-overlay-pill">♥ ${c.impactPct}% revertido em doação</span>
-          <span class="spot-rating-pill">★ ${c.rating} · ${c.location}</span>
-        </div>
-        <div class="biz-card-content">
-          <div class="biz-name-row">
-            <h4>${c.name}</h4>
-            <span class="verified-badge">✓ Verificada CRIS</span>
+    container.innerHTML = filtered.map(c => {
+      const cleanPhone = (c.whatsapp || c.contact || '').replace(/\D/g, '') || '5581991234501';
+      const waLink = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(`Olá! Vi a empresa ${c.name} no Super App CRIS e gostaria de atendimento.`)}`;
+      return `
+        <article class="biz-card">
+          <div class="biz-card-banner">
+            <img src="${c.photo}" alt="${c.name}" loading="lazy">
+            <span class="spot-overlay-pill">♥ ${c.impactPct}% revertido em doação</span>
+            <span class="spot-rating-pill">★ ${c.rating} · ${c.location}</span>
           </div>
-          <p style="font-size:12.5px;color:var(--text-muted);line-height:1.45;margin:6px 0 12px;">${c.bio}</p>
-          <div style="display:flex;gap:8px;">
-            <button type="button" class="btn-primary" style="flex:1;" data-open-biz="${c.id}">Abrir Perfil Completo</button>
-            <button type="button" class="btn-secondary" style="flex:1;" data-refer-biz="${c.name}">Conectar / Indicar</button>
+          <div class="biz-card-content">
+            <div class="biz-name-row">
+              <h4>${c.name}</h4>
+              <span class="verified-badge">✓ Verificada CRIS</span>
+            </div>
+            <p style="font-size:12.5px;color:var(--text-muted);line-height:1.45;margin:6px 0 8px;">${c.bio}</p>
+            ${c.founderName ? `
+              <div style="display:flex;align-items:center;gap:8px;background:var(--sheet-bg);padding:7px 10px;border-radius:12px;margin-bottom:10px;border:1px solid var(--border-color);">
+                <img src="${c.founderPhoto}" alt="${c.founderName}" style="width:28px;height:28px;border-radius:50%;object-fit:cover;border:1.5px solid var(--gold-warm);flex-shrink:0;">
+                <div style="min-width:0;font-size:11px;line-height:1.3;">
+                  <strong style="display:block;color:var(--text-main);">✝ ${c.founderName}</strong>
+                  <span style="color:var(--text-muted);">${c.founderChurch || 'Empreendedor Cristão da Rede'}</span>
+                </div>
+              </div>
+            ` : ''}
+            <div style="display:flex;gap:8px;">
+              <button type="button" class="btn-primary" style="flex:1.15;" data-open-biz="${c.id}">Ver Perfil & Bio</button>
+              <a href="${waLink}" target="_blank" rel="noopener" class="btn-whatsapp-direct" style="flex:1;padding:10px 12px;font-size:12px;" data-wa-company="${c.name}">
+                💬 WhatsApp
+              </a>
+            </div>
           </div>
-        </div>
-      </article>
-    `).join('');
+        </article>
+      `;
+    }).join('');
 
     container.querySelectorAll('[data-open-biz]').forEach(btn => {
       btn.addEventListener('click', () => openBusinessProfile(btn.dataset.openBiz));
     });
 
-    container.querySelectorAll('[data-refer-biz]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.getElementById('conn-partner').value = btn.dataset.referBiz;
-        document.getElementById('conn-subject').value = 'Parceria / Indicação via Catálogo CRIS';
-        openSheet('sheet-new-connection');
+    container.querySelectorAll('[data-wa-company]').forEach(link => {
+      link.addEventListener('click', () => {
+        showToast(`Abrindo canal de atendimento direto de ${link.dataset.waCompany}...`);
       });
     });
   }
@@ -877,9 +926,12 @@
   function openBusinessProfile(bizId) {
     const biz = state.companies.find(b => b.id === bizId);
     if (!biz) return;
+    const cleanPhone = (biz.whatsapp || biz.contact || '').replace(/\D/g, '') || '5581991234501';
+    const waLink = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(`Olá! Conheci a ${biz.name} no Super App CRIS e gostaria de conversar.`)}`;
+
     document.getElementById('sheet-biz-title').textContent = biz.name;
     document.getElementById('sheet-biz-body').innerHTML = `
-      <div style="height:165px;border-radius:20px;overflow:hidden;position:relative;margin-bottom:14px;">
+      <div style="height:160px;border-radius:20px;overflow:hidden;position:relative;margin-bottom:12px;">
         <img src="${biz.photo}" alt="${biz.name}" style="width:100%;height:100%;object-fit:cover;">
         <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(9,28,21,0.92));display:flex;flex-direction:column;justify-content:flex-end;padding:14px;color:#fff;">
           <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -890,30 +942,51 @@
         </div>
       </div>
 
-      <p style="font-size:13px;line-height:1.55;margin:0 0 14px;">${biz.bio}</p>
+      <p style="font-size:13px;line-height:1.52;margin:0 0 12px;">${biz.bio}</p>
 
-      <div class="cris-card" style="padding:13px;margin-bottom:10px;">
-        <strong style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--emerald-bright);display:block;margin-bottom:6px;">Produtos & Serviços Oferecidos</strong>
-        <ul style="margin:0;padding-left:16px;font-size:12.5px;line-height:1.65;">
+      <!-- BIO DO FUNDADOR CRISTÃO (O Rosto Cristão por Trás da Marca) -->
+      <div class="founder-bio-card">
+        <div class="founder-header-row">
+          <img class="founder-avatar-img" src="${biz.founderPhoto || 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80'}" alt="${biz.founderName || 'Fundador'}">
+          <div>
+            <span class="founder-eyebrow">✝ O Rosto Cristão por Trás da Marca</span>
+            <strong style="font-size:14px;display:block;margin-top:1px;">${biz.founderName || 'Empreendedor Cristão'}</strong>
+            <span class="founder-church-pill">⛪ ${biz.founderChurch || 'Comunidade Local Verificada'}</span>
+          </div>
+        </div>
+        <p class="founder-quote-text">“${biz.founderBio || 'Empreendemos para glorificar a Deus, servir famílias com excelência e abençoar projetos sociais.'}”</p>
+        ${biz.founderVerse ? `<small style="display:block;margin-top:6px;font-size:11px;font-weight:700;color:#a47030;">📖 ${biz.founderVerse}</small>` : ''}
+      </div>
+
+      <!-- Botão Principal: Chamar Direto no WhatsApp / Canal da Empresa -->
+      <div style="margin-bottom:12px;">
+        <a href="${waLink}" target="_blank" rel="noopener" class="btn-whatsapp-direct" id="modal-biz-wa-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          <span>Chamar no WhatsApp / Atendimento (${biz.contact.split('·')[0].trim()})</span>
+        </a>
+      </div>
+
+      <div class="cris-card" style="padding:12px;margin-bottom:10px;">
+        <strong style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--emerald-bright);display:block;margin-bottom:5px;">Produtos & Serviços Oferecidos</strong>
+        <ul style="margin:0;padding-left:16px;font-size:12.5px;line-height:1.6;">
           ${biz.products.concat(biz.services).map(item => `<li>${item}</li>`).join('')}
         </ul>
       </div>
 
-      <div class="cris-card" style="padding:13px;margin-bottom:10px;">
-        <strong style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--emerald-bright);display:block;margin-bottom:4px;">Cursos & Mentorias na Academia CRIS</strong>
-        <p style="margin:0;font-size:12.5px;">🎓 ${biz.courses.join(', ')}</p>
-      </div>
-
-      <div class="cris-card" style="padding:13px;margin-bottom:14px;">
-        <strong style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--emerald-bright);display:block;margin-bottom:4px;">Contato & Canais</strong>
-        <p style="margin:0;font-size:12.5px;">💬 ${biz.contact} · <strong>${biz.impactPct}% de toda venda vira doação social</strong></p>
+      <div class="cris-card" style="padding:12px;margin-bottom:12px;">
+        <strong style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:var(--emerald-bright);display:block;margin-bottom:4px;">Impacto Social & Cursos</strong>
+        <p style="margin:0;font-size:12.5px;">♥ <strong>${biz.impactPct}% de toda venda vira doação</strong> · 🎓 ${biz.courses.join(', ')}</p>
       </div>
 
       <div style="display:flex;gap:8px;">
-        <button type="button" class="btn-primary btn-full" id="modal-biz-connect-btn">Registrar Conexão / Indicação</button>
-        <button type="button" class="btn-secondary btn-full" id="modal-biz-scan-btn">Enviar Nota Fiscal</button>
+        <button type="button" class="btn-primary btn-full" id="modal-biz-connect-btn">Registrar Indicação / Negócio</button>
+        <button type="button" class="btn-secondary btn-full" id="modal-biz-scan-btn">Escanear Nota</button>
       </div>
     `;
+
+    document.getElementById('modal-biz-wa-btn')?.addEventListener('click', () => {
+      showToast(`Iniciando conversa direta com ${biz.name} no WhatsApp!`);
+    });
 
     document.getElementById('modal-biz-connect-btn').addEventListener('click', () => {
       closeSheet('sheet-business-profile');
@@ -1545,7 +1618,10 @@
       cnpj: '34.891.220/0001-19',
       bio: 'Branding, design de embalagens, arquitetura comercial e posicionamento digital para empresas com propósito.',
       address: 'Boa Viagem, Recife (Atende Online)',
-      contact: '(81) 99640-1120 · @estudioraizes',
+      contact: '(81) 99812-3302 · @estudioraizes',
+      founderName: 'Rafael Vasconcelos · Diretor Criativo',
+      founderChurch: 'Igreja Presbiteriana de Casa Forte',
+      founderBio: 'Cristão há 14 anos, casado com a Mariana e pai do Theo. Criei o Estúdio Raízes para servir negócios cristãos com excelência estética, verdade e mordomia.',
       revenue: 18420.00,
       impactRate: 8,
       views: 418,
@@ -1562,7 +1638,10 @@
       cnpj: '28.419.502/0001-84',
       bio: 'Padaria artesanal de fermentação natural, cafés especiais e cestas corporativas que abençoam famílias.',
       address: 'Rua dos Navegantes, 1420 · Boa Viagem, Recife',
-      contact: '(81) 99210-3380 · @graoegraca.recife',
+      contact: '(81) 99123-4501 · @graoegraca.pe',
+      founderName: 'Marcos & Débora Silveira · Fundadores',
+      founderChurch: 'Igreja Batista Esperança · Recife/PE',
+      founderBio: 'Cristãos há 18 anos e apaixonados por comunhão à mesa. Abrimos a Grão & Graça para que cada pão sustente famílias e financie o ensino bíblico de crianças.',
       revenue: 34890.00,
       impactRate: 6,
       views: 890,
@@ -1862,6 +1941,12 @@
     if (bfAddr) bfAddr.value = biz.address;
     const bfCont = document.getElementById('prof-biz-contact');
     if (bfCont) bfCont.value = biz.contact;
+    const bfFounderName = document.getElementById('prof-biz-founder-name');
+    if (bfFounderName) bfFounderName.value = biz.founderName || '';
+    const bfFounderChurch = document.getElementById('prof-biz-founder-church');
+    if (bfFounderChurch) bfFounderChurch.value = biz.founderChurch || '';
+    const bfFounderBio = document.getElementById('prof-biz-founder-bio');
+    if (bfFounderBio) bfFounderBio.value = biz.founderBio || '';
     const bfPerk = document.getElementById('prof-biz-perk');
     if (bfPerk) bfPerk.value = biz.perk;
   }
@@ -1956,6 +2041,10 @@
       mktComp.bio = biz.bio;
       mktComp.address = biz.address;
       mktComp.contact = biz.contact;
+      mktComp.whatsapp = (biz.contact || '').replace(/\D/g, '') || mktComp.whatsapp;
+      mktComp.founderName = biz.founderName || mktComp.founderName;
+      mktComp.founderChurch = biz.founderChurch || mktComp.founderChurch;
+      mktComp.founderBio = biz.founderBio || mktComp.founderBio;
       mktComp.photo = biz.coverPhoto;
       mktComp.impactPct = biz.impactRate;
       renderHomeFeaturedBusinesses();
@@ -2019,6 +2108,9 @@
     biz.bio = document.getElementById('prof-biz-bio').value.trim();
     biz.address = document.getElementById('prof-biz-address').value.trim();
     biz.contact = document.getElementById('prof-biz-contact').value.trim();
+    biz.founderName = document.getElementById('prof-biz-founder-name')?.value.trim() || biz.founderName;
+    biz.founderChurch = document.getElementById('prof-biz-founder-church')?.value.trim() || biz.founderChurch;
+    biz.founderBio = document.getElementById('prof-biz-founder-bio')?.value.trim() || biz.founderBio;
     biz.perk = document.getElementById('prof-biz-perk').value.trim();
     syncBizWithPublicMarketplace(biz);
     syncProfileHubUI();
@@ -2600,6 +2692,144 @@
     syncProfileHubUI();
   }
 
+  // ==========================================
+  // TUTORIAL GUIADO INTERATIVO (6 PASSOS)
+  // ==========================================
+  const tourSteps = [
+    {
+      badge: 'PASSO 1 DE 6 · ECOSSISTEMA CRIS',
+      icon: '💚',
+      title: 'Compra com Propósito & Impacto Social',
+      hint: '📍 Aba Início · Carteira de Impacto Social',
+      desc: 'Na CRIS, parte de toda compra ou serviço contratado em empresas parceiras vira doação auditada para projetos sociais, sem custar nada a mais para você!',
+      action: () => {
+        document.querySelectorAll('.sheet-backdrop.is-open').forEach(s => s.classList.remove('is-open'));
+        if (state.appMode !== 'member') setAppMode('member');
+        switchMainTab('home');
+      }
+    },
+    {
+      badge: 'PASSO 2 DE 6 · SCANNER FISCAL',
+      icon: '📷',
+      title: 'Scanner de Nota Fiscal (NFC-e / QR)',
+      hint: '📍 Botão Central · Leitor de Cupom Fiscal',
+      desc: 'Comprou em uma empresa parceira? Aponte a câmera para o QR Code da Nota Fiscal (DANFE NFC-e) e veja o impacto social ser creditado na hora.',
+      action: () => {
+        document.querySelectorAll('.sheet-backdrop.is-open').forEach(s => s.classList.remove('is-open'));
+        if (state.appMode !== 'member') setAppMode('member');
+        openSheet('sheet-scanner');
+      }
+    },
+    {
+      badge: 'PASSO 3 DE 6 · ROSTO CRISTÃO & WHATSAPP',
+      icon: '✝️',
+      title: 'Bio do Fundador Cristão & WhatsApp Direto',
+      hint: '📍 Aba Mercado · Perfil da Empresa',
+      desc: 'Em cada empresa você conhece a história de fé do fundador cristão por trás da marca e tem um botão para chamar direto no WhatsApp ou canal de atendimento!',
+      action: () => {
+        document.querySelectorAll('.sheet-backdrop.is-open').forEach(s => s.classList.remove('is-open'));
+        if (state.appMode !== 'member') setAppMode('member');
+        switchMainTab('marketplace', 'companies');
+        openBusinessProfile('b2');
+      }
+    },
+    {
+      badge: 'PASSO 4 DE 6 · MURAL & CONEXÕES B2B',
+      icon: '🤝',
+      title: 'Mural “Preciso / Ofereço” & Medidor CRM',
+      hint: '📍 Aba Mural & Conexões',
+      desc: 'Publique o que você precisa ou oferece, gere indicações para irmãos da comunidade e acompanhe cada negócio fechado no Medidor de Conexões.',
+      action: () => {
+        document.querySelectorAll('.sheet-backdrop.is-open').forEach(s => s.classList.remove('is-open'));
+        if (state.appMode !== 'member') setAppMode('member');
+        switchMainTab('mural', 'board');
+      }
+    },
+    {
+      badge: 'PASSO 5 DE 6 · FÉ PRÁTICA & CAPACITAÇÃO',
+      icon: '📖',
+      title: 'Palavra do Dia, Bíblia & Academia CRIS',
+      hint: '📍 Abas Palavra & Cursos',
+      desc: 'Receba reflexões diárias aplicadas ao trabalho, à liderança e à família, leia a Bíblia no app e faça cursos práticos ministrados por empresários da rede.',
+      action: () => {
+        document.querySelectorAll('.sheet-backdrop.is-open').forEach(s => s.classList.remove('is-open'));
+        if (state.appMode !== 'member') setAppMode('member');
+        switchMainTab('bible', 'devotional');
+      }
+    },
+    {
+      badge: 'PASSO 6 DE 6 · CONTA PF ⇄ EMPRESÁRIO PJ',
+      icon: '💼',
+      title: 'Seu Perfil & Área do Empresário / Prestador',
+      hint: '📍 Clique na sua foto no topo do App',
+      desc: 'Ao clicar na sua foto no topo, você edita seu perfil pessoal ou troca em 1 toque para a Área do Empresário (PJ) para gerir vendas, orçamentos e sua vitrine!',
+      action: () => {
+        document.querySelectorAll('.sheet-backdrop.is-open').forEach(s => s.classList.remove('is-open'));
+        openProfileHub('company');
+      }
+    }
+  ];
+
+  let currentTourIdx = 0;
+  const tourBackdrop = document.getElementById('guided-tour-backdrop');
+
+  function renderTourStep() {
+    const step = tourSteps[currentTourIdx];
+    if (!step || !tourBackdrop) return;
+
+    step.action();
+
+    document.getElementById('tour-step-badge').textContent = step.badge;
+    document.getElementById('tour-step-icon').textContent = step.icon;
+    document.getElementById('tour-step-title').textContent = step.title;
+    document.getElementById('tour-step-hint').textContent = step.hint;
+    document.getElementById('tour-step-desc').textContent = step.desc;
+
+    const dotsEl = document.getElementById('tour-dots-container');
+    dotsEl.innerHTML = tourSteps.map((_, idx) => `<span class="tour-dot ${idx === currentTourIdx ? 'is-active' : ''}"></span>`).join('');
+
+    const prevBtn = document.getElementById('btn-tour-prev');
+    const nextBtn = document.getElementById('btn-tour-next');
+    prevBtn.style.display = currentTourIdx === 0 ? 'none' : 'inline-flex';
+    nextBtn.textContent = currentTourIdx === tourSteps.length - 1 ? 'Concluir Tour e Explorar 🎉' : 'Próximo passo →';
+  }
+
+  function startGuidedTour() {
+    currentTourIdx = 0;
+    if (tourBackdrop) {
+      tourBackdrop.style.display = 'flex';
+      renderTourStep();
+    }
+  }
+
+  function closeGuidedTour() {
+    if (tourBackdrop) tourBackdrop.style.display = 'none';
+    sessionStorage.setItem('cris_tour_seen', '1');
+  }
+
+  document.getElementById('btn-start-tour-desktop')?.addEventListener('click', startGuidedTour);
+  document.getElementById('btn-start-tour-mobile')?.addEventListener('click', startGuidedTour);
+  document.getElementById('btn-tour-close')?.addEventListener('click', closeGuidedTour);
+
+  document.getElementById('btn-tour-prev')?.addEventListener('click', () => {
+    if (currentTourIdx > 0) {
+      currentTourIdx -= 1;
+      renderTourStep();
+    }
+  });
+
+  document.getElementById('btn-tour-next')?.addEventListener('click', () => {
+    if (currentTourIdx < tourSteps.length - 1) {
+      currentTourIdx += 1;
+      renderTourStep();
+    } else {
+      closeGuidedTour();
+      document.querySelectorAll('.sheet-backdrop.is-open').forEach(s => s.classList.remove('is-open'));
+      setAppMode('member');
+      showToast('Tour concluído! Fique à vontade para testar tudo.');
+    }
+  });
+
   // Inicialização
   updateWalletUI();
   updateScanPreview();
@@ -2613,4 +2843,11 @@
   renderCourses();
   renderCommunity();
   renderAllBizViews();
+
+  // Abre o Tour Guiado automaticamente na primeira visita da sessão
+  if (!sessionStorage.getItem('cris_tour_seen')) {
+    setTimeout(() => {
+      startGuidedTour();
+    }, 900);
+  }
 })();

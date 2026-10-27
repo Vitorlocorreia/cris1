@@ -15,11 +15,16 @@
   <div class="proto-workspace">
     <!-- Painel Guia no Desktop (Oculto automaticamente no celular) -->
     <aside class="proto-desktop-panel" aria-label="Controles do Protótipo">
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
         <img src="/assets/cris-logo-light.png" alt="CRIS" style="height:36px;width:auto;max-width:108px;object-fit:contain;display:block;flex-shrink:0;">
-        <button type="button" class="proto-back-lp" id="desktop-toggle-theme">
-          🌓 Alternar Light / Dark
-        </button>
+        <div style="display:flex;gap:6px;">
+          <button type="button" class="proto-back-lp" id="btn-start-tour-desktop" style="border-color:rgba(95,227,168,0.45);color:#5fe3a8;">
+            ✨ Tour Guiado
+          </button>
+          <button type="button" class="proto-back-lp" id="desktop-toggle-theme">
+            🌓 Tema
+          </button>
+        </div>
       </div>
       <div>
         <div class="eyebrow">UI/UX SUPER APP · CRIS</div>
@@ -167,7 +172,9 @@
           <div class="emerald-hero">
             <div class="hero-brand-strip" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;position:relative;z-index:2;">
               <img src="/assets/cris-logo-light.png" alt="CRIS" style="height:26px;width:auto;max-width:84px;object-fit:contain;display:block;flex-shrink:0;">
-              <span style="font-size:10px;letter-spacing:0.12em;color:#a8c7b8;font-weight:600;">COMPRA COM PROPÓSITO</span>
+              <button type="button" class="subtle-mode-pill is-pj-active" id="btn-start-tour-mobile" title="Iniciar Tutorial Guiado do Super App">
+                <span>✨ Como funciona (Tour)</span>
+              </button>
             </div>
             <div class="hero-top-bar">
               <div class="user-profile-pill is-clickable-profile" id="btn-open-member-profile" role="button" tabindex="0" title="Abrir Meu Perfil e Alternar Conta (Membro / PJ)">
@@ -1455,10 +1462,32 @@
                   <input type="text" id="prof-biz-address" value="Boa Viagem, Recife (Atende Online)" required>
                 </div>
                 <div class="field-group">
-                  <label for="prof-biz-contact">WhatsApp & Instagram</label>
-                  <input type="text" id="prof-biz-contact" value="(81) 99640-1120 · @estudioraizes" required>
+                  <label for="prof-biz-contact">WhatsApp / Canal Direto de Atendimento</label>
+                  <input type="text" id="prof-biz-contact" value="(81) 99640-1120" required>
                 </div>
               </div>
+
+              <!-- Bio do Fundador Cristão (O Rosto Cristão por Trás da Marca) -->
+              <div class="cris-card" style="background:var(--sheet-bg);padding:12px;margin-bottom:12px;border-left:3px solid var(--gold-warm);">
+                <span style="font-size:10px;font-weight:800;letter-spacing:0.08em;color:var(--gold-warm);text-transform:uppercase;display:block;margin-bottom:8px;">
+                  ✝ O ROSTO CRISTÃO POR TRÁS DA MARCA (VISÍVEL AO CONSUMIDOR)
+                </span>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                  <div class="field-group" style="margin-bottom:8px;">
+                    <label for="prof-biz-founder-name">Nome do Fundador(a)</label>
+                    <input type="text" id="prof-biz-founder-name" value="Rafael Vasconcelos · Diretor Criativo" required>
+                  </div>
+                  <div class="field-group" style="margin-bottom:8px;">
+                    <label for="prof-biz-founder-church">Igreja / Comunidade</label>
+                    <input type="text" id="prof-biz-founder-church" value="Igreja Presbiteriana de Casa Forte" required>
+                  </div>
+                </div>
+                <div class="field-group" style="margin-bottom:0;">
+                  <label for="prof-biz-founder-bio">História de Fé & Propósito do Fundador</label>
+                  <textarea id="prof-biz-founder-bio" rows="2" required>Cristão há 14 anos, casado com a Mariana e pai do Theo. Criei o Estúdio Raízes para servir empresas com excelência, verdade e mordomia cristã.</textarea>
+                </div>
+              </div>
+
               <div class="field-group">
                 <label for="prof-biz-perk">Benefício Exclusivo para Membros CRIS</label>
                 <input type="text" id="prof-biz-perk" value="Diagnóstico de marca gratuito + 10% OFF no primeiro projeto B2B" required>
@@ -1470,6 +1499,31 @@
             </form>
           </div>
 
+        </div>
+      </div>
+
+      <!-- 13. Tutorial Guiado Interativo (Onboarding / Tour Guiado CRIS) -->
+      <div class="tour-backdrop" id="guided-tour-backdrop" role="dialog" aria-modal="true" aria-labelledby="tour-step-title" style="display:none;">
+        <div class="tour-card">
+          <div class="tour-top-row">
+            <span class="tour-step-badge" id="tour-step-badge">PASSO 1 DE 6 · TOUR GUIADO</span>
+            <button type="button" class="tour-skip-btn" id="btn-tour-close">Pular tutorial ✕</button>
+          </div>
+          <div class="tour-icon-title-row">
+            <div class="tour-icon-bubble" id="tour-step-icon">💚</div>
+            <div>
+              <h3 id="tour-step-title">Bem-vindo ao Super App CRIS</h3>
+              <span class="tour-location-hint" id="tour-step-hint">📍 Aba Início · Saldo de Impacto Social</span>
+            </div>
+          </div>
+          <p class="tour-step-desc" id="tour-step-desc">
+            A CRIS conecta consumidores, empreendedores cristãos e projetos sociais. Toda compra ou serviço contratado gera doação transparente, sem custar nada a mais!
+          </p>
+          <div class="tour-dots-row" id="tour-dots-container"></div>
+          <div class="tour-actions-row">
+            <button type="button" class="btn-secondary" id="btn-tour-prev" style="padding:10px 14px;">← Anterior</button>
+            <button type="button" class="btn-primary" id="btn-tour-next" style="flex:1;padding:10px 16px;">Próximo passo →</button>
+          </div>
         </div>
       </div>
 

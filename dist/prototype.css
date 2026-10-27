@@ -3046,3 +3046,214 @@ button {
   flex-wrap: wrap;
   justify-content: flex-end;
 }
+
+/* ==========================================
+   BIO DO FUNDADOR CRISTÃO & BOTÃO WHATSAPP DIRETO
+   ========================================== */
+.founder-bio-card {
+  background: linear-gradient(145deg, var(--gold-soft), var(--card-bg));
+  border: 1.5px solid rgba(200, 150, 91, 0.35);
+  border-radius: 18px;
+  padding: 13px;
+  margin-bottom: 12px;
+}
+
+.founder-header-row {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 9px;
+}
+
+.founder-avatar-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2.5px solid var(--gold-warm);
+  flex-shrink: 0;
+}
+
+.founder-eyebrow {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #a47030;
+  display: block;
+}
+
+[data-theme="dark"] .founder-eyebrow {
+  color: #f5c878;
+}
+
+.founder-church-pill {
+  display: inline-block;
+  margin-top: 3px;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--emerald-bright);
+  background: var(--emerald-soft);
+  padding: 2px 8px;
+  border-radius: 99px;
+}
+
+.founder-quote-text {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  font-style: italic;
+  color: var(--text-main);
+}
+
+.btn-whatsapp-direct {
+  background: linear-gradient(135deg, #1ea952, #128c7e);
+  color: #ffffff;
+  border: 0;
+  border-radius: 14px;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(30, 169, 82, 0.28);
+  transition: transform 0.15s ease, filter 0.15s ease;
+  width: 100%;
+}
+
+.btn-whatsapp-direct:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+
+/* ==========================================
+   TUTORIAL GUIADO INTERATIVO (TOUR GUIADO CRIS)
+   ========================================== */
+.tour-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 160;
+  background: rgba(6, 20, 15, 0.56);
+  backdrop-filter: blur(3px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px 14px 96px;
+  animation: fadeInTour 0.22s ease;
+}
+
+@keyframes fadeInTour {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tour-card {
+  background: #0b241b;
+  color: #f3f7f4;
+  border: 1.5px solid rgba(95, 227, 168, 0.45);
+  border-radius: 24px;
+  padding: 16px;
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.55);
+  max-width: 440px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.tour-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.tour-step-badge {
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #5fe3a8;
+  background: rgba(95, 227, 168, 0.14);
+  padding: 3px 9px;
+  border-radius: 99px;
+}
+
+.tour-skip-btn {
+  background: none;
+  border: 0;
+  color: #9cb9ab;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 4px;
+}
+
+.tour-skip-btn:hover {
+  color: #ffffff;
+}
+
+.tour-icon-title-row {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 8px;
+}
+
+.tour-icon-bubble {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: rgba(95, 227, 168, 0.16);
+  border: 1px solid rgba(95, 227, 168, 0.35);
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.tour-icon-title-row h3 {
+  margin: 0;
+  font-size: 15.5px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.tour-location-hint {
+  font-size: 11px;
+  color: #f5c878;
+  font-weight: 600;
+  display: block;
+  margin-top: 2px;
+}
+
+.tour-step-desc {
+  margin: 0 0 12px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #d2e5dc;
+}
+
+.tour-dots-row {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.tour-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.22);
+  transition: all 0.2s ease;
+}
+
+.tour-dot.is-active {
+  width: 22px;
+  background: #5fe3a8;
+}
+
+.tour-actions-row {
+  display: flex;
+  gap: 8px;
+}
