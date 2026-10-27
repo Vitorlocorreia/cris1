@@ -5,19 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0b241b">
   <title>CRIS Super App — Protótipo UI/UX Mobile</title>
-  <link rel="icon" href="../assets/cris-logo.png">
+  <link rel="icon" href="/assets/cris-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="prototype.css">
+  <link rel="stylesheet" href="/app/prototype.css">
 </head>
 <body>
   <div class="proto-workspace">
     <!-- Painel Guia no Desktop (Oculto automaticamente no celular) -->
     <aside class="proto-desktop-panel" aria-label="Controles do Protótipo">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
-        <img src="../assets/cris-logo-light.png" alt="CRIS" style="height:36px;width:auto;display:block;">
-        <a class="proto-back-lp" href="../index.html">
+        <img src="/assets/cris-logo-light.png" alt="CRIS" style="height:36px;width:auto;display:block;">
+        <a class="proto-back-lp" href="/">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
           Voltar à LP
         </a>
@@ -137,7 +137,7 @@
 
       <!-- Notificação Push Simulada (Palavra do Dia) -->
       <div class="push-notification" id="push-banner" role="alert" aria-live="polite">
-        <img class="push-icon" src="../assets/cris-icon.png" alt="CRIS" style="object-fit:cover;background:#fcfbf7;padding:2px;">
+        <img class="push-icon" src="/assets/cris-icon.png" alt="CRIS" style="object-fit:cover;background:#fcfbf7;padding:2px;">
         <div class="push-content" id="push-banner-body">
           <div class="push-meta">
             <span>PALAVRA DO DIA · CRIS</span>
@@ -159,7 +159,7 @@
           <!-- Topo Esmeralda Profundo (Igual Referência 1) -->
           <div class="emerald-hero">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;position:relative;z-index:2;">
-              <img src="../assets/cris-logo-light.png" alt="CRIS" style="height:26px;width:auto;display:block;">
+              <img src="/assets/cris-logo-light.png" alt="CRIS" style="height:26px;width:auto;display:block;">
               <span style="font-size:10px;letter-spacing:0.12em;color:#a8c7b8;font-weight:600;">COMPRA COM PROPÓSITO</span>
             </div>
             <div class="hero-top-bar">
@@ -289,7 +289,7 @@
               <div class="promo-3d-emblem" aria-hidden="true">
                 <div class="emblem-ring"></div>
                 <div class="emblem-cube" style="background:#fcfbf7;padding:6px;">
-                  <img src="../assets/cris-logo.png" alt="CRIS" style="width:100%;height:100%;object-fit:contain;transform:rotate(-35deg);">
+                  <img src="/assets/cris-logo.png" alt="CRIS" style="width:100%;height:100%;object-fit:contain;transform:rotate(-35deg);">
                 </div>
               </div>
             </article>
@@ -309,7 +309,7 @@
             <article class="metallic-impact-card">
               <div class="card-chip-row">
                 <div class="emv-chip"></div>
-                <img src="../assets/cris-logo-light.png" alt="CRIS" style="height:24px;width:auto;">
+                <img src="/assets/cris-logo-light.png" alt="CRIS" style="height:24px;width:auto;">
               </div>
               <div style="margin-bottom:14px;">
                 <span style="font-size:11px;color:#9fc0b0;display:block;">NEGÓCIOS & INDICAÇÕES GERADAS NA REDE</span>
@@ -845,6 +845,6 @@
     </div>
   </div>
 
-  <script src="prototype.js"></script>
+  <script src="/app/prototype.js"></script>
 </body>
 </html>
