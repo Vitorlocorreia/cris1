@@ -516,13 +516,16 @@
   document.getElementById('btn-reset-home')?.addEventListener('click', resetToHome);
   document.getElementById('btn-restore-home')?.addEventListener('click', resetToHome);
 
-  document.getElementById('btn-restore-guide')?.addEventListener('click', () => {
+  function exitSpecialModes() {
     workspaceEl.classList.remove('is-frameless', 'is-phone-focused');
     if (restoreBarEl) restoreBarEl.style.display = 'none';
     if (location.search.includes('frameless=1')) {
       history.replaceState(null, '', location.pathname);
     }
-  });
+  }
+
+  document.getElementById('btn-restore-guide')?.addEventListener('click', exitSpecialModes);
+  document.getElementById('btn-sidebar-back-phone')?.addEventListener('click', exitSpecialModes);
 
   if (new URLSearchParams(location.search).get('frameless') === '1') {
     enterFramelessMode();

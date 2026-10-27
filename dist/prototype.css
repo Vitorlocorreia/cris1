@@ -2237,15 +2237,155 @@ button {
   display: none;
 }
 
-/* Layout Web App Desktop quando aberto sem moldura no PC */
+/* Elementos exclusivos da Sidebar Desktop ocultos no modo celular */
+.desktop-sidebar-brand,
+.desktop-sidebar-footer,
+.fab-desktop-label,
+.nav-tab-bible-desktop {
+  display: none;
+}
+
+/* Layout Web App Desktop com Menu Lateral quando aberto sem moldura no PC */
 @media (min-width: 861px) {
-  .proto-workspace.is-frameless .emerald-hero,
-  .proto-workspace.is-frameless .internal-hero {
-    padding: 26px max(48px, calc((100vw - 1260px) / 2)) 52px;
+  .proto-workspace.is-frameless #proto-restore-bar {
+    display: none !important;
   }
 
-  .proto-workspace.is-frameless .emerald-hero > div:first-child {
-    padding-left: 190px;
+  .proto-workspace.is-frameless .mobile-shell {
+    display: grid;
+    grid-template-columns: 272px 1fr;
+    width: 100vw;
+    height: 100dvh;
+  }
+
+  .proto-workspace.is-frameless .app-main {
+    height: 100dvh;
+    padding-bottom: 40px;
+  }
+
+  .proto-workspace.is-frameless .app-bottom-dock-wrap {
+    position: relative;
+    order: -1;
+    height: 100dvh;
+    padding: 26px 18px 22px;
+    background: #071912;
+    border-right: 1px solid rgba(130, 175, 152, 0.16);
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto;
+    z-index: 30;
+  }
+
+  .proto-workspace.is-frameless .desktop-sidebar-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 0 8px 20px;
+    border-bottom: 1px solid rgba(130, 175, 152, 0.14);
+  }
+
+  .proto-workspace.is-frameless .desktop-sidebar-brand span {
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: #5fe3a8;
+  }
+
+  .proto-workspace.is-frameless .app-bottom-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    padding: 18px 0 0;
+    margin: 0;
+    max-width: none;
+    backdrop-filter: none;
+  }
+
+  .proto-workspace.is-frameless .nav-tab,
+  .proto-workspace.is-frameless .nav-tab-bible-desktop {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    color: #a9c5b6;
+  }
+
+  .proto-workspace.is-frameless .nav-tab:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+  }
+
+  .proto-workspace.is-frameless .nav-tab span {
+    font-size: 13.5px;
+    font-weight: 600;
+  }
+
+  .proto-workspace.is-frameless .nav-tab.is-active {
+    background: rgba(44, 163, 116, 0.22);
+    color: #5fe3a8;
+    border: 1px solid rgba(95, 227, 168, 0.32);
+  }
+
+  .proto-workspace.is-frameless .nav-center-fab {
+    order: -1;
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    border: 0;
+    margin: 0 0 12px;
+    padding: 13px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 8px 20px rgba(44, 163, 116, 0.3);
+  }
+
+  .proto-workspace.is-frameless .fab-desktop-label {
+    display: inline;
+    font-size: 13px;
+    font-weight: 700;
+    color: #062016;
+  }
+
+  .proto-workspace.is-frameless .desktop-sidebar-footer {
+    display: block;
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid rgba(130, 175, 152, 0.14);
+  }
+
+  .proto-workspace.is-frameless .sidebar-back-phone-btn {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(130, 175, 152, 0.2);
+    color: #cfe3d8;
+    padding: 11px 14px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s;
+  }
+
+  .proto-workspace.is-frameless .sidebar-back-phone-btn:hover {
+    background: rgba(95, 227, 168, 0.15);
+    border-color: #5fe3a8;
+    color: #5fe3a8;
+  }
+
+  .proto-workspace.is-frameless .emerald-hero,
+  .proto-workspace.is-frameless .internal-hero {
+    padding: 28px max(44px, calc((100vw - 272px - 1180px) / 2)) 52px;
   }
 
   .proto-workspace.is-frameless .hero-balance-block {
@@ -2264,8 +2404,8 @@ button {
   }
 
   .proto-workspace.is-frameless .quick-circle-dock {
-    max-width: 680px;
-    gap: 16px;
+    max-width: 720px;
+    gap: 14px;
   }
 
   .proto-workspace.is-frameless .circle-action-btn {
@@ -2285,7 +2425,7 @@ button {
   }
 
   .proto-workspace.is-frameless .sheet-body {
-    padding: 32px max(48px, calc((100vw - 1260px) / 2)) 110px;
+    padding: 32px max(44px, calc((100vw - 272px - 1180px) / 2)) 60px;
     border-radius: 36px 36px 0 0;
   }
 
@@ -2337,7 +2477,7 @@ button {
   .proto-workspace.is-frameless #events-list-container,
   .proto-workspace.is-frameless #groups-list-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 18px;
   }
 
@@ -2349,17 +2489,12 @@ button {
   }
 
   .proto-workspace.is-frameless .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
     gap: 18px;
   }
 
   .proto-workspace.is-frameless .segmented-control {
     max-width: 520px;
-  }
-
-  .proto-workspace.is-frameless .app-bottom-nav {
-    max-width: 540px;
-    margin: 0 auto;
   }
 
   .proto-workspace.is-frameless .sheet-backdrop {
