@@ -159,19 +159,6 @@
       <!-- Área Principal Rolável -->
       <main class="app-main" id="app-main">
 
-        <!-- Alternador Nubank PF ⇄ PJ (Modo Membro vs Modo Empresário / Prestador) -->
-        <div class="profile-mode-bar" role="tablist" aria-label="Alternar modo de uso">
-          <button type="button" class="mode-switch-btn is-active" data-set-mode="member">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <span>Modo Membro</span>
-          </button>
-          <button type="button" class="mode-switch-btn" data-set-mode="business">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-            <span>Empresário & Prestador</span>
-            <em class="mode-pj-tag">PJ</em>
-          </button>
-        </div>
-
         <!-- =====================================================
              ABA 1: INÍCIO (SUPER APP HOME - REF 1 + NUBANK + IFOOD)
              ===================================================== -->
@@ -187,7 +174,13 @@
                 <img class="user-avatar-photo" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Mateus">
                 <div class="user-greeting">
                   <small>📍 Boa Viagem, Recife ▾</small>
-                  <strong>Olá, Mateus</strong>
+                  <div style="display:flex;align-items:center;gap:6px;">
+                    <strong>Olá, Mateus</strong>
+                    <button type="button" class="subtle-mode-pill" data-set-mode="business" title="Ir para Área do Empresário / Prestador">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 10l5-5 5 5M17 14l-5 5-5-5"/></svg>
+                      <span>Modo PJ</span>
+                    </button>
+                  </div>
                 </div>
               </div>
               <div class="hero-top-actions">
@@ -626,9 +619,15 @@
                   </div>
                 </div>
               </div>
-              <button type="button" class="glass-icon-btn" id="btn-biz-open-pos-top" title="Cobrar / Emitir QR Fiscal">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-              </button>
+              <div style="display:flex;align-items:center;gap:6px;">
+                <button type="button" class="subtle-mode-pill is-pj-active" data-set-mode="member" title="Voltar para visão de Membro">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 10l5-5 5 5M17 14l-5 5-5-5"/></svg>
+                  <span>Membro</span>
+                </button>
+                <button type="button" class="glass-icon-btn" id="btn-biz-open-pos-top" title="Cobrar / Emitir QR Fiscal">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                </button>
+              </div>
             </div>
 
             <!-- Faturamento Gerado na Rede CRIS + Repasse Social Auditado -->
@@ -873,7 +872,13 @@
            ===================================================== -->
       <div class="app-bottom-dock-wrap">
         <div class="desktop-sidebar-brand">
-          <img src="/assets/cris-logo-light.png" alt="CRIS" style="height:38px;width:auto;max-width:112px;object-fit:contain;display:block;align-self:flex-start;">
+          <div style="display:flex;align-items:center;justify-content:space-between;width:100%;gap:8px;">
+            <img src="/assets/cris-logo-light.png" alt="CRIS" style="height:36px;width:auto;max-width:104px;object-fit:contain;display:block;align-self:flex-start;">
+            <button type="button" class="subtle-mode-pill" id="sidebar-mode-toggle-btn" title="Alternar entre Membro e Empresário (PJ)">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 10l5-5 5 5M17 14l-5 5-5-5"/></svg>
+              <span id="sidebar-mode-toggle-label">Modo PJ</span>
+            </button>
+          </div>
           <span id="sidebar-mode-subtitle">SUPER APP · ECONOMIA DO REINO</span>
         </div>
 

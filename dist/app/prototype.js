@@ -1712,11 +1712,15 @@
     const memberDock = document.getElementById('nav-member-dock');
     const bizDock = document.getElementById('nav-biz-dock');
     const sidebarSubtitle = document.getElementById('sidebar-mode-subtitle');
+    const sidebarToggleBtn = document.getElementById('sidebar-mode-toggle-btn');
+    const sidebarToggleLabel = document.getElementById('sidebar-mode-toggle-label');
 
     if (mode === 'business') {
       memberDock.style.display = 'none';
       bizDock.style.display = '';
       if (sidebarSubtitle) sidebarSubtitle.textContent = 'MODO EMPRESÁRIO & PRESTADOR (PJ)';
+      if (sidebarToggleLabel) sidebarToggleLabel.textContent = 'Membro';
+      sidebarToggleBtn?.classList.add('is-pj-active');
       renderAllBizViews();
       switchBizTab('biz-home');
       showToast('💼 Área do Empresário & Prestador ativada!');
@@ -1724,10 +1728,16 @@
       bizDock.style.display = 'none';
       memberDock.style.display = '';
       if (sidebarSubtitle) sidebarSubtitle.textContent = 'SUPER APP · ECONOMIA DO REINO';
+      if (sidebarToggleLabel) sidebarToggleLabel.textContent = 'Modo PJ';
+      sidebarToggleBtn?.classList.remove('is-pj-active');
       switchMainTab('home');
       showToast('👤 Modo Membro (Consumidor) ativado!');
     }
   }
+
+  document.getElementById('sidebar-mode-toggle-btn')?.addEventListener('click', () => {
+    setAppMode(state.appMode === 'business' ? 'member' : 'business');
+  });
 
   document.querySelectorAll('[data-set-mode]').forEach(btn => {
     btn.addEventListener('click', () => setAppMode(btn.dataset.setMode));
