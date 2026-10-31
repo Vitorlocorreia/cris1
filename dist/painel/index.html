@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b241b">
+  <title>Painel de Leads — CRIS</title>
+  <link rel="icon" href="/assets/cris-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/lead-lp.css?v=16">
+</head>
+<body>
+  <div id="view-leads-panel" class="leads-dashboard-view">
+    <header class="dashboard-topbar">
+      <div class="dashboard-topbar-inner">
+        <div class="dashboard-brand-left">
+          <img src="/assets/cris-logo-light.png" alt="CRIS">
+          <span class="dashboard-route-badge">
+            <span>●</span>
+            <span>PAINEL DE LEADS</span>
+          </span>
+        </div>
+
+        <div class="dashboard-top-actions">
+          <button type="button" class="btn-dash-action" id="btn-refresh-leads" title="Sincronizar leads">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            <span>Atualizar</span>
+          </button>
+
+          <button type="button" class="btn-dash-action" id="btn-export-csv">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Exportar CSV</span>
+          </button>
+
+          <a href="/" class="btn-dash-action primary">
+            <span>← Ver LP</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <div class="dashboard-container">
+      <div class="dashboard-hero-head">
+        <div>
+          <div class="eyebrow-badge" style="margin-bottom:4px;">GESTÃO DE CAPTAÇÃO · PRÉ-LANÇAMENTO CRIS</div>
+          <h1>Informações dos Leads Captados</h1>
+          <p>Todos os cadastros realizados no formulário da LP (nome, WhatsApp, e-mail, se tem empresa e igreja).</p>
+        </div>
+        <div id="sync-status-indicator" style="font-size:12px;font-weight:600;color:var(--emerald-brand);background:rgba(33,76,59,0.08);padding:8px 14px;border-radius:99px;">
+          ☁️ Sincronizado em tempo real
+        </div>
+      </div>
+
+      <!-- KPIs -->
+      <div class="kpi-cards-grid">
+        <div class="kpi-card">
+          <div class="kpi-card-top">
+            <span>Total de Leads</span>
+            <span>👥</span>
+          </div>
+          <strong id="kpi-total-leads">0</strong>
+          <small>Cadastros na base</small>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-card-top">
+            <span>Têm Empresa (PJ)</span>
+            <span>🏢</span>
+          </div>
+          <strong id="kpi-total-pj" style="color:var(--bronze);">0</strong>
+          <small id="kpi-pct-pj">0% dos leads têm empresa</small>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-card-top">
+            <span>Consumidores (PF)</span>
+            <span>🙋‍♂️</span>
+          </div>
+          <strong id="kpi-total-pf" style="color:var(--emerald-brand);">0</strong>
+          <small id="kpi-pct-pf">0% membros consumidores</small>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-card-top">
+            <span>Igrejas Informadas</span>
+            <span>⛪</span>
+          </div>
+          <strong id="kpi-total-churches">0</strong>
+          <small>Igrejas distintas</small>
+        </div>
+      </div>
+
+      <!-- Barra de Busca e Filtros -->
+      <div class="leads-toolbar">
+        <div class="toolbar-search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="search" id="leads-search-input" class="toolbar-search-input" placeholder="Buscar por nome, WhatsApp, igreja, e-mail ou empresa...">
+        </div>
+
+        <div class="toolbar-filters">
+          <div class="filter-pill-group" role="group" aria-label="Filtrar por empresa">
+            <button type="button" class="filter-pill-btn is-active" data-filter-company="all">Todos</button>
+            <button type="button" class="filter-pill-btn" data-filter-company="pj">Com Empresa</button>
+            <button type="button" class="filter-pill-btn" data-filter-company="pf">Sem Empresa</button>
+          </div>
+
+          <select id="filter-church-select" class="toolbar-select" aria-label="Filtrar por igreja">
+            <option value="all">Todas as igrejas</option>
+          </select>
+
+          <select id="filter-status-select" class="toolbar-select" aria-label="Filtrar por status">
+            <option value="all">Todos os status</option>
+            <option value="novo">Novo</option>
+            <option value="contatado">Contatado</option>
+            <option value="grupo">No Grupo VIP</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Tabela de Leads -->
+      <div class="leads-table-card">
+        <div class="leads-table-scroll">
+          <table class="leads-table" aria-label="Lista de leads captados">
+            <thead>
+              <tr>
+                <th>Nome & Data</th>
+                <th>WhatsApp / Número</th>
+                <th>Tem Empresa?</th>
+                <th>Igreja</th>
+                <th>E-mail</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="leads-table-tbody"></tbody>
+          </table>
+        </div>
+        <div id="leads-empty-state" class="empty-leads-box" style="display:none;">
+          <p style="font-size:15px;font-weight:600;margin:0 0 6px;">Nenhum lead encontrado.</p>
+          <small>Experimente limpar o filtro ou realize um cadastro na página inicial.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cris-toast" id="cris-toast" role="status" aria-live="polite">
+    <span id="cris-toast-msg">Salvo com sucesso!</span>
+  </div>
+
+  <script src="/lead-lp.js?v=17"></script>
+</body>
+</html>
