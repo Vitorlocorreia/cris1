@@ -3,41 +3,19 @@
 
   const SUPABASE_URL = 'https://xyjqmvtlwlenfxpwrdcm.supabase.co';
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5anFtdnRsd2xlbmZ4cHdyZGNtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMzOTY3NzcsImV4cCI6MjEwODk3Mjc3N30.9He_amsa08oJx_gMQtU0X9Nvmu_lCcGDuTIbq4CYQGw';
-  const STORAGE_KEY = 'cris_leads_store_v2';
+  const STORAGE_KEY = 'cris_leads_store_v3';
 
   const DEFAULT_SEED_LEADS = [
     {
-      id: 'seed-1',
-      nome: 'Lucas Albuquerque',
-      numero: '(81) 99812-4410',
-      email: 'lucas.albuquerque@email.com',
+      id: 'f37d5c6c-3f07-4bc3-a079-2a130cdaf84b',
+      nome: 'Lead Exemplo (Visual)',
+      numero: '(81) 99999-0000',
+      email: 'exemplo@appcris.com.br',
       tem_empresa: true,
-      nome_empresa: 'Café Aliança Torrefação',
-      igreja: 'Igreja Presbiteriana de Casa Forte',
+      nome_empresa: 'Empresa Exemplo',
+      igreja: 'Igreja Exemplo',
       status: 'novo',
-      created_at: new Date(Date.now() - 1000 * 60 * 42).toISOString()
-    },
-    {
-      id: 'seed-2',
-      nome: 'Mariana Costa',
-      numero: '(81) 99630-8821',
-      email: 'mariana.costa@email.com',
-      tem_empresa: false,
-      nome_empresa: '',
-      igreja: 'Primeira Igreja Batista do Recife',
-      status: 'novo',
-      created_at: new Date(Date.now() - 1000 * 60 * 115).toISOString()
-    },
-    {
-      id: 'seed-3',
-      nome: 'Rafael Vasconcelos',
-      numero: '(81) 99145-2090',
-      email: 'rafael@estudioraizes.com.br',
-      tem_empresa: true,
-      nome_empresa: 'Estúdio Raízes Design',
-      igreja: 'Igreja Batista Esperança',
-      status: 'contatado',
-      created_at: new Date(Date.now() - 1000 * 60 * 260).toISOString()
+      created_at: new Date().toISOString()
     }
   ];
 
@@ -146,21 +124,8 @@
     }
 
     if (Array.isArray(cloudList)) {
-      const cloudIds = new Set(cloudList.map(function (item) { return String(item.id); }));
-      const cloudEmailsPhones = new Set(
-        cloudList.map(function (item) {
-          return (String(item.email || '').toLowerCase() + '|' + String(item.numero || '').replace(/\D/g, ''));
-        })
-      );
-
-      const unsyncedLocal = localList.filter(function (loc) {
-        const key = String(loc.email || '').toLowerCase() + '|' + String(loc.numero || '').replace(/\D/g, '');
-        return !cloudIds.has(String(loc.id)) && !cloudEmailsPhones.has(key);
-      });
-
-      const merged = unsyncedLocal.concat(cloudList);
-      state.leads = merged;
-      saveLocalLeads(merged);
+      state.leads = cloudList;
+      saveLocalLeads(cloudList);
       if (syncEl) syncEl.textContent = '☁️ Sincronizado em tempo real';
     } else {
       if (localList.length === 0) {
