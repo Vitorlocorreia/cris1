@@ -1384,6 +1384,17 @@ button {
   color: var(--muted);
 }
 
+.lead-mobile-only-badge {
+  display: none;
+}
+
+.lead-email-link {
+  color: var(--emerald-brand);
+  font-weight: 600;
+  text-decoration: underline;
+  word-break: break-all;
+}
+
 .badge-empresa {
   display: inline-flex;
   align-items: center;
@@ -1683,5 +1694,264 @@ button {
     padding: 24px 18px 36px;
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+/* ==========================================================================
+   PAINEL DE LEADS MOBILE-FIRST (CARDS NATIVOS NO CELULAR, ZERO SCROLL LATERAL)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .leads-dashboard-view {
+    padding-bottom: 48px;
+  }
+
+  .dashboard-topbar {
+    padding: 12px 14px;
+  }
+
+  .dashboard-topbar-inner {
+    gap: 10px;
+  }
+
+  .dashboard-brand-left {
+    gap: 8px;
+  }
+
+  .dashboard-brand-left img {
+    height: 26px;
+  }
+
+  .dashboard-route-badge {
+    padding: 4px 8px;
+    font-size: 9.5px;
+  }
+
+  .dashboard-top-actions {
+    gap: 6px;
+  }
+
+  .btn-dash-action {
+    padding: 7px 11px;
+    font-size: 11px;
+    gap: 4px;
+  }
+
+  .dashboard-container {
+    padding: 18px 14px 0;
+  }
+
+  .dashboard-hero-head {
+    margin-bottom: 16px;
+    gap: 10px;
+  }
+
+  .dashboard-hero-head h1 {
+    font-size: 26px;
+    line-height: 1.1;
+  }
+
+  .dashboard-hero-head p {
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  /* Grid 2x2 compacto de KPIs */
+  .kpi-cards-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .kpi-card {
+    padding: 13px 14px;
+    border-radius: 16px;
+    gap: 3px;
+  }
+
+  .kpi-card-top {
+    font-size: 10px;
+  }
+
+  .kpi-card strong {
+    font-size: 26px;
+  }
+
+  .kpi-card small {
+    font-size: 10.5px;
+    line-height: 1.25;
+  }
+
+  /* Toolbar Mobile Organizada */
+  .leads-toolbar {
+    padding: 14px;
+    border-radius: 18px;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .toolbar-search-wrap {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .toolbar-search-input {
+    font-size: 16px;
+    padding: 11px 14px 11px 38px;
+  }
+
+  .toolbar-filters {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .filter-pill-group {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+  }
+
+  .filter-pill-btn {
+    padding: 8px 6px;
+    font-size: 11.5px;
+    text-align: center;
+  }
+
+  .toolbar-select {
+    width: 100%;
+    font-size: 12px;
+    padding: 9px 10px;
+  }
+
+  /* Transforma a Tabela em Lista de Cards Nativos no Mobile */
+  .leads-table-card {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .leads-table-scroll {
+    overflow: visible;
+  }
+
+  .leads-table,
+  .leads-table tbody {
+    display: block;
+    width: 100%;
+  }
+
+  .leads-table thead {
+    display: none;
+  }
+
+  .leads-table tbody {
+    display: grid;
+    gap: 12px;
+  }
+
+  .leads-table tr.lead-row-item {
+    display: block;
+    background: #ffffff;
+    border: 1px solid var(--line-dark);
+    border-radius: 18px;
+    padding: 16px;
+    box-shadow: 0 6px 18px rgba(11, 36, 27, 0.05);
+  }
+
+  .leads-table td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px dashed rgba(15, 41, 30, 0.09);
+    font-size: 13px;
+    text-align: right;
+  }
+
+  .leads-table td::before {
+    content: attr(data-label);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    text-align: left;
+    flex-shrink: 0;
+  }
+
+  /* Topo do Card Mobile (Nome + Data + Badge PJ/PF) */
+  .leads-table td.lead-name-cell {
+    display: block;
+    padding: 0 0 12px;
+    margin-bottom: 2px;
+    border-bottom: 1px solid rgba(15, 41, 30, 0.1);
+    text-align: left;
+  }
+
+  .leads-table td.lead-name-cell::before {
+    display: none;
+  }
+
+  .lead-mobile-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .lead-name-cell strong {
+    font-size: 16px;
+    margin-bottom: 2px;
+  }
+
+  .lead-mobile-only-badge {
+    display: inline-flex;
+    flex-shrink: 0;
+  }
+
+  .leads-table td.lead-desktop-company-cell {
+    display: none;
+  }
+
+  /* Rodapé do Card Mobile (Botões WhatsApp e Excluir) */
+  .leads-table td.lead-actions-cell {
+    padding: 12px 0 0;
+    border-bottom: none;
+  }
+
+  .leads-table td.lead-actions-cell::before {
+    display: none;
+  }
+
+  .lead-actions-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .btn-wa-lead {
+    flex: 1;
+    justify-content: center;
+    padding: 11px 14px;
+    font-size: 13px;
+    border-radius: 12px;
+  }
+
+  .btn-delete-lead {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    flex-shrink: 0;
+  }
+
+  .empty-leads-box {
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid var(--line-dark);
   }
 }

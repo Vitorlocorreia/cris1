@@ -340,25 +340,30 @@
         : '<span class="badge-empresa is-pf">Não</span>';
 
       return (
-        '<tr>' +
+        '<tr class="lead-row-item">' +
           '<td class="lead-name-cell">' +
-            '<strong>' + escapeHtml(lead.nome) + '</strong>' +
-            '<small>' + escapeHtml(formatDateTimeBR(lead.created_at)) + '</small>' +
+            '<div class="lead-mobile-top">' +
+              '<div>' +
+                '<strong>' + escapeHtml(lead.nome) + '</strong>' +
+                '<small>' + escapeHtml(formatDateTimeBR(lead.created_at)) + '</small>' +
+              '</div>' +
+              '<span class="lead-mobile-only-badge">' + companyBadgeHtml + '</span>' +
+            '</div>' +
           '</td>' +
-          '<td><strong>' + escapeHtml(lead.numero) + '</strong></td>' +
-          '<td>' + companyBadgeHtml + '</td>' +
-          '<td><span class="badge-igreja">' + escapeHtml(lead.igreja || '—') + '</span></td>' +
-          '<td><a href="mailto:' + escapeHtml(lead.email) + '" style="color:var(--emerald-brand);font-weight:600;text-decoration:underline;">' + escapeHtml(lead.email) + '</a></td>' +
-          '<td>' +
+          '<td data-label="WhatsApp"><strong>' + escapeHtml(lead.numero) + '</strong></td>' +
+          '<td class="lead-desktop-company-cell" data-label="Tem empresa?">' + companyBadgeHtml + '</td>' +
+          '<td data-label="Igreja"><span class="badge-igreja">' + escapeHtml(lead.igreja || '—') + '</span></td>' +
+          '<td data-label="E-mail"><a href="mailto:' + escapeHtml(lead.email) + '" class="lead-email-link">' + escapeHtml(lead.email) + '</a></td>' +
+          '<td class="lead-status-cell" data-label="Status">' +
             '<select class="status-select-inline ' + statusClass + '" data-status-lead-id="' + escapeHtml(lead.id) + '" aria-label="Status">' +
               '<option value="novo"' + (statusVal === 'novo' ? ' selected' : '') + '>Novo</option>' +
               '<option value="contatado"' + (statusVal === 'contatado' ? ' selected' : '') + '>Contatado</option>' +
               '<option value="grupo"' + (statusVal === 'grupo' ? ' selected' : '') + '>No Grupo VIP</option>' +
             '</select>' +
           '</td>' +
-          '<td>' +
+          '<td class="lead-actions-cell">' +
             '<div class="lead-actions-row">' +
-              '<a href="' + waUrl + '" target="_blank" rel="noopener noreferrer" class="btn-wa-lead">WhatsApp ↗</a>' +
+              '<a href="' + waUrl + '" target="_blank" rel="noopener noreferrer" class="btn-wa-lead">Chamar no WhatsApp ↗</a>' +
               '<button type="button" class="btn-delete-lead" data-delete-lead-id="' + escapeHtml(lead.id) + '" title="Excluir">✕</button>' +
             '</div>' +
           '</td>' +
